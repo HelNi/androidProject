@@ -1,6 +1,6 @@
 #######################################
 #                                     #
-#        WEITERFÜHRENDE LINKS         #
+#        WEITERFÃœHRENDE LINKS         #
 #                                     #
 #######################################
 
@@ -10,5 +10,9 @@ Informationen zu UML-Klassendiagrammen:
 http://www.highscore.de/uml/klassendiagramm.html
 
 
-Übersicht über gängige Git-commands:
+Ãœbersicht Ã¼ber gÃ¤ngige Git-commands:
 https://rogerdudler.github.io/git-guide/index.de.html
+
+Coding conventions:
+https://source.android.com/source/code-style
+https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md
