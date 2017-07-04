@@ -11,6 +11,5 @@ __________
 
 Zielsetzung:
 - ToDo Liste erweitern
-- Erstellen von UML-Klassendiagrammen
 - Erstellen von Arbeitspaketen und Zuständigkeiten
 - Meilensteine
