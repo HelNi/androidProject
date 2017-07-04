@@ -1,0 +1,31 @@
+##############################
+#                            #
+#        ZIELSETZUNG         #
+#     Datum: 04.07.2017      #
+#                            #
+##############################
+
+
+
+Allgemeine Zielsetzung:
+_______________________
+
+Erstellen Sie eine mobile Anwendung!
+Der Funktionsumfang ist frei wählbar, bedarf aber der abschließenden Rücksprache mit der Lehrkraft.
+Die Implementierung erfolgt im Team, jedes Projektmitglied entwickelt zumindest einen Teilbereich der Anwendung.
+Die Zusammenarbeit im Team wird durch die Verwendung einer Codeverwaltung, wie z.B. Subversion oder Git organisiert.
+Die Projektsteuerung wird durch die Anwendung eines Vorgehensmodells der agilen Softwareentwicklung (SCRUM) erleichtert (Daily Scrum).
+
+
+
+Spezielle Zielsetzung:
+______________________
+
+Die Gruppe hat es sich zum Ziel gemacht eine App zu entwickeln, die die Möglichkeit bietet, die täglichen Arbeiten mit ihren zugehörigen Arbeitszeiten zu notieren.
+Die Applikation soll somit einen Überblick darüber bieten wie viel Zeit in welche Arbeit investiert wurde.
+Es ist somit möglich zu überprüfen, ob die angestrebte Arbeitszeit, für eine einzelne Aufgabe, oder auch für den ganzen Tag, erreicht wurde, oder nicht.
+
+Optional, sprich für den Fall, dass die Gruppe bereits vor Abschluss der Projektdauer das angestrebte Ziel erreicht, stehen die Implementierung eines Gehaltsrechners, sowie... aus.
+
+Grafisch soll der Tagesplaner im Stile eines "Stundenplanes" dargestellt werden.
+Die einzelnen Arbeitsblöcke sollen untereinander in Text-Boxen aufgelistet werden und die Summe der Arbeitszeit eines jeden Tages soll zusammengefasst über/unter jedem einzelnen Tag notiert sein.

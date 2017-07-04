@@ -1,0 +1,47 @@
+###########################################
+#                                         #
+#        ALLGEMEINE INFORMATIONEN         #
+#            Datum: 04.07.2017            #
+#                                         #
+###########################################
+
+
+
+PROJEKTBESCHREIBUNG
+
+PROJEKTMANAGEMENT-DOKUMENTE
+	- Zielformulierung
+	- UML-Klassendiagramme
+	- Arbeitspakete und Zuständigkeiten
+	- Meilensteine
+	
+REFLEXION
+	- Problemstellung
+	- Projektmanagement
+	- Arbeit im Team
+
+
+##############################################
+##############################################
+
+FORMATIERUNG DER DOKUMENTATION
+______________________________
+
+Titelseite:
+  - Schriftgröße: 24
+  - Schriftart: fett, mittig
+  - Zeichenabstand: 3,0 pt, gesperrt
+
+Inhaltsverzeichnis:
+  - Überschrift: Schriftgröße: 20; Schriftart: mittig, fett
+  - Schriftgröße: 12
+
+Allgemein:
+  - Font: Calibri
+  - Überschriften: fett, 14
+  - Text: 12
+  - nach jedem Absatz eine Leerzeile
+  - vor jeder Überschrift eine neue Leerzeile
+
+##############################################
+##############################################

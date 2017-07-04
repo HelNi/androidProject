@@ -1,0 +1,35 @@
+############################
+#                          #
+#        TODO LISTE        #
+#                          #
+############################
+
+
+
+DOKUMENTATION & ORGANISATION
+____________________________
+
+|X| Einrichten eines Repositorys für die Organisation des Codes auf github.com
+| | Allgemeine, grundlegende Strukturierung des Projektes
+| | Verfassen einer Zielsetzung
+| | Erstellen von Arbeitspaketen und Zuständigkeiten
+
+
+
+
+CODE
+____
+
+| | ...
+| | ...
+| | ...
+
+
+
+
+SONSTIGES
+_________
+
+| | ...
+| | ...
+| | ...
