@@ -16,3 +16,6 @@ https://rogerdudler.github.io/git-guide/index.de.html
 Coding conventions:
 https://source.android.com/source/code-style
 https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md
+
+clean Android Code:
+https://medium.com/mobile-development-weltn24/keep-your-droid-clean-e9c093140eb6
