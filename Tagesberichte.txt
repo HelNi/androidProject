@@ -1,0 +1,16 @@
+03.07.2017
+__________
+
+- Grobe Einführung in die Arbeit mit AndroidStudio
+- Einarbeitung in die Aufgabenstellung und Aufteilung in Gruppen
+- Findung einer Problemstellung
+- Erstellen eines Lösungsansatzes / Findung einer Idee für eine App
+- Diverse Recherchen zu Android Studio und Java
+- Diverse Recherchen zur Arbeit mit Git
+
+
+04.07.2017
+__________
+
+- Erstellen eines GitHub-Users und einrichten eines Repositorys
+- Diverse Recherchen zu Git

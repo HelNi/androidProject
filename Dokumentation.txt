@@ -1,0 +1,12 @@
+PROJEKTBESCHREIBUNG
+
+PROJEKTMANAGEMENT-DOKUMENTE
+	- Zielformulierung
+	- UML-Klassendiagramme
+	- Arbeitspakete und Zuständigkeiten
+	- Meilensteine
+	
+REFLEXION
+	- Problemstellung
+	- Projektmanagement
+	- Arbeit im Team
