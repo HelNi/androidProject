@@ -1,4 +1,4 @@
-#######################'#######
+###############################
 #                             #
 #        TAGESBERICHTE        #
 #                             #
@@ -9,10 +9,10 @@
 03.07.2017
 __________
 
-- Grobe Einf�hrung in die Arbeit mit AndroidStudio
+- Grobe Einführung in die Arbeit mit AndroidStudio
 - Einarbeitung in die Aufgabenstellung und Aufteilung in Gruppen
 - Findung einer Problemstellung
-- Erstellen eines L�sungsansatzes / Findung einer Idee f�r eine App
+- Erstellen eines Lösungsansatzes / Findung einer Idee für eine App
 - Diverse Recherchen zu Android Studio und Java
 - Diverse Recherchen zur Arbeit mit Git
 
@@ -22,3 +22,9 @@ __________
 
 - Erstellen eines GitHub-Users und einrichten eines Repositorys
 - Diverse Recherchen zu Git
+- Einlesen in die Funktionalität von UML-Klassendiagrammen
+- Einführung in die Projektarbeit mit SCRUM
+- Re-Organisieren des Repositorys
+- Erstellen diverser Dokumente für die Dokumentation
+- Verfassen der Zielsetzung
+- Rücksprache mit der Lehrkraft über die Zielsetzung
