@@ -9,10 +9,12 @@
 DOKUMENTATION & ORGANISATION
 ____________________________
 
-|X| Einrichten eines Repositorys für die Organisation des Codes auf github.com
+|X| Einrichten eines Repositorys fÃ¼r die Organisation des Codes auf github.com
 | | Allgemeine, grundlegende Strukturierung des Projektes
 | | Verfassen einer Zielsetzung
-| | Erstellen von Arbeitspaketen und Zuständigkeiten
+| | Erstellen von Arbeitspaketen und ZustÃ¤ndigkeiten
+| | Festlegen von Meilensteinen
+| | Verfassen einer Projektbeschreibung
 
 
 

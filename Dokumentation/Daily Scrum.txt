@@ -8,3 +8,8 @@
 
 05.07.2017
 __________
+
+Zielsetzung:
+- ToDo Liste erweitern
+- Erstellen von Arbeitspaketen und Zuständigkeiten
+- Meilensteine
