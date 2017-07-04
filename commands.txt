@@ -1,0 +1,8 @@
+GÄNGIGE GIT-COMMANDS:
+_____________________
+
+git clone https://github.com/HelNi/androidProject.git
+git status
+git add *
+git commit -m ""
+git push origin master
