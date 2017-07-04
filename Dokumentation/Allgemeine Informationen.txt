@@ -7,12 +7,18 @@
 
 
 
+EMail-Adresse von Kamps:
+malte.kamps@rbz-technik.de
+
+##############################################
+##############################################
+
 PROJEKTBESCHREIBUNG
 
 PROJEKTMANAGEMENT-DOKUMENTE
 	- Zielformulierung
 	- UML-Klassendiagramme
-	- Arbeitspakete und Zust‰ndigkeiten
+	- Arbeitspakete und Zust√§ndigkeiten
 	- Meilensteine
 	
 REFLEXION
@@ -28,20 +34,20 @@ FORMATIERUNG DER DOKUMENTATION
 ______________________________
 
 Titelseite:
-  - Schriftgrˆﬂe: 24
+  - Schriftgr√∂√üe: 24
   - Schriftart: fett, mittig
   - Zeichenabstand: 3,0 pt, gesperrt
 
 Inhaltsverzeichnis:
-  - ‹berschrift: Schriftgrˆﬂe: 20; Schriftart: mittig, fett
-  - Schriftgrˆﬂe: 12
+  - √úberschrift: Schriftgr√∂√üe: 20; Schriftart: mittig, fett
+  - Schriftgr√∂√üe: 12
 
 Allgemein:
   - Font: Calibri
-  - ‹berschriften: fett, 14
+  - √úberschriften: fett, 14
   - Text: 12
   - nach jedem Absatz eine Leerzeile
-  - vor jeder ‹berschrift eine neue Leerzeile
+  - vor jeder √úberschrift eine neue Leerzeile
 
 ##############################################
 ##############################################
