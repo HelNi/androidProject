@@ -28,3 +28,4 @@ __________
 - Erstellen diverser Dokumente für die Dokumentation
 - Verfassen der Zielsetzung
 - Rücksprache mit der Lehrkraft über die Zielsetzung
+- Einarbeitung in AndroidStudio
