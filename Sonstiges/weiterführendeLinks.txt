@@ -1,0 +1,14 @@
+#######################################
+#                                     #
+#        WEITERFÜHRENDE LINKS         #
+#                                     #
+#######################################
+
+
+
+Informationen zu UML-Klassendiagrammen:
+http://www.highscore.de/uml/klassendiagramm.html
+
+
+Übersicht über gängige Git-commands:
+https://rogerdudler.github.io/git-guide/index.de.html

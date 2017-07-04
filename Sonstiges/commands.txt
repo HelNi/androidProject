@@ -1,0 +1,18 @@
+﻿######################################
+#                                    #
+#        COMMON GIT COMMANDS         #
+#                                    #
+######################################
+
+
+
+git clone https://github.com/HelNi/androidProject.git
+git status
+git add *
+git commit -m ""
+git push origin master
+ject.git
+git status
+git add *
+git commit -m ""
+git push origin master
