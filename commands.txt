@@ -1,5 +1,7 @@
-G�NGIGE GIT-COMMANDS:
+GÄNGIGE GIT-COMMANDS:
 _____________________
+
+Übersicht unter: https://rogerdudler.github.io/git-guide/index.de.html
 
 git clone https://github.com/HelNi/androidProject.git
 git status
