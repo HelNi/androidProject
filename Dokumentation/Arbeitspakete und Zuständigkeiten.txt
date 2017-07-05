@@ -21,6 +21,7 @@ _____________
 		- Mail
 		- Passwort
 	| | Einträge
+		- Titel / Projektname
 		- Art der Tätigkeit
 		- Dauer
 		- Beschreibung
