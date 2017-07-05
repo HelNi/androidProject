@@ -40,8 +40,15 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        // TimeTablePagerFragment initialFragment = new TimeTablePagerFragment();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, initialFragment).commit();
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     @Override
@@ -83,12 +90,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
 
-        // TODO: Make this depend on the Item being clicked
-
-
         switch (id) {
             case R.id.nav_profile:
-                fragment = new TimeTableFragment();
+                fragment = new TimeTablePagerFragment();
                 break;
             case R.id.nav_settings:
                 break;
@@ -96,10 +100,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_logout:
                 break;
-            /*case R.id.nav_gallery:
-                fragment = ...
-                break;
-                */
         }
 
         if (fragment != null) {
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).addToBackStack("TEMP").commit();
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
