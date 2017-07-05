@@ -1,8 +1,8 @@
 package com.example.user.worktime;
 
 import android.os.Bundle;
-import android.support.transition.Fade;
 import android.support.v4.app.Fragment;
+import android.transition.Fade;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.support.design.widget.NavigationView;
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
         }
 
-        fragment.setEnterTransition(new Slide(Gravity.RIGHT));
+        fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
         fragment.setExitTransition(new Fade(Fade.OUT));
 
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).addToBackStack("TEMP").commit();
