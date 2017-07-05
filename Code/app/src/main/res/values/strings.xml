@@ -19,4 +19,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="logout_name">Abmelden</string>
+    <string name="settings_name">Einstellungen</string>
+    <string name="profile_name">Profil</string>
+    <string name="view_name">Ansicht</string>
 </resources>
