@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/page_number"
         android:text="Zeitplan-Platzhalter"
         android:gravity="center"
-        android:textSize="64dp"
+        android:textSize="64sp"
         android:layout_width="match_parent"
 
         android:layout_height="match_parent" />
 
-</LinearLayout>
+</ScrollView>

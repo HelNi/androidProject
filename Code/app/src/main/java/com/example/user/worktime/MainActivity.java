@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        TimeTablePagerFragment initialFragment = new TimeTablePagerFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, initialFragment).commit();
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment;
 
         // TODO: Make this depend on the Item being clicked
-        fragment = new TimeTableFragment();
+        fragment = new TimeTablePagerFragment();
 
         switch (id) {
             /*case R.id.nav_gallery:
