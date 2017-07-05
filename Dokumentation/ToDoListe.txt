@@ -11,27 +11,21 @@ ____________________________
 
 |X| Einrichten eines Repositorys für die Organisation des Codes auf github.com
 | | Allgemeine, grundlegende Strukturierung des Projektes
-| | Verfassen einer Zielsetzung
-| | Erstellen von Arbeitspaketen und Zuständigkeiten
-| | Festlegen von Meilensteinen
+|X| Verfassen einer Zielsetzung
 | | Verfassen einer Projektbeschreibung
+| | Erstellen von Arbeitspaketen und Zuständigkeiten
+| | Festlegen von Meilensteinen (siehe Meilensteine.txt)
+| | UML-Klassendiagramme
+| | Anfertigung der Reflexion
 
 
 
 
-CODE
-____
+OPTIONALE ZIELE
+_______________
 
-| | ...
-| | ...
-| | ...
-
-
-
-
-SONSTIGES
-_________
-
-| | ...
-| | ...
-| | ...
+| | Über- & Unterstunden-Rechner
+| | Darstellung verschiedener Arbeitszeiträume (Tage/Wochen/Monate)
+| | Unterschiedliche Porträt- und Landscape-Ansicht
+| | Einstellungen für Benutzeranpassungen der App
+| | Admin-Modus

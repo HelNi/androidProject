@@ -9,7 +9,9 @@
 05.07.2017
 __________
 
-Zielsetzung:
-- ToDo Liste erweitern
-- Erstellen von Arbeitspaketen und Zuständigkeiten
-- Meilensteine
+|X| ToDo Liste erweitern
+|X| Erstellen von Arbeitspaketen und Zuständigkeiten
+| | Verfassen einer Projektbeschreibung und Weiterführen der Dokumentation
+| | Definition von Klassen
+| | Erstellen eines Login-Bildschirms
+| | Erstellen der einzelnen Menü-Aktivitäten

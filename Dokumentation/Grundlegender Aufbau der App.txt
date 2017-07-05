@@ -1,0 +1,20 @@
+##############################################
+#                                            #
+#        GRUNDLEGENDER AUFBAU DER APP        #
+#                                            #
+##############################################
+
+
+
+- Benutzerverwaltung, Login mit Email und Passwort
+- Stundenübersicht / Tag
+- Standardansicht: Tag
+- Funktion neue Einträge hinzuzufügen / löschen
+- Editieren von existierenden Beiträgen
+- Vorlagen für Arbeitsvorgänge (z.B. Programmieren, Urlaub, ...)
+- Ansicht eines bestimmten Tages (Datepicker)
+- Menü
+  - Settings
+  - Profilinformationen
+  - Logout-Button
+  - Ansicht ändern
