@@ -40,12 +40,15 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        TimeTablePagerFragment initialFragment = new TimeTablePagerFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, initialFragment).commit();
+        // TimeTablePagerFragment initialFragment = new TimeTablePagerFragment();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, initialFragment).commit();
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     @Override
@@ -85,35 +88,26 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment;
-
-        // TODO: Make this depend on the Item being clicked
-        fragment = new TimeTablePagerFragment();
+        Fragment fragment = null;
 
         switch (id) {
-            /*case R.id.nav_gallery:
-                fragment = ...
+            case R.id.nav_profile:
+                fragment = new TimeTablePagerFragment();
                 break;
-                */
+            case R.id.nav_settings:
+                break;
+            case R.id.nav_view:
+                break;
+            case R.id.nav_logout:
+                break;
         }
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (fragment != null) {
+            fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
+            fragment.setExitTransition(new Fade(Fade.OUT));
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).addToBackStack("TEMP").commit();
         }
-
-        fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
-        fragment.setExitTransition(new Fade(Fade.OUT));
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).addToBackStack("TEMP").commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
