@@ -81,36 +81,33 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment;
+        Fragment fragment = null;
 
         // TODO: Make this depend on the Item being clicked
-        fragment = new TimeTableFragment();
+
 
         switch (id) {
+            case R.id.nav_profile:
+                fragment = new TimeTableFragment();
+                break;
+            case R.id.nav_settings:
+                break;
+            case R.id.nav_view:
+                break;
+            case R.id.nav_logout:
+                break;
             /*case R.id.nav_gallery:
                 fragment = ...
                 break;
                 */
         }
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (fragment != null) {
+            fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
+            fragment.setExitTransition(new Fade(Fade.OUT));
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).addToBackStack("TEMP").commit();
         }
-
-        fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
-        fragment.setExitTransition(new Fade(Fade.OUT));
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).addToBackStack("TEMP").commit();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
