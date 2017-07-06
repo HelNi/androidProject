@@ -2,11 +2,13 @@ package com.example.user.worktime.Classes.User;
 
 import org.joda.time.LocalDate;
 
+import java.io.Serializable;
+
 /**
  * Created by User on 06.07.2017.
  */
 
-public class User {
+public class User implements Serializable {
     private long id;
     private String salutation;
     private String title;
@@ -14,6 +16,16 @@ public class User {
     private String lastName;
     private String email;
     private LocalDate lastLogin;
+
+    public User(long id, String salutation, String title, String firstName, String lastName, String email, LocalDate lastLogin) {
+        this.id = id;
+        this.salutation = salutation;
+        this.title = title;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.lastLogin = lastLogin;
+    }
 
     public long getId() {
         return id;
