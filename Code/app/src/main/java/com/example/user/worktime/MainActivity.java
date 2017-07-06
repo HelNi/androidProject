@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity
                 return false;
             case R.id.nav_logout:
                 break;
+            case R.id.nav_about:
+                fragment = new AboutFragment();
+                break;
         }
 
         if (fragment != null) {
