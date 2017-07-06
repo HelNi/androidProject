@@ -10,11 +10,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String FRAGMENT_PROFILE = "frag_profile";
+    private static final String FRAGMENT_TIME_TABLE = "frag_time_table";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,32 +77,42 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
+        Fragment fragment;
+        String fragmentName;
 
         switch (id) {
             case R.id.nav_profile:
                 fragment = new ProfileFragment();
+                fragmentName = FRAGMENT_PROFILE;
                 break;
             case R.id.nav_time_table:
                 fragment = new TimeTablePagerFragment();
+                fragmentName = FRAGMENT_TIME_TABLE;
                 break;
             case R.id.nav_settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return false;
             case R.id.nav_logout:
+                return false;
+            default:
+                Log.e("Error", "onNavigationItemSelected: unknown ID " + id);
+                return false;
                 break;
             case R.id.nav_about:
                 fragment = new AboutFragment();
                 break;
         }
 
-        if (fragment != null) {
-            fragment.setEnterTransition(new Explode());
-            fragment.setExitTransition(new Explode());
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).commit();
+        if (getSupportFragmentManager().findFragmentByTag(fragmentName) != null) {
+            // Fragment is already selected- we don't need to transition twice.
+            return false;
         }
+
+        fragment.setEnterTransition(new Fade());
+        fragment.setExitTransition(new Fade());
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment, fragmentName).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
