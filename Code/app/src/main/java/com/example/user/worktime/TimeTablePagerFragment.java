@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.user.worktime.Classes.DateHelpers;
+
+import org.joda.time.LocalDate;
+
 /**
  * Created by User on 05.07.2017.
  */
@@ -44,6 +48,11 @@ public class TimeTablePagerFragment extends Fragment {
             }
         };
         mPager.setAdapter(mPagerAdapter);
-        mPager.setCurrentItem(1500); // TODO: Calculate item for current week
+        changeSelectedDate(new LocalDate());
+    }
+
+    public void changeSelectedDate(LocalDate date) {
+        int dayNum = DateHelpers.getDayPage(date);
+        mPager.setCurrentItem(dayNum);
     }
 }

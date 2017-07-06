@@ -8,6 +8,8 @@ import android.content.res.Resources;
 import android.os.LocaleList;
 import android.text.TextUtils;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import java.util.Locale;
 
 /**
@@ -17,6 +19,13 @@ import java.util.Locale;
 public class WorktimeApplication extends Application {
     // The Android Test devices are (by default) configured as english.
     // This is a workaround to make them display German instead.
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        JodaTimeAndroid.init(this);
+    }
 
     @Override
     protected void attachBaseContext(Context base) {
