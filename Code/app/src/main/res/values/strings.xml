@@ -33,6 +33,7 @@
     <!-- Strings related to the profile fragment -->
     <string name="profile_fragment_headline">Benutzerinformationen</string>
 
+    <string name="profile_fragment_salutation">Anrede: </string>
     <string name="profile_fragment_user_name">Benutzername: </string>
     <string name="profile_fragment_user_email">E-Mail: </string>
     <string name="profile_fragment_user_first_name">Vorname: </string>
