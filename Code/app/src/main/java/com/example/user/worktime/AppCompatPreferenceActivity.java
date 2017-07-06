@@ -1,4 +1,4 @@
-package com.example.user.worktime.Classes;
+package com.example.user.worktime;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

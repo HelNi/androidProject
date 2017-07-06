@@ -1,6 +1,7 @@
 package com.example.user.worktime.Classes;
 
 import android.icu.util.DateInterval;
+import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 
@@ -17,20 +18,20 @@ import java.util.Date;
 public class DateHelpers {
     /**
      *
-     * @param date
-     * @return Number of the day of the specified date
+     * @param date For which date to get the day numer
+     * @return Number of the day of the specified date after 1.1.1970
      */
-    public static int getDayPage(LocalDate date) {
-        return Days.daysBetween(new LocalDate(0l), date).getDays();
+    public static int getDayPage(@NonNull LocalDate date) {
+        return Days.daysBetween(new LocalDate(0L), date).getDays();
     }
 
     /**
      *
-     * @param day
+     * @param day Day number after 1.1.1970
      * @return The Date of the Specified day.
      */
-    public static LocalDate dayNumToDate(int day) {
-        LocalDate localDate = new LocalDate(0l);
+    public @NonNull static LocalDate dayNumToDate(int day) {
+        LocalDate localDate = new LocalDate(0L);
         return localDate.plusDays(day);
     }
 }

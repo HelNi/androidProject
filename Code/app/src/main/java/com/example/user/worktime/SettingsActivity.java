@@ -21,8 +21,6 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
-import com.example.user.worktime.Classes.AppCompatPreferenceActivity;
-
 import java.util.List;
 
 /**
