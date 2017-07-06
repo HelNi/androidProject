@@ -26,7 +26,8 @@
     <string name="profile_name">Profil</string>
     <string name="view_name">Ansicht</string>
     <string name="nav_username">Benutzername</string>
-    <string name="nav_email">E-Mail</string>
+    <string name="nav_email">beispiel@email.com</string>
+    <string name="nav_about">Über die App</string>
 
     <!-- Strings related to the profile fragment -->
     <string name="profile_fragment_headline">Benutzerinformationen</string>

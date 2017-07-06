@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WorkTime</string>
-    <string name="action_sign_in">Einloggen</string>
+    <string name="action_sign_in">Anmelden</string>
     <string name="action_sign_in_short">Login</string>
     <string name="error_field_required">Dieses Feld muss angegeben werden</string>
     <string name="error_incorrect_password">Das Passwort ist inkorrekt</string>
