@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.user.worktime.User.User;
-
 /**
  * Created by User on 05.07.2017.
  */
