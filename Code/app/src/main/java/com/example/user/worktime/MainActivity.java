@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FRAGMENT_PROFILE = "frag_profile";
     private static final String FRAGMENT_TIME_TABLE = "frag_time_table";
+    private static final String FRAGMENT_ABOUT = "frag_about";
 
 
     @Override
@@ -97,6 +98,10 @@ public class MainActivity extends AppCompatActivity
                 return false;
             case R.id.nav_logout:
                 return false;
+            case R.id.nav_about:
+                fragment = new AboutFragment();
+                fragmentName = FRAGMENT_ABOUT;
+                break;
             default:
                 Log.e("Error", "onNavigationItemSelected: unknown ID " + id);
                 return false;
