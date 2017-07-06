@@ -40,15 +40,15 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        // TimeTablePagerFragment initialFragment = new TimeTablePagerFragment();
-        //getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, initialFragment).commit();
+//        TimeTablePagerFragment initialFragment = new TimeTablePagerFragment();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, initialFragment).commit();
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        onNavigationItemSelected(navigationView.getMenu().getItem(0));
-        navigationView.getMenu().getItem(0).setChecked(true);
+        onNavigationItemSelected(navigationView.getMenu().getItem(1));
+        navigationView.getMenu().getItem(1).setChecked(true);
     }
 
     @Override
@@ -68,21 +68,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -92,11 +77,12 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_profile:
+                fragment = new ProfileFragment();
+                break;
+            case R.id.nav_time_table:
                 fragment = new TimeTablePagerFragment();
                 break;
             case R.id.nav_settings:
-                break;
-            case R.id.nav_view:
                 break;
             case R.id.nav_logout:
                 break;

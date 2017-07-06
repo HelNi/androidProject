@@ -20,9 +20,19 @@
 
     <string name="action_settings">Settings</string>
 
+    <!-- Strings related to the Navigation tab-->
     <string name="logout_name">Abmelden</string>
     <string name="settings_name">Einstellungen</string>
     <string name="profile_name">Profil</string>
     <string name="view_name">Ansicht</string>
     <string name="select_new_date">Neues Datum Wählen</string>
+    <string name="nav_username">Benutzername</string>
+    <string name="nav_email">E-Mail</string>
+
+    <!-- Strings related to the profile fragment -->
+    <string name="profile_fragment_user_name">ttest</string>
+    <string name="profile_fragment_user_email">ttest@company.com</string>
+    <string name="profile_fragment_user_first_name">Theodore</string>
+    <string name="profile_fragment_user_last_name">Test</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

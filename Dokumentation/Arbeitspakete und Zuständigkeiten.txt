@@ -1,0 +1,33 @@
+###################################################
+#                                                 #
+#        ARBEITSPAKETE UND ZUSTÄNDIGKEITEN        #
+#                                                 #
+###################################################
+
+
+
+
+ARBEITSPAKETE
+_____________
+
+1. Login-Area
+	- Benutzername
+	- Passwort 
+	
+2. Datenbank
+	| | Benutzerdaten
+		- ID
+		- Benutzername
+		- Mail
+		- Passwort
+	| | Einträge
+		- Titel / Projektname
+		- Art der Tätigkeit
+		- Dauer
+		- Beschreibung
+		- UserID
+		
+3. Hauptansicht
+	- 
+	
+4. Definition Einträge und Projekte

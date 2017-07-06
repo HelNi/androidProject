@@ -29,3 +29,15 @@ __________
 - Verfassen der Zielsetzung
 - Rücksprache mit der Lehrkraft über die Zielsetzung
 - Einarbeitung in AndroidStudio
+
+
+05.07.2017
+__________
+
+- Erstellen der ersten Arbeitspakete
+- Festlegen des grundlegenden Aufbaus der App
+- Erweitern der ToDo-Liste
+- Erstellen der Dokumentation in LibreOffice
+- Einlesen in Fragments
+- Menu-Fragments erstellen
+- Design anpassen (Icons, Farben)
