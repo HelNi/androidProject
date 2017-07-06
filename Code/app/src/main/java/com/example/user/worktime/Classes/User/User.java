@@ -1,4 +1,4 @@
-package com.example.user.worktime.User;
+package com.example.user.worktime.Classes.User;
 
 import org.joda.time.LocalDate;
 
