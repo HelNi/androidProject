@@ -1,10 +1,9 @@
 package com.example.user.worktime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.view.Gravity;
+import android.transition.Explode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -83,16 +82,18 @@ public class MainActivity extends AppCompatActivity
                 fragment = new TimeTablePagerFragment();
                 break;
             case R.id.nav_settings:
-                break;
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return false;
             case R.id.nav_logout:
                 break;
         }
 
         if (fragment != null) {
-            fragment.setEnterTransition(new Slide(Gravity.BOTTOM));
-            fragment.setExitTransition(new Fade(Fade.OUT));
+            fragment.setEnterTransition(new Explode());
+            fragment.setExitTransition(new Explode());
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).addToBackStack("TEMP").commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
