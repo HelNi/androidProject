@@ -10,4 +10,6 @@
     <string name="permission_rationale">Kontaktdaten werden benötigt, um eine Vervollständigung zu bieten.</string>
     <string name="prompt_email">E-Mail</string>
     <string name="prompt_password">Passwort</string>
+    <string name="actions">Aktionen</string>
+    <string name="personal">Persönliches</string>
 </resources>
