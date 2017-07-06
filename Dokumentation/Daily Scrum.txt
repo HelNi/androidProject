@@ -14,4 +14,13 @@ __________
 | | Verfassen einer Projektbeschreibung und Weiterführen der Dokumentation
 | | Definition von Klassen
 | | Erstellen eines Login-Bildschirms
-| | Erstellen der einzelnen Menü-Aktivitäten
+
+
+06.07.2017
+__________
+
+| | Verfassen einer Projektbeschreibung und Weiterführen der Dokumentation
+| | Integrieren eines Pagers zum scrollen zwischen Wochentagen
+| | Schreiben der ersten Funktionen
+| | Anpassung des Designs
+| | Erweiterung des Menüs
