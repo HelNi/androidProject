@@ -1,10 +1,9 @@
 package com.example.user.worktime.Classes.TimeTable;
 
-import com.example.user.worktime.User.User;
+import com.example.user.worktime.Classes.User.User;
 
 import org.joda.time.LocalDate;
 
-import java.util.Enumeration;
 import java.util.List;
 
 /**

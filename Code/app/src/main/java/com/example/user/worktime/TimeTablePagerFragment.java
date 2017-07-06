@@ -35,8 +35,7 @@ public class TimeTablePagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mPager = (ViewPager) view.findViewById(R.id.view_pager);
-        mPager.setOffscreenPageLimit(3);
-        mPagerAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
+        mPagerAdapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 return TimeTablePageFragment.newInstance(position);
