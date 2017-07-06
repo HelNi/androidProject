@@ -52,6 +52,11 @@ public class TimeTablePageFragment extends Fragment {
         return fragment;
     }
 
+    private void getTimeTable() {
+        // TODO: Get a proper one from the backend-API... when it exists.
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
