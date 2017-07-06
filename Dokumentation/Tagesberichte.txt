@@ -38,3 +38,6 @@ __________
 - Festlegen des grundlegenden Aufbaus der App
 - Erweitern der ToDo-Liste
 - Erstellen der Dokumentation in LibreOffice
+- Einlesen in Fragments
+- Menu-Fragments erstellen
+- Design anpassen (Icons, Farben)
