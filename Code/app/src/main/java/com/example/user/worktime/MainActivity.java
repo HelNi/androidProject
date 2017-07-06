@@ -18,6 +18,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.user.worktime.Classes.User.User;
+
+import org.joda.time.LocalDate;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FRAGMENT_PROFILE = "frag_profile";
@@ -85,7 +89,10 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_profile:
-                fragment = new ProfileFragment();
+                // TODO: This is a temp user; Get the real user from the API later!
+                User user = new User(1, "Herr", null, "Peter", "Lustig", "Peter@Baerstadt.de", new LocalDate());
+
+                fragment = ProfileFragment.newInstance(user);
                 fragmentName = FRAGMENT_PROFILE;
                 break;
             case R.id.nav_time_table:

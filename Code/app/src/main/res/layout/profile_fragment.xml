@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="24dp"
-    android:layout_marginRight="24dp"
-    android:layout_marginTop="24dp"
-    android:orientation="vertical">
+    android:stretchColumns="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="@string/profile_fragment_headline"
-        android:textSize="@dimen/profile_headline_text_size"/>
+    <TableRow>
+        <ImageView
+            android:src="@drawable/ic_person_black_24dp"
+            android:tint="@color/colorPrimary"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            />
+        <TextView
+            android:id="@+id/profile_full_name"
+            android:layout_column="1"
+            android:layout_margin="16dp"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="test"
+            />
+    </TableRow>
 
-    <TextView
-        android:id="@+id/salutation_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/profile_fragment_salutation"
-        android:textSize="@dimen/profile_text_size" />
-
-    <TextView
-        android:id="@+id/first_name_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/profile_fragment_user_first_name"
-        android:textSize="@dimen/profile_text_size" />
-
-    <TextView
-        android:id="@+id/last_name_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/profile_fragment_user_last_name"
-        android:textSize="@dimen/profile_text_size" />
-
-    <TextView
-        android:id="@+id/email_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/profile_fragment_user_email"
-        android:textSize="@dimen/profile_text_size" />
+    <TableRow>
+        <ImageView
+            android:src="@drawable/ic_nav_main_icon"
+            android:tint="@color/colorPrimary"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            />
+        <TextView
+            android:id="@+id/profile_email"
+            android:layout_column="1"
+            android:layout_margin="16dp"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="test"
+            />
+    </TableRow>
 
 
 
-</LinearLayout>
+</TableLayout>
