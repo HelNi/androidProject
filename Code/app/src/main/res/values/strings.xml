@@ -27,13 +27,22 @@
     <string name="view_name">Ansicht</string>
     <string name="select_new_date">Neues Datum Wählen</string>
     <string name="nav_username">Benutzername</string>
-    <string name="nav_email">E-Mail</string>
+    <string name="nav_email">beispiel@email.com</string>
+    <string name="nav_about">Über die App</string>
 
     <!-- Strings related to the profile fragment -->
-    <string name="profile_fragment_user_name">ttest</string>
-    <string name="profile_fragment_user_email">ttest@company.com</string>
-    <string name="profile_fragment_user_first_name">Theodore</string>
-    <string name="profile_fragment_user_last_name">Test</string>
+    <string name="profile_fragment_headline">Benutzerinformationen</string>
+
+    <string name="profile_fragment_user_name">Benutzername: </string>
+    <string name="profile_fragment_user_email">E-Mail: </string>
+    <string name="profile_fragment_user_first_name">Vorname: </string>
+    <string name="profile_fragment_user_last_name">Nachname: </string>
+
+    <string name="profile_fragment_user_name_value">ttest</string>
+    <string name="profile_fragment_user_email_value">ttest@company.com</string>
+    <string name="profile_fragment_user_first_name_value">Theodore</string>
+    <string name="profile_fragment_user_last_name_value">Test</string>
+
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_settings">Settings</string>
 
