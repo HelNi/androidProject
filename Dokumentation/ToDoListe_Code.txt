@@ -1,0 +1,85 @@
+#################################
+#                               #
+#        TODO LISTE CODE        #
+#                               #
+#################################
+
+
+| | ALLGEMEIN
+_____________
+
+| | Ändern des Anzeigenamens der MainActivity neben dem Navigations-Button
+
+
+
+
+| | LOGINBERECH
+_______________
+
+| | Methoden für die Anmeldung und Verknüpfung mit dem Login-Button
+| | Entfernen der Beispiele in den Eingabefeldern
+|X| Entfernen der Abfrage, ob auf das Telefonbuch zugegriffen werden darf
+|X| Implementieren der Funktionen für den Weiter-Button auf der Tastatur
+| | Angemeldet bleiben
+
+
+
+
+| | HAUPTSEITE / ANSICHT
+________________________
+
+| | ...
+
+
+
+
+| | NAVIGATIONSBEREICH
+______________________
+
+| | Einfügen des Namens und der Email aus der DB
+| | Überarbeiten des Icons
+| | Überarbeiten des Hintergrundes
+
+
+
+
+| | PROFILANZEIGE
+_________________
+
+|X| Füllen der ProfileFragment-Seite mit Inhalten
+| | Dynamisches Einbinden der Userdaten
+| | Optional: Hinzufügen von Avataren
+
+
+
+
+| | ÜBER DIE APP
+________________
+
+| | Füllen des Fragments mit Inhalten
+
+
+
+
+| | ABMELDEN
+____________
+
+| | Erstellen der nötgen Funktionen, um den User abzumelden
+
+
+
+
+| | EINSTELLUNGEN
+_________________
+
+| | Sprache ändern
+| | General
+	| | Icon überarbeiten
+	| | Inhalte festlegen und verändern
+	| | Sprache ändern
+| | Notifications
+	| | Überarbeiten
+	| | Sprache ändern
+| | Data & Sync
+	| | Sprache ändern
+	| | Inhalte überarbeiten
