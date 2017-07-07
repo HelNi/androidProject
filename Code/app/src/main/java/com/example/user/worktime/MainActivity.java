@@ -1,6 +1,7 @@
 package com.example.user.worktime;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -144,6 +145,26 @@ public class MainActivity extends AppCompatActivity
     public void logout(MenuItem item) {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    /**
+     * This method is used by the about.xml and opens the URL with the example-imprint.
+     * @param view the view handed over by the button.
+     */
+    public void openImprint(View view) {
+        Uri uri = Uri.parse("https://www.grumpycats.com/about"); // missing 'http://' will cause a crash!
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
+    /**
+     * This method is used by the about.xml and opens the URL with the example-imprint.
+     * @param view the view handed over by the button.
+     */
+    public void openGitHub(View view) {
+        Uri uri = Uri.parse("https://github.com/HelNi/androidProject.git"); // missing 'http://' will cause a crash!
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 }

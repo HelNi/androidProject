@@ -125,10 +125,10 @@
     <string name="about_fragment_title">Über die App</string>
     <string name="about_fragment_app_name">Name der App: WorkTime</string>
     <string name="about_fragment_version">Version-Nr.: 1.0</string>
-    <string name="about_fragment_developed_by">Entwickelt von:\nPhil Hansen, Niklas Schicker, Helge Nieblich</string>
+    <string name="about_fragment_developed_by">Entwickelt von:\nPhil Hansen\nNiklas Schicker\nHelge Nieblich</string>
     <string name="about_fragment_time_of_development">Entwicklungszeitraum:\n03.07.2017 – 21.07.2017</string>
-    <string name="about_fragment_git_link"><a href="https://github.com/HelNi/androidProject.git">Link zu GitHub</a></string>
-    <string name="about_fragment_imprint"><a href="https://www.grumpycats.com/about">Impressum</a></string>
+    <string name="about_fragment_git_link">Link zu GitHub</string>
+    <string name="about_fragment_imprint">Impressum</string>
 
 
 </resources>
