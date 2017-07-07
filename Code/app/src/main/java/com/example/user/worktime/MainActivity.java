@@ -36,15 +36,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with add TimeTableEntry", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -86,6 +77,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment;
         String fragmentName;
+        boolean displayFab = false;
 
         switch (id) {
             case R.id.nav_profile:
@@ -98,6 +90,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_time_table:
                 fragment = new TimeTablePagerFragment();
                 fragmentName = FRAGMENT_TIME_TABLE;
+                displayFab = true;
                 break;
             case R.id.nav_settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
@@ -121,13 +114,32 @@ public class MainActivity extends AppCompatActivity
 
         fragment.setEnterTransition(new Fade());
         fragment.setExitTransition(new Fade());
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment, fragmentName).commit();
+        if (displayFab) {
+            if (!(fragment instanceof View.OnClickListener))
+                throw new AssertionError(String.format("Fragment %s must implement OnClickListener or not show The FAB", fragment.getClass().getName()));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            fab.setOnClickListener((View.OnClickListener) fragment);
+            fab.show();
+        }
+        else
+    {
+        fab.hide();
+    }
+
+    getSupportFragmentManager().
+
+    beginTransaction().
+
+    replace(R.id.main_layout, fragment, fragmentName).
+
+    commit();
+
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+}
 
     public void logout(MenuItem item) {
         Intent intent = new Intent(this, LoginActivity.class);

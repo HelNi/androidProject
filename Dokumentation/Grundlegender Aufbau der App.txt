@@ -17,4 +17,4 @@
   - Settings
   - Profilinformationen
   - Logout-Button
-  - Ansicht ändern
+  - Ansicht (ändern)

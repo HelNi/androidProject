@@ -2,6 +2,7 @@ package com.example.user.worktime;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,13 +14,15 @@ import android.view.ViewGroup;
 
 import com.example.user.worktime.Classes.DateHelpers;
 
+import net.danlew.android.joda.DateUtils;
+
 import org.joda.time.LocalDate;
 
 /**
  * Created by User on 05.07.2017.
  */
 
-public class TimeTablePagerFragment extends Fragment {
+public class TimeTablePagerFragment extends Fragment implements View.OnClickListener {
 
     ViewPager mPager = null;
     PagerAdapter mPagerAdapter = null;
@@ -53,5 +56,14 @@ public class TimeTablePagerFragment extends Fragment {
     public void changeSelectedDate(LocalDate date) {
         int dayNum = DateHelpers.getDayPage(date);
         mPager.setCurrentItem(dayNum);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int currentDay = mPager.getCurrentItem();
+        LocalDate currentDate = new LocalDate(DateHelpers.dayNumToDate(currentDay));
+
+        String dateString = DateUtils.formatDateTime(getActivity(), currentDate, DateUtils.FORMAT_SHOW_DATE);
+        Snackbar.make(getView(), dateString, Snackbar.LENGTH_SHORT).show();
     }
 }
