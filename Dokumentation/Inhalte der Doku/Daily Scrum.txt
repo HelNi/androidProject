@@ -24,3 +24,30 @@ __________
 | | Schreiben der ersten Funktionen
 | | Anpassung des Designs
 | | Erweiterung des Menüs
+
+
+07.07.2017
+__________
+
+|X| Überarbeiten des Designs
+|X| Schreiben der ersten Funktionen
+| | Überarbeiten der ProfilFragment-Seite
+| | Anpassen und Überarbeiten der Dokumentation
+
+Phil:
+|X| Erweiterung des Menüs
+|X| Implementierung der Logout-Funktion (vorläufig)
+|X| Implementieren des Hinzufügen-Buttons
+| | Recherche zur Implementierung der Hauptfunktionen und Tests
+
+Niklas:
+|X| Integrieren eines Pagers zum scrollen zwischen Wochentagen
+|X| Überarbeiten des Navigations-Menüs
+|X| Erstellung von Backend-Klassen
+| | Backend API
+
+Helge:
+| | Verfassen einer Projektbeschreibung und Weiterführen der Dokumentation
+|X| Kleine Änderungen am Login-Bereich
+|X| Hinzufügen der AboutFragment-Seite
+| | Füllen der 'about'-Seite mit Inhalten

@@ -54,3 +54,11 @@ __________
 - Implementieren des Hinzufügen-Buttons
 - Recherche zur Ansicht und dem Hinzufügen der Datensätze
 - Weitere Recherchen zum Aufbau der Dokumentation
+
+
+07.07.2017
+__________
+
+- Gestaltung der 'about'-Seite
+- Füllen der 'about'-Seite mit Inhalten
+- Recherche zu Button-OnClick-Methoden in Android

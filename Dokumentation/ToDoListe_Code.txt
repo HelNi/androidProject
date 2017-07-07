@@ -65,15 +65,15 @@ _________________
 
 
 
-| | ÜBER DIE APP
+|X| ÜBER DIE APP
 ________________
 
-| | Link zum Impressum
-| | Link zum GitHub-Projekt
-| | Version
-| | Entwickler
-| | App-Name
-| | Entwicklungszeitraum
+|X| Link zum Impressum
+|X| Link zum GitHub-Projekt
+|X| Version
+|X| Entwickler
+|X| App-Name
+|X| Entwicklungszeitraum
 
 
 
@@ -103,7 +103,6 @@ _________________
 	| | Inhalte überarbeiten
 	
 | | Farbe der App ändern
-| | 
 	
 	
 | | Design

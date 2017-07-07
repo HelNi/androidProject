@@ -18,3 +18,6 @@ ____
 
 HELGE
 _____
+|X| Erstellen eines Git-Repositorys
+| | Erstellen der Dokumentationsunterlagen
+|X| Erstellen der 'about'-Seite
