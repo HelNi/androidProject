@@ -62,3 +62,5 @@ __________
 - Gestaltung der 'about'-Seite
 - Füllen der 'about'-Seite mit Inhalten
 - Recherche zu Button-OnClick-Methoden in Android
+- Recherche zu CardView und RecyclerView / Hauptfunktion der Applikation implementieren
+- Dokumentation anpassen
