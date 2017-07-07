@@ -10,12 +10,12 @@ DOKUMENTATION & ORGANISATION
 ____________________________
 
 |X| Einrichten eines Repositorys für die Organisation des Codes auf github.com
-| | Allgemeine, grundlegende Strukturierung des Projektes
+|X| Allgemeine, grundlegende Strukturierung des Projektes
 |X| Verfassen einer Zielsetzung
 | | Verfassen einer Projektbeschreibung
-| | Erstellen von Arbeitspaketen und Zuständigkeiten
+| | Erstellen von Arbeitspaketen und Zuständigkeiten (parallel zur Arbeit)
 | | Festlegen von Meilensteinen (siehe Meilensteine.txt)
-| | UML-Klassendiagramme
+| | UML-Klassendiagramme (nach Fertigstellung des Projektes)
 | | Anfertigung der Reflexion
 
 

@@ -41,3 +41,16 @@ __________
 - Einlesen in Fragments
 - Menu-Fragments erstellen
 - Design anpassen (Icons, Farben)
+
+
+06.07.2017
+__________
+
+- Kleine Änderungen am Login-Bereich
+- optische Gestaltung des Navigations-Bereiches
+- Überarbeiten der ProfilFragment-Seite
+- Hinzufügen der AboutFragment-Seite
+- Implementierung der Logout-Funktion (vorläufig)
+- Implementieren des Hinzufügen-Buttons
+- Recherche zur Ansicht und dem Hinzufügen der Datensätze
+- Weitere Recherchen zum Aufbau der Dokumentation
