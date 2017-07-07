@@ -64,3 +64,4 @@ __________
 - Recherche zu Button-OnClick-Methoden in Android
 - Recherche zu CardView und RecyclerView / Hauptfunktion der Applikation implementieren
 - Dokumentation anpassen
+- Backend programmieren (Datenbank-/funktionen)
