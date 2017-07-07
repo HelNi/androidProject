@@ -8,7 +8,7 @@
 | | ALLGEMEIN
 _____________
 
-| | Ändern des Anzeigenamens der MainActivity neben dem Navigations-Button
+|X| Ã„ndern des Anzeigenamens der MainActivity neben dem Navigations-Button
 
 
 
@@ -16,10 +16,10 @@ _____________
 | | LOGINBERECH
 _______________
 
-| | Methoden für die Anmeldung und Verknüpfung mit dem Login-Button
+| | Methoden fÃ¼r die Anmeldung und VerknÃ¼pfung mit dem Login-Button
 | | Entfernen der Beispiele in den Eingabefeldern
 |X| Entfernen der Abfrage, ob auf das Telefonbuch zugegriffen werden darf
-|X| Implementieren der Funktionen für den Weiter-Button auf der Tastatur
+|X| Implementieren der Funktionen fÃ¼r den Weiter-Button auf der Tastatur
 | | Angemeldet bleiben
 
 
@@ -28,7 +28,19 @@ _______________
 | | HAUPTSEITE / ANSICHT
 ________________________
 
-| | ...
+| | Button / Funktion zum HinzufÃ¼gen eines neuen Eintrags
+|X| Derselbe Button soll nur auf der MainActivity zu sehen sein
+| | Funktion zum Editieren eines Eintrags
+| | Funktion zum LÃ¶schen eines Eintrags
+| | Ansicht aller EintrÃ¤ge eines Tages
+|X| MenÃ¼-Funktion
+
+
+
+| | MENÃœ
+________
+
+| | 
 
 
 
@@ -36,9 +48,9 @@ ________________________
 | | NAVIGATIONSBEREICH
 ______________________
 
-| | Einfügen des Namens und der Email aus der DB
-| | Überarbeiten des Icons
-| | Überarbeiten des Hintergrundes
+| | EinfÃ¼gen des Namens und der Email aus der DB
+| | Ãœberarbeiten des Icons
+| | Ãœberarbeiten des Hintergrundes
 
 
 
@@ -46,17 +58,22 @@ ______________________
 | | PROFILANZEIGE
 _________________
 
-|X| Füllen der ProfileFragment-Seite mit Inhalten
+|X| FÃ¼llen der ProfileFragment-Seite mit Inhalten
 | | Dynamisches Einbinden der Userdaten
-| | Optional: Hinzufügen von Avataren
+| | Optional: HinzufÃ¼gen von Avataren
 
 
 
 
-| | ÜBER DIE APP
+| | ÃœBER DIE APP
 ________________
 
-| | Füllen des Fragments mit Inhalten
+| | Link zum Impressum
+| | Link zum GitHub-Projekt
+| | Version
+| | Entwickler
+| | App-Name
+| | Entwicklungszeitraum
 
 
 
@@ -64,7 +81,8 @@ ________________
 | | ABMELDEN
 ____________
 
-| | Erstellen der nötgen Funktionen, um den User abzumelden
+| | Erstellen der nÃ¶tgen Funktionen, um den User abzumelden ...
+|X| ... und alle ActivitÃ¤ten und Fragmenten schlieÃŸen
 
 
 
@@ -72,14 +90,23 @@ ____________
 | | EINSTELLUNGEN
 _________________
 
-| | Sprache ändern
+| | Sprache Ã¤ndern
 | | General
-	| | Icon überarbeiten
-	| | Inhalte festlegen und verändern
-	| | Sprache ändern
+	| | Icon Ã¼berarbeiten
+	| | Inhalte festlegen und verÃ¤ndern
+	| | Sprache Ã¤ndern
 | | Notifications
-	| | Überarbeiten
-	| | Sprache ändern
+	| | Ãœberarbeiten
+	| | Sprache Ã¤ndern
 | | Data & Sync
-	| | Sprache ändern
-	| | Inhalte überarbeiten
+	| | Sprache Ã¤ndern
+	| | Inhalte Ã¼berarbeiten
+	
+| | Farbe der App Ã¤ndern
+| | 
+	
+	
+| | Design
+__________
+
+| | Design anpassen / sich auf eine Farbe entscheiden
