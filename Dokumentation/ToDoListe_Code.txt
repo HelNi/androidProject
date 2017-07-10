@@ -24,7 +24,6 @@ _______________
 
 
 
-
 | | HAUPTSEITE / ANSICHT
 ________________________
 
@@ -34,6 +33,17 @@ ________________________
 | | Funktion zum Löschen eines Eintrags
 | | Ansicht aller Einträge eines Tages
 |X| Menü-Funktion
+
+
+
+| | Eintrag
+__________________
+
+| | Name der Aktivität
+| | Icon der Aktivität
+| | Startzeitpunkt (mit Datum?)
+| | Endzeitpunkt (mit Datum?)
+| | Beschreibung (max length?)
 
 
 
@@ -57,14 +67,12 @@ ______________________
 
 
 
-
 | | PROFILANZEIGE
 _________________
 
 |X| Füllen der ProfileFragment-Seite mit Inhalten
 | | Dynamisches Einbinden der Userdaten
 | | Optional: Hinzufügen von Avataren
-
 
 
 
@@ -80,13 +88,11 @@ ________________
 
 
 
-
 | | ABMELDEN
 ____________
 
 | | Erstellen der nötgen Funktionen, um den User abzumelden ...
 |X| ... und alle Activitäten und Fragmenten schließen
-
 
 
 
