@@ -127,8 +127,8 @@
     <string name="about_fragment_version">Version-Nr.: 1.0</string>
     <string name="about_fragment_developed_by">Entwickelt von:\nPhil Hansen\nNiklas Schicker\nHelge Nieblich</string>
     <string name="about_fragment_time_of_development">Entwicklungszeitraum:\n03.07.2017 – 21.07.2017</string>
-    <string name="about_fragment_git_link">Link zu GitHub</string>
+    <string name="about_fragment_git_link">Link zum GitHub Repository</string>
+    <string name="about_fragment_contact">Kontakt</string>
     <string name="about_fragment_imprint">Impressum</string>
-
 
 </resources>
