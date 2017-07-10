@@ -84,7 +84,8 @@ ________________
 |X| Version
 |X| Entwickler
 |X| App-Name
-| | Kontakt
+|X| Kontakt
+| | Testen der Kontakt-Funktion mit konfiguriertem Mail-Client
 
 
 
