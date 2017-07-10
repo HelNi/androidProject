@@ -65,7 +65,7 @@ _________________
 
 
 
-|X| ÜBER DIE APP
+| | ÜBER DIE APP
 ________________
 
 |X| Link zum Impressum
@@ -73,7 +73,7 @@ ________________
 |X| Version
 |X| Entwickler
 |X| App-Name
-|X| Entwicklungszeitraum
+| | Kontakt
 
 
 

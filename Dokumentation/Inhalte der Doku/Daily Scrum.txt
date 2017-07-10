@@ -26,6 +26,7 @@ __________
 | | Erweiterung des Menüs
 
 
+
 07.07.2017
 __________
 
@@ -51,3 +52,27 @@ Helge:
 |X| Kleine Änderungen am Login-Bereich
 |X| Hinzufügen der AboutFragment-Seite
 | | Füllen der 'about'-Seite mit Inhalten
+
+
+
+10.07.2017
+__________
+
+|X| Überarbeiten der ProfilFragment-Seite
+|X| Anpassen und Überarbeiten der Dokumentation
+| | Einarbeiten in die Backend-API
+
+Phil:
+|X| Recherche zur Implementierung der Hauptfunktionen und Tests
+| | Implementierung der Hauptfunktion und Tests dieser
+| | überarbeiten der Dokumentation
+
+Niklas:
+| | Backend API
+| | Einführung in die Backend-API
+
+Helge:
+| | Verfassen einer Projektbeschreibung und Weiterführen der Dokumentation
+|X| Füllen der 'about'-Seite mit Inhalten
+| | Implementierung der Hauptfunktion und Tests dieser
+| | Hinzufügen eines 'contact'-buttons zur about-Seite

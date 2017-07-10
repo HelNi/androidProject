@@ -65,3 +65,7 @@ __________
 - Recherche zu CardView und RecyclerView / Hauptfunktion der Applikation implementieren
 - Dokumentation anpassen
 - Backend programmieren (Datenbank-/funktionen)
+
+
+10.07.2017
+__________
