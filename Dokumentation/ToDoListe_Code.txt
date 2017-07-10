@@ -16,7 +16,7 @@ _____________
 | | LOGINBERECH
 _______________
 
-| | Methoden für die Anmeldung und Verknüpfung mit dem Login-Button
+| | Anbindung an die Backend-API
 | | Entfernen der Beispiele in den Eingabefeldern
 |X| Entfernen der Abfrage, ob auf das Telefonbuch zugegriffen werden darf
 |X| Implementieren der Funktionen für den Weiter-Button auf der Tastatur
@@ -40,8 +40,11 @@ ________________________
 | | MENÜ
 ________
 
-| | 
-
+| | Profil
+| | Tagesansicht (optional: Ansicht ändern)
+| | Über die App
+| | Abmelden
+| | Einstellungen
 
 
 
@@ -49,7 +52,7 @@ ________
 ______________________
 
 | | Einfügen des Namens und der Email aus der DB
-| | Überarbeiten des Icons
+|X| Überarbeiten des Icons
 | | Überarbeiten des Hintergrundes
 
 
