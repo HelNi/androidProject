@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
      */
     public void openMailProgram (View view) {
         Intent sendMail = new Intent(Intent.ACTION_VIEW);
-        Uri data = Uri.parse("mailto:workTime@example.com?subject=test&body=test");
+        Uri data = Uri.parse("mailto:workTime@example.com?subject=Anfrage%20zur%20WorkTime%20App");
         sendMail.setData(data);
         startActivity(sendMail);
     }
