@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.transition.Fade;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +40,7 @@ import java.util.List;
 import com.example.user.worktime.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.R.attr.value;
 
 public class TimeTableEntryCreationActivity extends Activity {
 
@@ -45,5 +50,17 @@ public class TimeTableEntryCreationActivity extends Activity {
         setContentView(R.layout.activity_time_table_entry_creation);
     }
 
+    public void startTimePicker(View view) {
+        DialogFragment fragment = new TimePickerFragment();
+
+        Bundle args = new Bundle();
+        args.putInt("viewId", view.getId());
+        fragment.setArguments(args);
+
+
+        fragment.setEnterTransition(new Fade());
+        fragment.setExitTransition(new Fade());
+        fragment.show(getFragmentManager(),"TimePicker");
+    }
 }
 

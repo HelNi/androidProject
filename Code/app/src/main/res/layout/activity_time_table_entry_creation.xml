@@ -11,6 +11,7 @@
     tools:context="com.example.user.worktime.TimeTableEntryCreationActivity">
 
     <!-- Login progress -->
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -24,54 +25,78 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/email_login_form"
+        <RelativeLayout
+            android:id="@+id/entry_creation_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="@drawable/layout_border">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <AutoCompleteTextView
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+            <AutoCompleteTextView
+                android:id="@+id/activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:hint="@string/entry_form_activity_prompt"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/start_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/start_time"
+                android:layout_alignBottom="@+id/start_time"
+                android:layout_toStartOf="@+id/start_time"
+                android:text="Anfangszeit auswählen" />
+
+            <Button
+                android:id="@+id/start_time"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="A"
+                android:layout_below="@+id/activity"
+                android:layout_alignStart="@+id/end_time"
+                android:onClick="startTimePicker"/>
+
+            <TextView
+                android:id="@+id/end_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/end_time"
+                android:layout_alignBottom="@+id/end_time"
+                android:layout_toStartOf="@+id/end_time"
+                android:text="Endzeit auswählen"/>
+            <Button
+                android:id="@+id/end_time"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="E"
+                android:layout_below="@+id/start_time"
+                android:layout_centerHorizontal="true"
+                android:onClick="startTimePicker"/>
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/entry_form_description_prompt"
+                android:maxLines="1"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/entry_form_create_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/entry_form_button"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
     </ScrollView>
+
 </LinearLayout>
