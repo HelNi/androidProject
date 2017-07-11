@@ -129,6 +129,7 @@
     <string name="about_fragment_time_of_development">Entwicklungszeitraum:\n03.07.2017 – 21.07.2017</string>
     <string name="about_fragment_git_link">Link zu GitHub</string>
     <string name="about_fragment_imprint">Impressum</string>
+    <string name="title_activity_time_table_entry_creation">Eintrag erstellen</string>
 
 
 </resources>
