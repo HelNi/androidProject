@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import com.example.user.worktime.LoginActivity;
 import com.example.user.worktime.MainActivity;
+import com.example.user.worktime.R;
 import com.example.user.worktime.TimeTableEntryCreationActivity;
 
 /**
@@ -13,7 +14,7 @@ import com.example.user.worktime.TimeTableEntryCreationActivity;
 
 public class IntentFactory {
 
-    private static final String GIT_HUB_LINK = "https://github.com/HelNi/androidProject.git"; // missing 'http://' will cause a crash!
+    private static final String GIT_HUB_LINK = ""; // missing 'http://' will cause a crash!
     private static final String IMPRINT_LINK = "https://www.grumpycats.com/about"; // missing 'http://' will cause a crash!
 
     public static Intent createNewEntryCreationIntent(MainActivity mainActivity) {
@@ -22,14 +23,24 @@ public class IntentFactory {
         return intent;
     }
 
-    public static Intent createGitHubIntent() {
-        Uri uri = Uri.parse(GIT_HUB_LINK);
+    /**
+     * This method is used by the about.xml and opens the URL with the example-imprint in the default web-browser.
+     * @param mainActivity urls.xml is only accessible from the MainActivity.
+     * @return
+     */
+    public static Intent createGitHubIntent(MainActivity mainActivity) {
+        Uri uri = Uri.parse(mainActivity.getString(R.string.github_link));
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         return intent;
     }
 
-    public static Intent createImprintIntent() {
-        Uri uri = Uri.parse(IMPRINT_LINK);
+    /**
+     * This method is used by the about.xml and opens the URL with the example-imprint.
+     * @param mainActivity urls.xml is only accessible from the MainActivity.
+     * @return
+     */
+    public static Intent createImprintIntent(MainActivity mainActivity) {
+        Uri uri = Uri.parse(mainActivity.getString(R.string.imprint_link));
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         return intent;
     }
