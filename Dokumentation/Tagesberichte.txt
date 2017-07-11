@@ -65,3 +65,15 @@ __________
 - Recherche zu CardView und RecyclerView / Hauptfunktion der Applikation implementieren
 - Dokumentation anpassen
 - Backend programmieren (Datenbank-/funktionen)
+
+
+10.07.2017
+__________
+
+- Daily Scrum und Ergänzung der Tagesprotokolle
+- Recherchen zur Anfertigung einer Dokumentation mit Libre Office
+- Hinzufügen eines contact-buttons zur Infoseite
+- Recherchen zum Öffnen des Email Clients über einen Button
+- Einarbeitung in die Backend-API
+- Grundstruktur der Eintrages
+- Recherche zum Einfügen von Grafiken in die App

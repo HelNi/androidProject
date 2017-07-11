@@ -165,4 +165,18 @@ public class MainActivity extends AppCompatActivity
     public void openGitHub(View view) {
         startActivity(IntentFactory.createGitHubIntent());
     }
+
+    /**
+     * This method is used when the contact-button in the about-fragment is being clicked.
+     * The default mail-program will be opened by using an intent.
+     * The receiver of the mail is handed over to the mail program as a parameter of the intent.
+     * @param view
+     * TODO check on an actual phone with a configured mail-client.
+     */
+    public void openMailProgram (View view) {
+        Intent sendMail = new Intent(Intent.ACTION_VIEW);
+        Uri data = Uri.parse("mailto:workTime@example.com?subject=Anfrage%20zur%20WorkTime%20App");
+        sendMail.setData(data);
+        startActivity(sendMail);
+    }
 }

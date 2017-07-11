@@ -12,16 +12,14 @@ _____________
 
 
 
-
 | | LOGINBERECH
 _______________
 
-| | Methoden für die Anmeldung und Verknüpfung mit dem Login-Button
+| | Anbindung an die Backend-API
 | | Entfernen der Beispiele in den Eingabefeldern
 |X| Entfernen der Abfrage, ob auf das Telefonbuch zugegriffen werden darf
 |X| Implementieren der Funktionen für den Weiter-Button auf der Tastatur
 | | Angemeldet bleiben
-
 
 
 
@@ -37,11 +35,25 @@ ________________________
 
 
 
+| | Eintrag
+__________________
+
+| | Name der Aktivität
+| | Icon der Aktivität
+| | Startzeitpunkt (mit Datum?)
+| | Endzeitpunkt (mit Datum?)
+| | Beschreibung (max length?)
+
+
+
 | | MENÜ
 ________
 
-| | 
-
+| | Profil
+| | Tagesansicht (optional: Ansicht ändern)
+| | Über die App
+| | Abmelden
+| | Einstellungen
 
 
 
@@ -49,9 +61,8 @@ ________
 ______________________
 
 | | Einfügen des Namens und der Email aus der DB
-| | Überarbeiten des Icons
+|X| Überarbeiten des Icons
 | | Überarbeiten des Hintergrundes
-
 
 
 
@@ -64,8 +75,7 @@ _________________
 
 
 
-
-|X| ÜBER DIE APP
+| | ÜBER DIE APP
 ________________
 
 |X| Link zum Impressum
@@ -73,8 +83,8 @@ ________________
 |X| Version
 |X| Entwickler
 |X| App-Name
-|X| Entwicklungszeitraum
-
+|X| Kontakt
+| | Testen der Kontakt-Funktion mit konfiguriertem Mail-Client
 
 
 
@@ -83,7 +93,6 @@ ____________
 
 | | Erstellen der nötgen Funktionen, um den User abzumelden ...
 |X| ... und alle Activitäten und Fragmenten schließen
-
 
 
 
