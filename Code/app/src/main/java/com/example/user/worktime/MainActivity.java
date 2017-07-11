@@ -151,19 +151,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * This method is used by the about.xml and opens the URL with the example-imprint.
+     * See IntentFactory.java for further information!
      * @param view the view handed over by the button.
      */
     public void openImprint(View view) {
-        startActivity(IntentFactory.createImprintIntent());
+        startActivity(IntentFactory.createImprintIntent(this));
     }
 
     /**
-     * This method is used by the about.xml and opens the URL with the example-imprint.
+     * See IntentFactory.java for further information!
      * @param view the view handed over by the button.
      */
     public void openGitHub(View view) {
-        startActivity(IntentFactory.createGitHubIntent());
+        startActivity(IntentFactory.createGitHubIntent(this));
     }
 
     /**
