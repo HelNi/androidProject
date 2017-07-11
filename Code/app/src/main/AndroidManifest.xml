@@ -42,6 +42,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.user.worktime.MainActivity" />
         </activity>
+        <activity
+            android:name=".TimeTableEntryCreationActivity"
+            android:label="@string/title_activity_time_table_entry_creation"></activity>
     </application>
 
 </manifest>

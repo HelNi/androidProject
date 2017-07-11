@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.transition.Explode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.user.worktime.Classes.User.User;
+import com.example.user.worktime.Factory.IntentFactory;
 
 import org.joda.time.LocalDate;
 
@@ -121,7 +120,12 @@ public class MainActivity extends AppCompatActivity
             if (!(fragment instanceof View.OnClickListener))
                 throw new AssertionError(String.format("Fragment %s must implement OnClickListener or not show The FAB", fragment.getClass().getName()));
 
-            fab.setOnClickListener((View.OnClickListener) fragment);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(IntentFactory.createNewEntryCreationIntent(MainActivity.this));
+                }
+            });
             fab.show();
         }
         else
@@ -143,9 +147,7 @@ public class MainActivity extends AppCompatActivity
 }
 
     public void logout(MenuItem item) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        startActivity(IntentFactory.createLogoutIntent(this));
     }
 
     /**
@@ -153,9 +155,7 @@ public class MainActivity extends AppCompatActivity
      * @param view the view handed over by the button.
      */
     public void openImprint(View view) {
-        Uri uri = Uri.parse("https://www.grumpycats.com/about"); // missing 'http://' will cause a crash!
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        startActivity(IntentFactory.createImprintIntent());
     }
 
     /**
@@ -163,8 +163,6 @@ public class MainActivity extends AppCompatActivity
      * @param view the view handed over by the button.
      */
     public void openGitHub(View view) {
-        Uri uri = Uri.parse("https://github.com/HelNi/androidProject.git"); // missing 'http://' will cause a crash!
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        startActivity(IntentFactory.createGitHubIntent());
     }
 }
