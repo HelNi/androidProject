@@ -12,4 +12,5 @@
     <string name="prompt_password">Passwort</string>
     <string name="actions">Aktionen</string>
     <string name="personal">Persönliches</string>
+    <string name="unknown_username">Unbekannter Benutzer</string>
 </resources>

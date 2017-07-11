@@ -8,6 +8,8 @@ import android.content.res.Resources;
 import android.os.LocaleList;
 import android.text.TextUtils;
 
+import com.example.user.worktime.Backend.TokenFetcher;
+
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import java.util.Locale;
@@ -25,6 +27,7 @@ public class WorktimeApplication extends Application {
     public void onCreate() {
         super.onCreate();
         JodaTimeAndroid.init(this);
+        TokenFetcher.init(this);
     }
 
     @Override

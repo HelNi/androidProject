@@ -48,10 +48,11 @@ public class ProfileFragment extends Fragment {
 
         TextView fullNameView = (TextView) view.findViewById(R.id.profile_full_name);
         TextView emailView = (TextView) view.findViewById(R.id.profile_email);
+        TextView usernameView = (TextView) view.findViewById(R.id.profile_username);
 
         fullNameView.setText(String.format("%s %s %s", user.getSalutation(), user.getFirstName(), user.getLastName()));
         emailView.setText(user.getEmail());
-
+        usernameView.setText(user.getUserName());
         return view;
     }
 }
