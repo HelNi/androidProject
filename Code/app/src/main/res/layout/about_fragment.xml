@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,55 +11,55 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             android:text="@string/about_fragment_title"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             android:text="@string/about_fragment_app_name"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             android:text="@string/about_fragment_version"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             android:text="@string/about_fragment_developed_by"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_fragment_time_of_development"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/about_fragment_time_of_development"
+            android:textSize="20sp"/>
 
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -71,15 +71,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/about_fragment_contact"
-                    android:onClick="openMailProgram"/>
+                    android:onClick="openMailProgram"
+                    android:text="@string/about_fragment_contact"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/about_fragment_imprint"
-                    android:onClick="openImprint"/>
+                    android:onClick="openImprint"
+                    android:text="@string/about_fragment_imprint"/>
 
             </LinearLayout>
 
@@ -87,8 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableBottom="@drawable/ic_github"
-                android:text="@string/about_fragment_git_link"
-                android:onClick="openGitHub" />
+                android:onClick="openGitHub"
+                android:text="@string/about_fragment_git_link" />
 
         </LinearLayout>
 

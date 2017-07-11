@@ -5,6 +5,7 @@ package com.example.user.worktime.Classes.TimeTable;
  */
 
 public enum Activity {
+    DEFAULT("Basislast"),
     URLAUB("Urlaub"),
     SOFTWAREENTWICKLUNG("Softwareentwicklung"),
     MEETING("Meeting");

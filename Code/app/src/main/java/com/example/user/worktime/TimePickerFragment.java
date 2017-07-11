@@ -41,13 +41,16 @@ public class TimePickerFragment extends DialogFragment
         if (minute < 10) {
             min = "0".concat(String.valueOf(minute));
         }
+        if (hourOfDay < 10) {
+            hour = "0".concat(String.valueOf(hourOfDay));
+        }
 
         if (value.equals(R.id.start_time)) {
             tv = (TextView) getActivity().findViewById(R.id.start_time_text_view);
-            tv.setText("Anfang: " + hour + ":" + min + " Uhr");
+            tv.setText(hour + ":" + min + " Uhr");
         } else if (value.equals(R.id.end_time)) {
             tv = (TextView) getActivity().findViewById(R.id.end_time_text_view);
-            tv.setText("Ende: " + hour + ":" + min + " Uhr");
+            tv.setText(hour + ":" + min + " Uhr");
         } else {
             // TODO Fehlerbehandlung. Sollte allerdings nie auftreten.
         }

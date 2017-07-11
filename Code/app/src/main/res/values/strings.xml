@@ -133,7 +133,7 @@
     <string name="title_activity_time_table_entry_creation">Eintrag erstellen</string>
 
     <!-- String related to creating a new entry -->
-    <string name="entry_form_activity_prompt">Wählen Sie ihre Aktivität aus</string>
+    <string name="entry_form_activity_prompt">Neuer Eintrag</string>
     <string name="entry_form_time_start_prompt">Anfangszeitpunkt</string>
     <string name="entry_form_time_end_prompt">Endzeitpunkt</string>
     <string name="entry_form_description_prompt">Beschreibung einfügen</string>

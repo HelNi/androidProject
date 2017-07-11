@@ -2,101 +2,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:layout_margin="16dp"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.user.worktime.TimeTableEntryCreationActivity">
 
-    <!-- Login progress -->
-
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
-    <ScrollView
-        android:id="@+id/login_form"
+    <LinearLayout
+        android:id="@+id/entry_creation_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="300dp"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/entry_creation_form"
+        <!-- TODO use Spinner -->
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="vertical"
-            android:background="@drawable/layout_border">
+            android:layout_height="wrap_content"
+            android:hint="Bezeichnung"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/activity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/entry_form_activity_prompt"
-                android:inputType="textEmailAddress"
-                android:maxLines="1" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/start_time"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:onClick="startTimePicker"
+            android:text="Anfang" />
 
             <TextView
                 android:id="@+id/start_time_text_view"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:textSize="24sp"
+                android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/start_time"
-                android:layout_alignBottom="@+id/start_time"
-                android:layout_toStartOf="@+id/start_time"
-                android:text="Anfangszeit auswählen" />
+                android:text="00:00 Uhr" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
             <Button
-                android:id="@+id/start_time"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="A"
-                android:layout_below="@+id/activity"
-                android:layout_alignStart="@+id/end_time"
-                android:onClick="startTimePicker"/>
+                android:id="@+id/end_time"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="startTimePicker"
+                android:text="Ende" />
 
             <TextView
                 android:id="@+id/end_time_text_view"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:textSize="24sp"
+                android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/end_time"
-                android:layout_alignBottom="@+id/end_time"
-                android:layout_toStartOf="@+id/end_time"
-                android:text="Endzeit auswählen"/>
-            <Button
-                android:id="@+id/end_time"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="E"
-                android:layout_below="@+id/start_time"
-                android:layout_centerHorizontal="true"
-                android:onClick="startTimePicker"/>
+                android:text="00:00 Uhr" />
 
-            <EditText
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/entry_form_description_prompt"
-                android:maxLines="1"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/entry_form_create_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/entry_form_button"
-                android:textStyle="bold"
-                android:layout_marginBottom="20dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:hint="@string/entry_form_description_prompt"
+            android:maxLines="1" />
 
-        </RelativeLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/entry_form_create_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="@string/entry_form_button"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </LinearLayout>
