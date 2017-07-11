@@ -13,6 +13,25 @@
             android:layout_margin="16dp"
             />
         <TextView
+            android:id="@+id/profile_username"
+            android:layout_column="1"
+            android:layout_margin="16dp"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:text="test"
+            />
+    </TableRow>
+
+
+    <TableRow>
+        <ImageView
+            android:src="@drawable/ic_person_black_24dp"
+            android:tint="@color/colorPrimary"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            />
+        <TextView
             android:id="@+id/profile_full_name"
             android:layout_column="1"
             android:layout_margin="16dp"

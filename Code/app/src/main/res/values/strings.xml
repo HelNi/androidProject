@@ -131,5 +131,6 @@
     <string name="about_fragment_contact">Kontakt</string>
     <string name="about_fragment_imprint">Impressum</string>
     <string name="title_activity_time_table_entry_creation">Eintrag erstellen</string>
+    <string name="unknown_username">Unknown username</string>
 
 </resources>

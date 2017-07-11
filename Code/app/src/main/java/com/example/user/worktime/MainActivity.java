@@ -1,6 +1,7 @@
 package com.example.user.worktime;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.user.worktime.Backend.BackendClient;
+import com.example.user.worktime.Backend.TokenFetcher;
 import com.example.user.worktime.Classes.User.User;
 import com.example.user.worktime.Factory.IntentFactory;
 
@@ -28,10 +31,14 @@ public class MainActivity extends AppCompatActivity
     private static final String FRAGMENT_TIME_TABLE = "frag_time_table";
     private static final String FRAGMENT_ABOUT = "frag_about";
 
+    // The Current user of the application, returned from the Login action.
+    private User mUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUser = (User) getIntent().getSerializableExtra("user");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,9 +89,8 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.nav_profile:
                 // TODO: This is a temp user; Get the real user from the API later!
-                User user = new User(1, "Herr", null, "Peter", "Lustig", "Peter@Baerstadt.de", new LocalDate());
 
-                fragment = ProfileFragment.newInstance(user);
+                fragment = ProfileFragment.newInstance(mUser);
                 fragmentName = FRAGMENT_PROFILE;
                 break;
             case R.id.nav_time_table:
@@ -147,6 +153,9 @@ public class MainActivity extends AppCompatActivity
 }
 
     public void logout(MenuItem item) {
+        // Clear saved API token
+        TokenFetcher.unsetApiToken();
+
         startActivity(IntentFactory.createLogoutIntent(this));
     }
 

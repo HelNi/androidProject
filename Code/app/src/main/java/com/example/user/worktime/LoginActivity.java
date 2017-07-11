@@ -3,8 +3,9 @@ package com.example.user.worktime;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,36 +29,41 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.user.worktime.Backend.BackendClient;
+import com.example.user.worktime.Backend.Services.AuthService;
+import com.example.user.worktime.Backend.TokenFetcher;
+import com.example.user.worktime.Classes.User.User;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.Manifest.permission.READ_CONTACTS;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * A login screen that offers login via email/password.
+ *
+ * First, the API is fetched from the user's given inputs, then the corresponding user is fetched.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+    private UserInfoTask mUserInfoTask = null;
+
+    private String mApiKey = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private AuthService mAuthService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +85,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        // FOR TESTING: Pre-poulate data.
-        // TODO: Remove for production
-
-        mEmailView.setText("foo@example.com");
-        mPasswordView.setText("hello");
-
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -93,8 +93,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        // REMOVE me- just check if the API key is stored.
+
+
+        mAuthService = BackendClient.getInstance().getmAuthService();
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        String apiToken = TokenFetcher.getApiToken();
+        if (apiToken != null) {
+            loginWithApiKey(apiToken);
+        }
+    }
+
+    private void loginWithApiKey(@NonNull String token) {
+        showProgress(true);
+        UserInfoTask userInfoTask = new UserInfoTask();
+        userInfoTask.execute();
     }
 
     /**
@@ -130,11 +146,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        }/* else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
-        }
+        }*/
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -143,7 +159,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+
             showProgress(true);
+
+            TokenFetcher.unsetApiToken();
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
@@ -258,6 +277,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
 
+        private Boolean mUsernameInvalid = false;
+        private Boolean mPasswordInvalid = false;
+
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
@@ -268,22 +290,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                // Simulate network access.
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
+                Call<String> getAuthToken = mAuthService.getAuthToken(mEmail, mPassword);
+                Response<String> apiTokenResponse = getAuthToken.execute();
+                if (!apiTokenResponse.isSuccessful()) {
+                    switch (apiTokenResponse.code()) {
+                        case 400:
+                            String errorBody = apiTokenResponse.errorBody().string();
+                            switch (errorBody) {
+                                case "Invalid Password":
+                                    mPasswordInvalid = true;
+                                    break;
+                                case "Invalid Username":
+                                    mUsernameInvalid = true;
+                                    break;
+                            }
+                    }
+                    return false;
+                }
+                mApiKey = apiTokenResponse.body();
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                Snackbar.make(LoginActivity.this.findViewById(R.id.login_layout), e.getLocalizedMessage(), Snackbar.LENGTH_SHORT).show();
                 return false;
             }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return false;
         }
 
         @Override
@@ -292,19 +322,72 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                // set API key etc.
-                startActivity(i);
-                finish();
+                TokenFetcher.setApiToken(mApiKey);
+                loginWithApiKey(mApiKey);
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                if (mUsernameInvalid) {
+                    mEmailView.setError(getString(R.string.unknown_username));
+                    mEmailView.requestFocus();
+                }
+                else if (mPasswordInvalid) {
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+                }
             }
         }
 
         @Override
         protected void onCancelled() {
             mAuthTask = null;
+            showProgress(false);
+        }
+    }
+
+    private void startApplication(User user) {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        i.putExtra("user", user);
+
+        startActivity(i);
+        finish();
+    }
+
+    private class UserInfoTask extends AsyncTask<Void, Void, User> {
+        @Override
+        protected User doInBackground(Void... params) {
+            try {
+                Response<User> userCall = BackendClient.getInstance().getUserService().getSelf().execute();
+                if (!userCall.isSuccessful()) {
+                    Snackbar.make(findViewById(R.id.login_layout), userCall.errorBody().string(), Snackbar.LENGTH_LONG);
+                    return null;
+                }
+
+                return userCall.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Snackbar.make(findViewById(R.id.login_layout), e.getLocalizedMessage(), Snackbar.LENGTH_LONG);
+                return null;
+            }
+
+            //return null;
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            showProgress(false);
+
+            if (user != null) {
+                // store API key to be globally accessible from shared preferences.
+                startApplication(user);
+            }
+            else {
+                mApiKey = null;
+            }
+
+            showProgress(false);
+        }
+
+        @Override
+        protected void onCancelled() {
             showProgress(false);
         }
     }
