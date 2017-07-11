@@ -76,3 +76,24 @@ Helge:
 |X| Füllen der 'about'-Seite mit Inhalten
 | | Implementierung der Hauptfunktion und Tests dieser
 | | Hinzufügen eines 'contact'-buttons zur about-Seite
+
+
+
+11.07.2017
+__________
+
+|X| Einarbeiten in die Backend-API
+
+Phil:
+| | Gestaltung der Hauptfunktion und Implementierung dieser (umformuliert! Zuvor: Implementierung der Hauptfunktion und Tests dieser)
+|X| überarbeiten der Dokumentation
+
+Niklas:
+| | Backend API
+|X| Einführung in die Backend-API
+
+Helge:
+| | Gestaltung der Hauptfunktion und Implementierung dieser (umformuliert! Zuvor: Implementierung der Hauptfunktion und Tests dieser)
+|X| Hinzufügen eines 'contact'-buttons zur about-Seite
+|X| Verfassen einer Projektbeschreibung und Weiterführen der Dokumentation
+| | Formatieren der Dokumentation mit LibreOffice
