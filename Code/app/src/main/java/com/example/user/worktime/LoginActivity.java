@@ -319,12 +319,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
 
             if (success) {
                 TokenFetcher.setApiToken(mApiKey);
                 loginWithApiKey(mApiKey);
             } else {
+                showProgress(false);
                 if (mUsernameInvalid) {
                     mEmailView.setError(getString(R.string.unknown_username));
                     mEmailView.requestFocus();
