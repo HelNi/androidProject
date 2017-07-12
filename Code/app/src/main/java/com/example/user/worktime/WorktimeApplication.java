@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.LocaleList;
-import android.text.TextUtils;
 
-import com.example.user.worktime.Backend.TokenFetcher;
+import com.example.user.worktime.Backend.BackendApiTokenManager;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -27,7 +25,7 @@ public class WorktimeApplication extends Application {
     public void onCreate() {
         super.onCreate();
         JodaTimeAndroid.init(this);
-        TokenFetcher.init(this);
+        BackendApiTokenManager.init(this);
     }
 
     @Override

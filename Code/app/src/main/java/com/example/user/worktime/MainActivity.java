@@ -1,7 +1,6 @@
 package com.example.user.worktime;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,12 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.user.worktime.Backend.BackendClient;
-import com.example.user.worktime.Backend.TokenFetcher;
+import com.example.user.worktime.Backend.BackendApiTokenManager;
 import com.example.user.worktime.Classes.User.User;
 import com.example.user.worktime.Factory.IntentFactory;
-
-import org.joda.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -154,7 +150,7 @@ public class MainActivity extends AppCompatActivity
 
     public void logout(MenuItem item) {
         // Clear saved API token
-        TokenFetcher.unsetApiToken();
+        BackendApiTokenManager.unsetApiToken();
 
         startActivity(IntentFactory.createLogoutIntent(this));
     }

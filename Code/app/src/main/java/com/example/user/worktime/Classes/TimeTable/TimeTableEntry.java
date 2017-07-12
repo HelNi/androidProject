@@ -1,11 +1,8 @@
 package com.example.user.worktime.Classes.TimeTable;
 
-import android.support.annotation.Nullable;
-
 import com.example.user.worktime.Classes.User.User;
 
 import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
 
 /**
  * Created by User on 06.07.2017.

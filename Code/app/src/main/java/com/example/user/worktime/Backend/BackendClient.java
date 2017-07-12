@@ -2,7 +2,9 @@ package com.example.user.worktime.Backend;
 
 import android.support.annotation.NonNull;
 
+import com.example.user.worktime.Backend.Services.ActivityService;
 import com.example.user.worktime.Backend.Services.AuthService;
+import com.example.user.worktime.Backend.Services.TimeTableEntryService;
 import com.example.user.worktime.Backend.Services.UserService;
 
 import java.io.IOException;
@@ -31,6 +33,8 @@ public class BackendClient {
     private Retrofit retrofit;
     private AuthService mAuthService;
     private UserService mUserService;
+    private TimeTableEntryService mEntryService;
+    private ActivityService mActivityService;
 
     private BackendClient(Retrofit retrofit) {
         this.retrofit = retrofit;
@@ -39,12 +43,29 @@ public class BackendClient {
     /**
      * @return The Service which is used for authenticating.
      */
-    public AuthService getmAuthService() {
+    public AuthService getAuthService() {
         if (mAuthService == null) {
             mAuthService = this.retrofit.create(AuthService.class);
         }
 
         return mAuthService;
+    }
+
+    // NYI
+    public ActivityService getActivityService() {
+        if (mActivityService == null) {
+            mActivityService = this.retrofit.create(ActivityService.class);
+        }
+
+        return mActivityService;
+    }
+
+    public TimeTableEntryService getTimeTableEntryService() {
+        if (mEntryService == null) {
+            mEntryService = this.retrofit.create(TimeTableEntryService.class);
+        }
+
+        return mEntryService;
     }
 
     /**
@@ -81,7 +102,7 @@ public class BackendClient {
                 new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
-                        String apiToken = TokenFetcher.getApiToken();
+                        String apiToken = BackendApiTokenManager.getApiToken();
                         if (apiToken != null) {
                             Request original = chain.request();
                             HttpUrl originalHttpUrl = original.url();

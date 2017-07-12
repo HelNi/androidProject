@@ -13,4 +13,8 @@
     <string name="actions">Aktionen</string>
     <string name="personal">Persönliches</string>
     <string name="unknown_username">Unbekannter Benutzer</string>
+    <string name="weekNo">%1$s. KW</string>
+    <string name="navigation_drawer_close">Navigation schließen</string>
+    <string name="navigation_drawer_open">Navigation Öffnen</string>
+    <string name="nav_username">Benutzername</string>
 </resources>

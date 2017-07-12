@@ -9,9 +9,8 @@ import android.support.annotation.Nullable;
  * Created by nsh on 11.07.2017.
  */
 
-public class TokenFetcher {
+public class BackendApiTokenManager {
     private static SharedPreferences mPreferences;
-    private static Context mCtx;
 
     private static SharedPreferences mSharedPreferences;
 
@@ -31,11 +30,10 @@ public class TokenFetcher {
     }
 
     public static void init(@NonNull Context ctx) {
-        mCtx = ctx;
-        mSharedPreferences = mCtx.getSharedPreferences(BackendClient.PREFERENCE_NAME, 0);
+        mSharedPreferences = ctx.getSharedPreferences(BackendClient.PREFERENCE_NAME, 0);
     }
 
-    private TokenFetcher() {
+    private BackendApiTokenManager() {
 
     }
 }

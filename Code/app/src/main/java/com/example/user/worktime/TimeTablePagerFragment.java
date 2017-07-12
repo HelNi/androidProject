@@ -12,11 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Classes.DateHelpers;
+import com.example.user.worktime.Classes.TimeTable.Activity;
 
 import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.LocalDate;
+
+import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * Created by User on 05.07.2017.
@@ -46,9 +52,14 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
 
             @Override
             public int getCount() {
-                return Integer.MAX_VALUE; // TODO
+                // FIXME: This is a workaround. It should be virtually infinite,
+                // But when it's set the the max integer, the UI freezes for 10 seconds
+                // On back-navigation. This is a bad compromise.
+                // We need to find a real solution.
+                return 50000; // TODO
             }
         };
+        mPager.setOffscreenPageLimit(1);
         mPager.setAdapter(mPagerAdapter);
         changeSelectedDate(new LocalDate());
     }
@@ -65,5 +76,10 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
 
         String dateString = DateUtils.formatDateTime(getActivity(), currentDate, DateUtils.FORMAT_SHOW_DATE);
         Snackbar.make(getView(), dateString, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public Call<List<Activity>> getActivitiesAsync() {
+        // Asynchronously fetch activities. Sub-Views can register callbacks.
+        return BackendClient.getInstance().getActivityService().getActivities();
     }
 }

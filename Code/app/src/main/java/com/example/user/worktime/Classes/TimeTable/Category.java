@@ -4,6 +4,8 @@ package com.example.user.worktime.Classes.TimeTable;
  * Created by User on 06.07.2017.
  */
 
+// Use Activity instead
+@Deprecated
 public enum Category {
     DEFAULT("Basislast"),
     URLAUB("Urlaub"),

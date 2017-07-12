@@ -1,31 +1,38 @@
 package com.example.user.worktime;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Classes.DateHelpers;
+import com.example.user.worktime.Classes.TimeTable.Activity;
 
 import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.LocalDate;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by User on 05.07.2017.
  */
 
 public class TimeTablePageFragment extends Fragment {
+    private static final String TAG = "TimeTablePagerFragment";
     int position;
     LocalDate date;
 
@@ -52,17 +59,20 @@ public class TimeTablePageFragment extends Fragment {
         return fragment;
     }
 
-    private void getTimeTable() {
-        // TODO: Get a proper one from the backend-API... when it exists.
-
-    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //new Throwable("A").printStackTrace();
+        Log.wtf(TAG, "onCreateView: " + position);
         View view = inflater.inflate(R.layout.time_table_fragment, container, false);
         TextView dateShow = (TextView) view.findViewById(R.id.page_number);
-        dateShow.setText(DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_ABBREV_WEEKDAY |  DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_WEEKDAY));
+        dateShow.setText(DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_ABBREV_WEEKDAY | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_WEEKDAY));
+
+        TextView weekNumberView = (TextView) view.findViewById(R.id.week_number);
+        weekNumberView.setText(String.format(getString(R.string.weekNo), String.valueOf(date.getWeekOfWeekyear())));
+
+        //registerActivitiesCallback();
 
         dateShow.setClickable(true);
         dateShow.setOnClickListener(new View.OnClickListener() {
@@ -79,5 +89,23 @@ public class TimeTablePageFragment extends Fragment {
         });
 
         return view;
+    }
+
+    // When activities arrive from the nework,
+    private void registerActivitiesCallback() {
+        TimeTablePagerFragment parentFragment = (TimeTablePagerFragment) this.getParentFragment();
+
+        parentFragment.getActivitiesAsync().enqueue(new Callback<List<Activity>>() {
+            @Override
+            public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
+                List<Activity> body = response.body();
+                // TODO: Do something with that list.
+            }
+
+            @Override
+            public void onFailure(Call<List<Activity>> call, Throwable t) {
+                Snackbar.make(getView(), t.getLocalizedMessage(), Snackbar.LENGTH_LONG);
+            }
+        });
     }
 }

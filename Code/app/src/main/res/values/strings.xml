@@ -140,5 +140,6 @@
     <string name="entry_form_time_end_prompt">Endzeitpunkt</string>
     <string name="entry_form_description_prompt">Beschreibung einfügen</string>
     <string name="entry_form_button">Erstellen</string>
+    <string name="weekNo">%1$s wk.</string>
 
 </resources>
