@@ -9,6 +9,7 @@
 _____________
 
 |X| Ändern des Anzeigenamens der MainActivity neben dem Navigations-Button
+| | Überarbeiten des Farbschemas
 
 
 
