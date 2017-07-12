@@ -7,9 +7,13 @@ import android.os.Bundle;
 import android.transition.Fade;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -23,6 +27,13 @@ public class TimeTableEntryCreationActivity extends Activity {
         setContentView(R.layout.activity_time_table_entry_creation);
 
         addItemsOnSpinner();
+
+        LinearLayout focusableParent = (LinearLayout) findViewById(R.id.entry_creation_form);
+        focusableParent.requestFocus();
+
+        TextView dateTextView = (TextView) findViewById(R.id.date_textview);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        dateTextView.setText(sdf.format(new Date()).toString());
     }
 
     public void startTimePicker(View view) {

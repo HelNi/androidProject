@@ -138,7 +138,7 @@
     <string name="entry_form_activity_prompt">Neuer Eintrag</string>
     <string name="entry_form_time_start_prompt">Anfangszeitpunkt</string>
     <string name="entry_form_time_end_prompt">Endzeitpunkt</string>
-    <string name="entry_form_description_prompt">Beschreibung einfügen</string>
+    <string name="entry_form_description_prompt">Details zur Beschäftigung.</string>
     <string name="entry_form_button">Erstellen</string>
 
 </resources>

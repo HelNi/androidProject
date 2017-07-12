@@ -45,7 +45,8 @@
         </activity>
         <activity
             android:name=".TimeTableEntryCreationActivity"
-            android:label="@string/title_activity_time_table_entry_creation"></activity>
+            android:label="@string/title_activity_time_table_entry_creation"
+            android:launchMode = "singleInstance"></activity>
     </application>
 
 </manifest>
