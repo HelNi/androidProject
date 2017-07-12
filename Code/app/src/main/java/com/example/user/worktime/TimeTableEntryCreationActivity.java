@@ -1,29 +1,43 @@
 package com.example.user.worktime;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.transition.Fade;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
 import com.example.user.worktime.Classes.TimeTable.Category;
+import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
+
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 public class TimeTableEntryCreationActivity extends Activity {
-
+    TimeTableEntry mEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        mEntry = new TimeTableEntry(new LocalDateTime(), new LocalDateTime(), "", null, null);
+
         setContentView(R.layout.activity_time_table_entry_creation);
 
         addItemsOnSpinner();
@@ -65,5 +79,18 @@ public class TimeTableEntryCreationActivity extends Activity {
         spinner.setAdapter(dataAdapter);
     }
 
+    public void startDateTimePicker(View view) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                LocalDateTime start = mEntry.getStart();
+                LocalDateTime end = mEntry.getEnd();
+
+                mEntry.setStart(start.withDate(year, month + 1, dayOfMonth));
+                mEntry.setEnd(end.withDate(year, month + 1, dayOfMonth));
+            }
+        }, 1992, 12,14); /*Dummy- Werte, mit Datum ersetzen*/
+        datePickerDialog.show();
+    }
 }
 
