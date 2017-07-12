@@ -2,6 +2,9 @@ package com.example.user.worktime.Classes.TimeTable;
 
 import android.support.annotation.Nullable;
 
+import com.example.user.worktime.Classes.User.User;
+
+import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 
 /**
@@ -9,15 +12,28 @@ import org.joda.time.LocalTime;
  */
 
 public class TimeTableEntry {
-    private long id;
+    protected long id;
 
-    private LocalTime start;
+    protected LocalDateTime start;
 
-    private LocalTime end;
+    protected LocalDateTime end;
 
-    private String description;
+    protected String description;
 
-    private Activity activity;
+    protected Activity activity;
+
+    protected User user;
+
+    public TimeTableEntry() {
+    }
+
+    public TimeTableEntry(LocalDateTime start, LocalDateTime end, String description, Activity activity, User user) {
+        this.start = start;
+        this.end = end;
+        this.description = description;
+        this.activity = activity;
+        this.user = user;
+    }
 
     public long getId() {
         return id;
@@ -27,19 +43,19 @@ public class TimeTableEntry {
         this.id = id;
     }
 
-    public LocalTime getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(LocalTime start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public LocalTime getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(LocalTime end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
@@ -55,7 +71,15 @@ public class TimeTableEntry {
         return activity;
     }
 
-    public void setActivity(@Nullable Activity activity) {
+    public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

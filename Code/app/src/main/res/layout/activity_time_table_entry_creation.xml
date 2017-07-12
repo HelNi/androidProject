@@ -10,7 +10,8 @@
         android:id="@+id/entry_creation_form"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <!-- TODO use Spinner -->
         <EditText
@@ -35,11 +36,11 @@
 
         <Button
             android:id="@+id/start_time"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:elevation="2dp"
+            android:elevation="@dimen/fab_margin"
             android:onClick="startTimePicker"
             android:text="Anfang" />
 
@@ -62,7 +63,7 @@
 
             <Button
                 android:id="@+id/end_time"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -92,13 +93,14 @@
 
         <Button
             android:id="@+id/entry_form_create_button"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
+            android:layout_weight="0.13"
             android:text="@string/entry_form_button"
             android:textStyle="bold" />
 
