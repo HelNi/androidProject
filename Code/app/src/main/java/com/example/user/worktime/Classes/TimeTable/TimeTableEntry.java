@@ -17,7 +17,7 @@ public class TimeTableEntry {
 
     private String description;
 
-    private Activity activity;
+    private Category category;
 
     public long getId() {
         return id;
@@ -51,11 +51,11 @@ public class TimeTableEntry {
         this.description = description;
     }
 
-    public Activity getActivity() {
-        return activity;
+    public Category getActivity() {
+        return category;
     }
 
-    public void setActivity(@Nullable Activity activity) {
-        this.activity = activity;
+    public void setActivity(@Nullable Category category) {
+        this.category = category;
     }
 }
