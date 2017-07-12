@@ -11,6 +11,8 @@ import org.joda.time.LocalTime;
 public class TimeTableEntry {
     private long id;
 
+    private String label;
+
     private LocalTime start;
 
     private LocalTime end;
@@ -26,6 +28,10 @@ public class TimeTableEntry {
     public void setId(long id) {
         this.id = id;
     }
+
+    public String getLabel() { return label; }
+
+    public void setLabel(String label) { this.label = label;}
 
     public LocalTime getStart() {
         return start;
