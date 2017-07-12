@@ -4,19 +4,19 @@ package com.example.user.worktime.Classes.TimeTable;
  * Created by User on 06.07.2017.
  */
 
-public enum Activity {
+public enum Category {
     DEFAULT("Basislast"),
     URLAUB("Urlaub"),
     SOFTWAREENTWICKLUNG("Softwareentwicklung"),
     MEETING("Meeting");
 
-    private String activity;
+    private String catgory;
 
-    Activity(String activity) {
-        this.activity = activity;
+    Category(String catgory) {
+        this.catgory = catgory;
     }
 
     @Override public String toString() {
-        return activity;
+        return catgory;
     }
 }
