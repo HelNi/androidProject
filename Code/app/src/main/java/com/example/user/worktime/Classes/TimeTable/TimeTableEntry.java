@@ -20,18 +20,18 @@ public class TimeTableEntry {
 
     protected String description;
 
-    protected Activity activity;
+    protected Category category;
 
     protected User user;
 
     public TimeTableEntry() {
     }
 
-    public TimeTableEntry(LocalDateTime start, LocalDateTime end, String description, Activity activity, User user) {
+    public TimeTableEntry(LocalDateTime start, LocalDateTime end, String description, Category category, User user) {
         this.start = start;
         this.end = end;
         this.description = description;
-        this.activity = activity;
+        this.category = category;
         this.user = user;
     }
 
@@ -67,12 +67,12 @@ public class TimeTableEntry {
         this.description = description;
     }
 
-    public Activity getActivity() {
-        return activity;
+    public Category getActivity() {
+        return category;
     }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
+    public void setActivity(Category category) {
+        this.category = category;
     }
 
     public User getUser() {
