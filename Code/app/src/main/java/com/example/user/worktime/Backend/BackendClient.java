@@ -2,12 +2,19 @@ package com.example.user.worktime.Backend;
 
 import android.support.annotation.NonNull;
 
+import com.example.user.worktime.Backend.GsonConverters.LocalDateTimeConverter;
 import com.example.user.worktime.Backend.Services.ActivityService;
 import com.example.user.worktime.Backend.Services.AuthService;
 import com.example.user.worktime.Backend.Services.TimeTableEntryService;
 import com.example.user.worktime.Backend.Services.UserService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import org.joda.time.LocalDateTime;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -22,11 +29,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class BackendClient {
-    public static final String BACKEND_BASE_URL = "https://nsh.webuse.de/worktime/";
+    public static final String BACKEND_BASE_URL = "https://nsh.webuse.de/worktime/app_dev.php/";
     // shared preferences for backend API settings, like the API key.
     // Use with getSharedPreferences in activities.
     public static final String PREFERENCE_NAME = "BACKEND_API";
     public static final String PREFERENCE_API_KEY = "API_KEY";
+
+    /**
+     * The specific genericized type for {@code LocalDateTime}.
+     */
+    public static final Type LOCAL_DATE_TIME_TYPE = new TypeToken<LocalDateTime>() {
+    }.getType();
 
     private static BackendClient instance = null;
 
@@ -81,12 +94,16 @@ public class BackendClient {
 
     public static BackendClient getInstance() {
         if (instance == null) {
+
             Retrofit.Builder builder = new Retrofit.Builder();
             OkHttpClient client = buildClient();
 
+            // Enable serialization of LocalDateTime.
+            Gson gson = new GsonBuilder().registerTypeAdapter(LOCAL_DATE_TIME_TYPE, new LocalDateTimeConverter()).create();
+
             Retrofit retrofit = builder.baseUrl(BACKEND_BASE_URL)
                     .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 
             instance = new BackendClient(retrofit);

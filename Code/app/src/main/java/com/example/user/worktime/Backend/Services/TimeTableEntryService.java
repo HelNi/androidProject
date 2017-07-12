@@ -27,7 +27,7 @@ public interface TimeTableEntryService {
     @GET("api/entries/{id}.json")
     Call<TimeTableEntry> getEntry(@Path("id") long id);
 
-    @GET("api/entries/between")
+    @GET("api/entries/between.json")
     Call<List<TimeTableEntry>> getEntriesBetweenDates(@Query("start") LocalDateTime start, @Query("end") LocalDateTime end);
 
     /**

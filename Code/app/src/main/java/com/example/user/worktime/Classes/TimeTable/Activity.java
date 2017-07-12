@@ -1,5 +1,7 @@
 package com.example.user.worktime.Classes.TimeTable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by nsh on 12.07.2017.
  */
@@ -9,6 +11,7 @@ public class Activity {
 
     protected String name;
 
+    @SerializedName("category_name")
     protected String categoryName;
 
     protected Boolean deprecated;

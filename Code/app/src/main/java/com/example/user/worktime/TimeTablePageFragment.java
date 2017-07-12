@@ -16,6 +16,7 @@ import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Classes.DateHelpers;
 import com.example.user.worktime.Classes.TimeTable.Activity;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
+import com.google.gson.Gson;
 
 import net.danlew.android.joda.DateUtils;
 
@@ -75,9 +76,6 @@ public class TimeTablePageFragment extends Fragment {
         TextView weekNumberView = (TextView) view.findViewById(R.id.week_number);
         weekNumberView.setText(String.format(getString(R.string.weekNo), String.valueOf(date.getWeekOfWeekyear())));
 
-        registerActivitiesCallback();
-        populateTimeTableList();
-
         dateShow.setClickable(true);
         dateShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +93,12 @@ public class TimeTablePageFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        registerActivitiesCallback();
+        populateTimeTableList();
+    }
+
     private Call<List<TimeTableEntry>> getEntriesAsync() {
         LocalDateTime start = date.toLocalDateTime(LocalTime.MIDNIGHT);
         LocalDateTime end = date.toLocalDateTime(LocalTime.MIDNIGHT).plusDays(1);
@@ -106,11 +110,16 @@ public class TimeTablePageFragment extends Fragment {
         this.getEntriesAsync().enqueue(new Callback<List<TimeTableEntry>>() {
             @Override
             public void onResponse(Call<List<TimeTableEntry>> call, Response<List<TimeTableEntry>> response) {
-                //
+                List<TimeTableEntry> body = response.body();
+                if (!body.isEmpty()) {
+                    Snackbar.make(getView(), new Gson().toJson(body), Snackbar.LENGTH_INDEFINITE).show();
+                }
+                // TODO: Do something with those entries.
             }
 
             @Override
             public void onFailure(Call<List<TimeTableEntry>> call, Throwable t) {
+                Snackbar.make(getView(), t.getLocalizedMessage(), Snackbar.LENGTH_INDEFINITE).show();
 
             }
         });
@@ -124,6 +133,7 @@ public class TimeTablePageFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
                 List<Activity> body = response.body();
+
                 // TODO: Do something with that list.
             }
 
