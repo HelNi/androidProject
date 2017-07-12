@@ -77,3 +77,12 @@ __________
 - Einarbeitung in die Backend-API
 - Grundstruktur der Eintrages
 - Recherche zum Einfügen von Grafiken in die App
+
+
+11.07.2017
+__________
+
+- Implementierung der "Eintrag erstellen"-Funktion
+- Erstes Designen der "Eintrag erstellen"-Funktion
+- Implementierung einer IntentFactory zur besseren Strukturierung des Codes
+- Implementierung und Recherche zu android.widget.Spinner
