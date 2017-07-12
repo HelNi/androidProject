@@ -15,10 +15,13 @@ import android.widget.TextView;
 import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Classes.DateHelpers;
 import com.example.user.worktime.Classes.TimeTable.Activity;
+import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 
 import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 
 import java.io.IOException;
 import java.util.List;
@@ -72,7 +75,8 @@ public class TimeTablePageFragment extends Fragment {
         TextView weekNumberView = (TextView) view.findViewById(R.id.week_number);
         weekNumberView.setText(String.format(getString(R.string.weekNo), String.valueOf(date.getWeekOfWeekyear())));
 
-        //registerActivitiesCallback();
+        registerActivitiesCallback();
+        populateTimeTableList();
 
         dateShow.setClickable(true);
         dateShow.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +93,27 @@ public class TimeTablePageFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private Call<List<TimeTableEntry>> getEntriesAsync() {
+        LocalDateTime start = date.toLocalDateTime(LocalTime.MIDNIGHT);
+        LocalDateTime end = date.toLocalDateTime(LocalTime.MIDNIGHT).plusDays(1);
+
+        return BackendClient.getInstance().getTimeTableEntryService().getEntriesBetweenDates(start, end);
+    }
+
+    public void populateTimeTableList() {
+        this.getEntriesAsync().enqueue(new Callback<List<TimeTableEntry>>() {
+            @Override
+            public void onResponse(Call<List<TimeTableEntry>> call, Response<List<TimeTableEntry>> response) {
+                //
+            }
+
+            @Override
+            public void onFailure(Call<List<TimeTableEntry>> call, Throwable t) {
+
+            }
+        });
     }
 
     // When activities arrive from the nework,
