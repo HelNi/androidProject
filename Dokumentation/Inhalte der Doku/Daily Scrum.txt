@@ -97,3 +97,28 @@ Helge:
 |X| Hinzufügen eines 'contact'-buttons zur about-Seite
 |X| Verfassen einer Projektbeschreibung und Weiterführen der Dokumentation
 | | Formatieren der Dokumentation mit LibreOffice
+
+
+
+12.07.2017
+__________
+
+| | Allgemeine Projektplanung
+
+Phil:
+| | Gestaltung der Hauptfunktion und Implementierung dieser
+	|X| Implementierung der "Eintrag erstellen"-Funktion
+	|X| Erstes Designen der "Eintrag erstellen"-Funktion
+	|X| Implementierung einer IntentFactory zur besseren Strukturierung des Codes
+	|X| Implementierung und Recherche zu android.widget.Spinner
+| | 
+
+Niklas:
+_______
+| | Backend API
+
+Helge:
+______
+| | Gestaltung der Hauptfunktion und Implementierung dieser
+	| | Überarbeiten der Eintrag erstellen Funktion
+|X| Formatieren der Dokumentation mit LibreOffice

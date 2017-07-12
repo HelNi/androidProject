@@ -86,3 +86,5 @@ __________
 - Erstes Designen der "Eintrag erstellen"-Funktion
 - Implementierung einer IntentFactory zur besseren Strukturierung des Codes
 - Implementierung und Recherche zu android.widget.Spinner
+- Formatieren der Dokumentation in Libre Office
+- Re-organisiseren des Codes
