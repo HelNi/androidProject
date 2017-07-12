@@ -57,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:elevation="@dimen/fab_margin"
-                android:onClick="startTimePicker"
+                android:id="@+id/date_button"
+                android:onClick="startDateTimePicker"
                 android:text="Datum" />
 
             <TextView

@@ -88,3 +88,11 @@ __________
 - Implementierung und Recherche zu android.widget.Spinner
 - Formatieren der Dokumentation in Libre Office
 - Re-organisiseren des Codes
+
+
+12.07.2017
+__________
+
+- Re-organisieren der Entry-Page
+- Einfügen eines DatePickers zur Entry-Page
+- Implementierung der Erstellen-Fkt für die Entry-Page
