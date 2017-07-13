@@ -10,19 +10,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.transition.Fade;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +35,8 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
+import com.example.user.worktime.Backend.BackendClient;
+import com.example.user.worktime.Backend.Services.TimeTableEntryService;
 import com.example.user.worktime.Classes.TimeTable.Category;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 
@@ -37,6 +44,10 @@ import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TimeTableEntryCreationActivity extends AppCompatActivity {
     TimeTableEntry mEntry; // The entry we edit or create.
@@ -56,6 +67,24 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         //Set the focus to the parent-LinearLayout to not focus the EditText at startup.
         LinearLayout focusableParent = (LinearLayout) findViewById(R.id.entry_creation_form);
         focusableParent.requestFocus();
+
+        EditText descriptionEditor = (EditText) findViewById(R.id.description);
+        descriptionEditor.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mEntry.setDescription(s.toString());
+            }
+        });
 
         //Add back button to the ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -146,6 +175,46 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         }, mEntry.getStart().getYear(), mEntry.getStart().getMonthOfYear(), mEntry.getStart().getDayOfMonth());
         datePickerDialog.show();
 
+    }
+
+    /**
+     * Depending on whether the title is being edited or newly created, send it to the backend-API.
+     * @param view
+     */
+    public void persistEntry(View view) {
+        // TODO: Show progress
+
+        TimeTableEntryService timeTableEntryService = BackendClient.getInstance().getTimeTableEntryService();
+        Call<Void> call;
+        if (mIsEdit) {
+            call = timeTableEntryService.updateEntry(mEntry.getId(), mEntry);
+        }
+        else {
+            call = timeTableEntryService.createEntry(mEntry);
+        }
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        String errorString = response.errorBody().string();
+                        Snackbar.make(findViewById(R.id.activity_coordinator_layout), errorString, Snackbar.LENGTH_INDEFINITE).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // TODO:STOP SPINNER
+                // Alsoproper handling
+                Snackbar.make(findViewById(R.id.activity_coordinator_layout), t.getLocalizedMessage(), Snackbar.LENGTH_INDEFINITE).show();
+            }
+        });
     }
 }
 
