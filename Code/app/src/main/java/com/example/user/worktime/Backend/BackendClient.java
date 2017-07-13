@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class BackendClient {
-    public static final String BACKEND_BASE_URL = "https://nsh.webuse.de/worktime/app_dev.php/";
+    public static final String BACKEND_BASE_URL = "https://nsh.webuse.de/worktime/";
     // shared preferences for backend API settings, like the API key.
     // Use with getSharedPreferences in activities.
     public static final String PREFERENCE_NAME = "BACKEND_API";
