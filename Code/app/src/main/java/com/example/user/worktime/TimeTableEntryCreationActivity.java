@@ -7,6 +7,8 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.util.AttributeSet;
 import android.view.View;
@@ -30,7 +32,7 @@ import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
-public class TimeTableEntryCreationActivity extends Activity {
+public class TimeTableEntryCreationActivity extends AppCompatActivity {
     TimeTableEntry mEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,24 @@ public class TimeTableEntryCreationActivity extends Activity {
 
         addItemsOnSpinner();
 
+        //Set the focus to the parent-LinearLayout to not focus the EditText at startup.
         LinearLayout focusableParent = (LinearLayout) findViewById(R.id.entry_creation_form);
         focusableParent.requestFocus();
 
+        //Set the currently chosen date.
         TextView dateTextView = (TextView) findViewById(R.id.date_textview);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         dateTextView.setText(sdf.format(new Date()).toString());
+
+        //Add back button to the ActionBar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    //Needed to add the 'back'-button to the ActionBar
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     public void startTimePicker(View view) {

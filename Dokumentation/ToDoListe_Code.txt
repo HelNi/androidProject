@@ -47,6 +47,17 @@ __________________
 
 
 
+| | Eintrag erstellen
+_____________________
+
+| | DatePicker implementieren
+| | Ausgewähltes Datum des DatePickers anzeigen
+| | Default-Datum ändern
+| | Action-Bar einblenden
+| | Erstellen-Button überarbeiten
+
+
+
 | | MENÜ
 ________
 
