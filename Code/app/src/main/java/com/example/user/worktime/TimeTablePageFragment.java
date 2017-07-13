@@ -106,6 +106,7 @@ public class TimeTablePageFragment extends Fragment {
                         ((TimeTablePagerFragment) getParentFragment()).changeSelectedDate(new LocalDate(year, month + 1, dayOfMonth));
                     }
                 }, date.getYear(), date.getMonthOfYear(), date.getDayOfMonth());
+                datePickerDialog.setCancelable(true);
                 datePickerDialog.show();
             }
         });

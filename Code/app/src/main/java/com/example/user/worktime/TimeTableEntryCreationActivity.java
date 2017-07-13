@@ -53,12 +53,11 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
         addItemsOnSpinner();
 
+        
+
         //Set the focus to the parent-LinearLayout to not focus the EditText at startup.
         LinearLayout focusableParent = (LinearLayout) findViewById(R.id.entry_creation_form);
         focusableParent.requestFocus();
-
-        //Set the currently chosen date.
-
 
         //Add back button to the ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
