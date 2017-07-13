@@ -16,11 +16,11 @@ _____________
 | | LOGINBERECH
 _______________
 
-| | Anbindung an die Backend-API
-| | Entfernen der Beispiele in den Eingabefeldern
+|X| Anbindung an die Backend-API
+|X| Entfernen der Beispiele in den Eingabefeldern
 |X| Entfernen der Abfrage, ob auf das Telefonbuch zugegriffen werden darf
 |X| Implementieren der Funktionen für den Weiter-Button auf der Tastatur
-| | Angemeldet bleiben
+|X| Angemeldet bleiben
 
 
 
@@ -31,7 +31,7 @@ ________________________
 |X| Derselbe Button soll nur auf der MainActivity zu sehen sein
 | | Funktion zum Editieren eines Eintrags
 | | Funktion zum Löschen eines Eintrags
-| | Ansicht aller Einträge eines Tages
+|X| Ansicht aller Einträge eines Tages
 |X| Menü-Funktion
 
 
@@ -39,32 +39,32 @@ ________________________
 | | Eintrag
 __________________
 
-| | Name der Aktivität
+|X| Name der Aktivität
 | | Icon der Aktivität
-| | Startzeitpunkt (mit Datum?)
-| | Endzeitpunkt (mit Datum?)
-| | Beschreibung (max length?)
+|X| Startzeitpunkt (mit Datum?)
+|X| Endzeitpunkt (mit Datum?)
+|X| Beschreibung (max length?)
 
 
 
 | | Eintrag erstellen
 _____________________
 
-| | DatePicker implementieren
+|X| DatePicker implementieren
 | | Ausgewähltes Datum des DatePickers anzeigen
 | | Default-Datum ändern
-| | Action-Bar einblenden
-| | Erstellen-Button überarbeiten
+|X| Action-Bar einblenden
+|X| Erstellen-Button überarbeiten
 
 
 
 | | MENÜ
 ________
 
-| | Profil
+|X| Profil
 | | Tagesansicht (optional: Ansicht ändern)
-| | Über die App
-| | Abmelden
+|X| Über die App
+|X| Abmelden
 | | Einstellungen
 
 
@@ -82,7 +82,7 @@ ______________________
 _________________
 
 |X| Füllen der ProfileFragment-Seite mit Inhalten
-| | Dynamisches Einbinden der Userdaten
+|X| Dynamisches Einbinden der Userdaten
 | | Optional: Hinzufügen von Avataren
 
 
@@ -103,7 +103,7 @@ ________________
 | | ABMELDEN
 ____________
 
-| | Erstellen der nötgen Funktionen, um den User abzumelden ...
+|X| Erstellen der nötgen Funktionen, um den User abzumelden ...
 |X| ... und alle Activitäten und Fragmenten schließen
 
 
