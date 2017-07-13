@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity
     private User mUser;
 
 
+    public User getUser() {
+        return mUser;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,15 +123,10 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if (displayFab) {
-            if (!(fragment instanceof View.OnClickListener))
+            if (!(fragment instanceof View.OnClickListener)) {
                 throw new AssertionError(String.format("Fragment %s must implement OnClickListener or not show The FAB", fragment.getClass().getName()));
-
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(IntentFactory.createNewEntryCreationIntent(MainActivity.this));
-                }
-            });
+            }
+            fab.setOnClickListener((View.OnClickListener) fragment);
             fab.show();
         }
         else

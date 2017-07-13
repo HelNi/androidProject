@@ -6,11 +6,13 @@ import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.joda.time.LocalDateTime;
 
+import java.io.Serializable;
+
 /**
  * Created by User on 06.07.2017.
  */
 
-public class TimeTableEntry {
+public class TimeTableEntry implements Serializable {
     protected long id;
 
     protected LocalDateTime start;

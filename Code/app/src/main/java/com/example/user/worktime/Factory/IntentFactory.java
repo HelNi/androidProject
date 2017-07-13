@@ -1,8 +1,10 @@
 package com.example.user.worktime.Factory;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.LoginActivity;
 import com.example.user.worktime.MainActivity;
 import com.example.user.worktime.R;
@@ -17,9 +19,12 @@ public class IntentFactory {
     private static final String GIT_HUB_LINK = ""; // missing 'http://' will cause a crash!
     private static final String IMPRINT_LINK = "https://www.grumpycats.com/about"; // missing 'http://' will cause a crash!
 
-    public static Intent createNewEntryCreationIntent(MainActivity mainActivity) {
-        Intent intent = new Intent(mainActivity, TimeTableEntryCreationActivity.class);
-        mainActivity.startActivity(intent);
+    public static Intent createNewEntryCreationIntent(Context context, TimeTableEntry entry, boolean isEdit) {
+        Intent intent = new Intent(context, TimeTableEntryCreationActivity.class);
+
+        intent.putExtra("isEdit", isEdit);
+        intent.putExtra("entry", entry);
+
         return intent;
     }
 

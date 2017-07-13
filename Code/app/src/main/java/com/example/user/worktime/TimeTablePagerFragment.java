@@ -15,10 +15,14 @@ import android.view.ViewGroup;
 import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Classes.DateHelpers;
 import com.example.user.worktime.Classes.TimeTable.Activity;
+import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
+import com.example.user.worktime.Classes.User.User;
+import com.example.user.worktime.Factory.IntentFactory;
 
 import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 import java.util.List;
 
@@ -74,8 +78,9 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
         int currentDay = mPager.getCurrentItem();
         LocalDate currentDate = new LocalDate(DateHelpers.dayNumToDate(currentDay));
 
-        String dateString = DateUtils.formatDateTime(getActivity(), currentDate, DateUtils.FORMAT_SHOW_DATE);
-        Snackbar.make(getView(), dateString, Snackbar.LENGTH_SHORT).show();
+        User user = ((MainActivity) getActivity()).getUser();
+        TimeTableEntry entry = new TimeTableEntry(currentDate.toLocalDateTime(LocalTime.MIDNIGHT), currentDate.toLocalDateTime(LocalTime.MIDNIGHT), "", null, user);
+        getActivity().startActivityFromFragment(this, IntentFactory.createNewEntryCreationIntent(getContext(), entry, false), 0);
     }
 
     public Call<List<Activity>> getActivitiesAsync() {

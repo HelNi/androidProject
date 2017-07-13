@@ -2,6 +2,7 @@ package com.example.user.worktime;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Classes.DateHelpers;
 import com.example.user.worktime.Classes.TimeTable.Activity;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
+import com.example.user.worktime.Classes.User.User;
+import com.example.user.worktime.Factory.IntentFactory;
 
 import net.danlew.android.joda.DateUtils;
 
@@ -191,6 +195,7 @@ public class TimeTablePageFragment extends Fragment {
         @Override
         public void onBindViewHolder(EntryViewHolder holder, int position) {
             final TimeTableEntry entry = entries.get(position);
+            holder.description.setText(entry.getDescription());
             holder.interval.setText(DateUtils.formatDateRange(getContext(), entry.getStart(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
             //holder.duration.setText(DateUtils.formatDuration(getContext(), entry.getDuration()));
             Minutes minutes = Minutes.minutesBetween(entry.getStart(), entry.getEnd());
@@ -200,34 +205,41 @@ public class TimeTablePageFragment extends Fragment {
             // ACTIVITY TODO
             // BUTTONS TODO (setOnClickListener)
 
-            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            holder.editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    assert (false);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("Eintrag löschen")
-                            .setCancelable(true)
-                            .setPositiveButton("Löschen", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
-                            .setIcon(R.drawable.ic_delete_forever_black_24dp)
-                            .setMessage(String.format("Eintrag von %1$s bis %1$s wirklich löschen?",
-                                    DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME),
-                                    DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME)));
-
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                    //BackendClient.getInstance().getTimeTableEntryService().deleteEntry(entry.getId());
-                    //fetchTimeTableListFromServer();
+                    User user = entry.getUser();
+                    Intent i = IntentFactory.createNewEntryCreationIntent(getContext(), entry, true);
+                    getActivity().startActivityFromFragment(TimeTablePageFragment.this, i, 0);
                 }
             });
 
             holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Eintrag löschen")
+                            .setCancelable(true)
+                            .setNegativeButton("Nicht löschen", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setPositiveButton("Löschen", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    BackendClient.getInstance().getTimeTableEntryService().deleteEntry(entry.getId());
+                                    fetchTimeTableListFromServer();
+                                }
+                            })
+                            .setIcon(R.drawable.ic_delete_forever_black_24dp)
+                            .setMessage(String.format("Eintrag von %1$s bis %2$s wirklich löschen?",
+                                    DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME),
+                                    DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME)));
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
 
                 }
             });

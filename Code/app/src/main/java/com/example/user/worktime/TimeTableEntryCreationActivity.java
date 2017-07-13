@@ -1,10 +1,13 @@
 package com.example.user.worktime;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -18,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,16 +33,21 @@ import java.util.List;
 import com.example.user.worktime.Classes.TimeTable.Category;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 
+import net.danlew.android.joda.DateUtils;
+
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 public class TimeTableEntryCreationActivity extends AppCompatActivity {
-    TimeTableEntry mEntry;
+    TimeTableEntry mEntry; // The entry we edit or create.
+    boolean mIsEdit; // Whether we edit or create a new entry
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        mEntry = new TimeTableEntry(new LocalDateTime(), new LocalDateTime(), "", null, null);
+        mEntry = (TimeTableEntry) getIntent().getSerializableExtra("entry");
+        mIsEdit = getIntent().getBooleanExtra("isEdit", false);
 
         setContentView(R.layout.activity_time_table_entry_creation);
 
@@ -49,32 +58,57 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         focusableParent.requestFocus();
 
         //Set the currently chosen date.
-        TextView dateTextView = (TextView) findViewById(R.id.date_textview);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        dateTextView.setText(sdf.format(new Date()).toString());
+
 
         //Add back button to the ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        updateTextViews();
+    }
+
+    /**
+     * Updates the values in the text views according to what is in our current entry.
+     */
+    public void updateTextViews() {
+        // Set the inputs according to the initial input from the entry.
+        TextView dateTextView = (TextView) findViewById(R.id.date_textview);
+        dateTextView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_DATE));
+
+        TextView startView = (TextView) findViewById(R.id.start_time_text_view);
+        TextView endView = (TextView) findViewById(R.id.end_time_text_view);
+
+        startView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_TIME));
+        endView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
+
+        TextView descriptionView = (TextView) findViewById(R.id.description);
+        descriptionView.setText(mEntry.getDescription());
     }
 
     //Needed to add the 'back'-button to the ActionBar
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
 
     public void startTimePicker(View view) {
-        DialogFragment fragment = new TimePickerFragment();
+        final boolean isStart = view.getId() == R.id.start_time;
 
-        Bundle args = new Bundle();
-        args.putInt("viewId", view.getId());
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if (isStart) {
+                    mEntry.setStart(mEntry.getStart().withTime(hourOfDay, minute, 0, 0));
+                } else {
+                    mEntry.setEnd(mEntry.getEnd().withTime(hourOfDay, minute, 0, 0));
+                }
 
-        fragment.setArguments(args);
+                updateTextViews();
+            }
+        },
+                isStart ? mEntry.getStart().getHourOfDay() : mEntry.getEnd().getHourOfDay(),
+                isStart ? mEntry.getStart().getMinuteOfHour() : mEntry.getEnd().getMinuteOfHour(), true);// TODO: Aus entry
 
-        fragment.setEnterTransition(new Fade());
-        fragment.setExitTransition(new Fade());
-        fragment.show(getFragmentManager(),"TimePicker");
+        timePickerDialog.show();
     }
 
     // Add all values of the Activity enum into the spinner
@@ -86,7 +120,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         for (Category category : categories) {
             list.add(category.toString());
         }
-        
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -102,10 +136,11 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
                 mEntry.setStart(start.withDate(year, month + 1, dayOfMonth));
                 mEntry.setEnd(end.withDate(year, month + 1, dayOfMonth));
+                updateTextViews();
 
 
             }
-        }, 1992, 12,14); /*Dummy- Werte, mit Datum ersetzen*/
+        }, mEntry.getStart().getYear(), mEntry.getStart().getMonthOfYear(), mEntry.getStart().getDayOfMonth());
         datePickerDialog.show();
 
     }

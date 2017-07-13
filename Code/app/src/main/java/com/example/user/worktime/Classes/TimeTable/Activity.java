@@ -2,11 +2,13 @@ package com.example.user.worktime.Classes.TimeTable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by nsh on 12.07.2017.
  */
 
-public class Activity {
+public class Activity implements Serializable {
     protected long id;
 
     protected String name;

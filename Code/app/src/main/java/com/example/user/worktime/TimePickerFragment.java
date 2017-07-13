@@ -17,6 +17,7 @@ import java.util.Calendar;
  * Created by User on 11.07.2017.
  */
 
+@Deprecated
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
