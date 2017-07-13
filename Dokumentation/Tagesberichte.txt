@@ -96,3 +96,4 @@ __________
 - Re-organisieren der Entry-Page
 - Einfügen eines DatePickers zur Entry-Page
 - Implementierung der Erstellen-Fkt für die Entry-Page
+- Einlesen in die Funktionalität eines Date Pickers
