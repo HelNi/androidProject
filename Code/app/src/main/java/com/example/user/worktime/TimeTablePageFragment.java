@@ -1,19 +1,20 @@
 package com.example.user.worktime;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.Formatter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -24,19 +25,19 @@ import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 
 import net.danlew.android.joda.DateUtils;
 
+import org.joda.time.DateTimeUtils;
+import org.joda.time.Hours;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.Minutes;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.user.worktime.TimeTablePageFragment.TimeTableEntryAdapter.*;
 
 /**
  * Created by User on 05.07.2017.
@@ -82,7 +83,6 @@ public class TimeTablePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //new Throwable("A").printStackTrace();
-        Log.wtf(TAG, "onCreateView: " + position);
         View view = inflater.inflate(R.layout.time_table_fragment, container, false);
         TextView dateShow = (TextView) view.findViewById(R.id.page_number);
         dateShow.setText(DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_ABBREV_WEEKDAY | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_WEEKDAY));
@@ -121,7 +121,7 @@ public class TimeTablePageFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         registerActivitiesCallback();
-        populateTimeTableList();
+        fetchTimeTableListFromServer();
     }
 
     private Call<List<TimeTableEntry>> getEntriesAsync() {
@@ -131,7 +131,7 @@ public class TimeTablePageFragment extends Fragment {
         return BackendClient.getInstance().getTimeTableEntryService().getEntriesBetweenDates(start, end);
     }
 
-    public void populateTimeTableList() {
+    public void fetchTimeTableListFromServer() {
         this.getEntriesAsync().enqueue(new Callback<List<TimeTableEntry>>() {
             @Override
             public void onResponse(Call<List<TimeTableEntry>> call, Response<List<TimeTableEntry>> response) {
@@ -145,7 +145,6 @@ public class TimeTablePageFragment extends Fragment {
             @Override
             public void onFailure(Call<List<TimeTableEntry>> call, Throwable t) {
                 Snackbar.make(getView(), t.getLocalizedMessage(), Snackbar.LENGTH_INDEFINITE).show();
-
             }
         });
     }
@@ -172,7 +171,7 @@ public class TimeTablePageFragment extends Fragment {
         List<TimeTableEntry> entries;
 
         public List<TimeTableEntry> getEntries() {
-            return entries;
+             return entries;
         }
 
         public void setEntries(List<TimeTableEntry> entries) {
@@ -191,12 +190,47 @@ public class TimeTablePageFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(EntryViewHolder holder, int position) {
-            TimeTableEntry entry = entries.get(position);
-            holder.start.setText(DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME));
-            holder.end.setText(DateUtils.formatDateTime(getContext(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
-            holder.description.setText(entry.getDescription());
+            final TimeTableEntry entry = entries.get(position);
+            holder.interval.setText(DateUtils.formatDateRange(getContext(), entry.getStart(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
+            //holder.duration.setText(DateUtils.formatDuration(getContext(), entry.getDuration()));
+            Minutes minutes = Minutes.minutesBetween(entry.getStart(), entry.getEnd());
+            holder.duration.setText(String.format(getString(R.string.date_duration),
+                    Hours.hoursBetween(entry.getStart(),
+                            entry.getEnd()).getHours(), minutes.getMinutes() % 60));
             // ACTIVITY TODO
             // BUTTONS TODO (setOnClickListener)
+
+            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    assert (false);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Eintrag löschen")
+                            .setCancelable(true)
+                            .setPositiveButton("Löschen", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setIcon(R.drawable.ic_delete_forever_black_24dp)
+                            .setMessage(String.format("Eintrag von %1$s bis %1$s wirklich löschen?",
+                                    DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME),
+                                    DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME)));
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    //BackendClient.getInstance().getTimeTableEntryService().deleteEntry(entry.getId());
+                    //fetchTimeTableListFromServer();
+                }
+            });
+
+            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
         @Override
@@ -206,18 +240,24 @@ public class TimeTablePageFragment extends Fragment {
 
         protected class EntryViewHolder extends RecyclerView.ViewHolder {
             CardView cv;
-            TextView start;
-            TextView end;
+            TextView interval;
+            TextView duration;
             TextView description;
             TextView activity;
+
+            Button editButton;
+            Button deleteButton;
 
             public EntryViewHolder(View itemView) {
                 super(itemView);
                 cv = (CardView) itemView.findViewById(R.id.cv);
-                start = (TextView) itemView.findViewById(R.id.entry_start_time);
-                end = (TextView) itemView.findViewById(R.id.entry_end_time);
+                interval = (TextView) itemView.findViewById(R.id.entry_interval);
+                duration = (TextView) itemView.findViewById(R.id.entry_duration);
                 activity = (TextView) itemView.findViewById(R.id.project_name);
                 description = (TextView) itemView.findViewById(R.id.entry_description);
+
+                editButton = (Button) itemView.findViewById(R.id.entry_edit_button);
+                deleteButton = (Button) itemView.findViewById(R.id.entry_delete_button);
             }
         }
     }

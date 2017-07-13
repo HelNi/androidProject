@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Zeitplan-Platzhalter"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
 
         android:textSize="32sp" />
 

@@ -2,6 +2,8 @@ package com.example.user.worktime.Classes.TimeTable;
 
 import com.example.user.worktime.Classes.User.User;
 
+import org.joda.time.Duration;
+import org.joda.time.Interval;
 import org.joda.time.LocalDateTime;
 
 /**
@@ -78,5 +80,13 @@ public class TimeTableEntry {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Duration getDuration() {
+        return new Duration(start.toDateTime(), end.toDateTime());
+    }
+
+    public Interval getInterval() {
+        return new Interval(start.toDateTime(), end.toDateTime());
     }
 }

@@ -136,10 +136,11 @@
 
     <!-- String related to creating a new entry -->
     <string name="entry_form_activity_prompt">Neuer Eintrag</string>
-    <string name="entry_form_time_start_prompt">Anfangszeitpunkt</string>
+    <string name="entry_form_time_start_prompt" translatable="false">Anfangszeitpunkt</string>
     <string name="entry_form_time_end_prompt">Endzeitpunkt</string>
     <string name="entry_form_description_prompt">Details zur Beschäftigung.</string>
-    <string name="entry_form_button">Erstellen</string>
+    <string name="entry_form_button" translatable="false">Erstellen</string>
     <string name="weekNo">%1$s wk.</string>
+    <string name="date_duration">%1$d%2$d h</string>
 
 </resources>
