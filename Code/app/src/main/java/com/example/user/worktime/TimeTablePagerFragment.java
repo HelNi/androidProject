@@ -1,11 +1,11 @@
 package com.example.user.worktime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -18,8 +18,6 @@ import com.example.user.worktime.Classes.TimeTable.Activity;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.Classes.User.User;
 import com.example.user.worktime.Factory.IntentFactory;
-
-import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
@@ -34,13 +32,23 @@ import retrofit2.Call;
 
 public class TimeTablePagerFragment extends Fragment implements View.OnClickListener {
 
+    public static final int REQUEST_CODE = 5;
     ViewPager mPager = null;
     PagerAdapter mPagerAdapter = null;
+    // Needed to fetch the currently active fragment from the pager.
+    SparseArrayCompat<TimeTablePageFragment> mPagerFragments = new SparseArrayCompat<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.time_table_pager_fragment, container, false);
+    }
+
+    /**
+     * @return The fragment the view pager is currently showing.
+     */
+    public TimeTablePageFragment getCurrentFragment() {
+        return mPagerFragments.get(mPager.getCurrentItem());
     }
 
     @Override
@@ -49,6 +57,20 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
 
         mPager = (ViewPager) view.findViewById(R.id.view_pager);
         mPagerAdapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                super.destroyItem(container, position, object);
+                mPagerFragments.remove(position);
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                Object fragment = super.instantiateItem(container, position);
+                mPagerFragments.put(position, (TimeTablePageFragment) fragment);
+                return fragment;
+            }
+
             @Override
             public Fragment getItem(int position) {
                 return TimeTablePageFragment.newInstance(position);
@@ -80,7 +102,18 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
 
         User user = ((MainActivity) getActivity()).getUser();
         TimeTableEntry entry = new TimeTableEntry(currentDate.toLocalDateTime(LocalTime.MIDNIGHT), currentDate.toLocalDateTime(LocalTime.MIDNIGHT), "", null, user);
-        getActivity().startActivityFromFragment(this, IntentFactory.createNewEntryCreationIntent(getContext(), entry, false), 0);
+        startActivityForResult(IntentFactory.createNewEntryCreationIntent(getContext(), entry, false), REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // When the entry activity finishes, we must update our results.
+        if (requestCode != REQUEST_CODE) {
+            return;
+        }
+
+        TimeTablePageFragment currentFragment = getCurrentFragment();
+        currentFragment.fetchTimeTableListFromServer(); // Re-populate.
     }
 
     public Call<List<Activity>> getActivitiesAsync() {

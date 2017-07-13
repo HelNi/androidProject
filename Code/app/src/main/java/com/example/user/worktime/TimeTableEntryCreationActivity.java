@@ -9,6 +9,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -112,14 +113,24 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
      */
     public void updateTextViews() {
         // Set the inputs according to the initial input from the entry.
-        TextView dateTextView = (TextView) findViewById(R.id.date_textview);
-        dateTextView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_DATE));
+        //TextView dateTextView = (TextView) findViewById(R.id.date_textview);
+        //dateTextView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_DATE));
 
-        TextView startView = (TextView) findViewById(R.id.start_time_text_view);
-        TextView endView = (TextView) findViewById(R.id.end_time_text_view);
+        EditText dateEdit = (EditText) findViewById(R.id.date_text_edit);
+        dateEdit.setText(DateUtils.formatDateTime(this, mEntry.getStart(), DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_ALL));
 
-        startView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_TIME));
-        endView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
+        EditText startTimeEdit = (EditText) findViewById(R.id.start_time_text_edit);
+        startTimeEdit.setText(DateUtils.formatDateTime(this, mEntry.getStart(), DateUtils.FORMAT_SHOW_TIME));
+
+        EditText endTimeEdit = (EditText) findViewById(R.id.end_time_text_edit);
+        endTimeEdit.setText(DateUtils.formatDateTime(this, mEntry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
+
+
+        //TextView startView = (TextView) findViewById(R.id.start_time_text_view);
+        //TextView endView = (TextView) findViewById(R.id.end_time_text_view);
+
+        //startView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_TIME));
+        //endView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
 
         TextView descriptionView = (TextView) findViewById(R.id.description);
         descriptionView.setText(mEntry.getDescription());
@@ -205,7 +216,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (!response.isSuccessful()) {
                     try {
                         String errorString = response.errorBody().string();
@@ -219,7 +230,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 // TODO:STOP SPINNER
                 // Alsoproper handling
                 Snackbar.make(findViewById(R.id.activity_coordinator_layout), t.getLocalizedMessage(), Snackbar.LENGTH_INDEFINITE).show();

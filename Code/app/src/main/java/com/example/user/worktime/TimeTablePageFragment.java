@@ -131,7 +131,7 @@ public class TimeTablePageFragment extends Fragment {
 
     private Call<List<TimeTableEntry>> getEntriesAsync() {
         LocalDateTime start = date.toLocalDateTime(LocalTime.MIDNIGHT);
-        LocalDateTime end = date.toLocalDateTime(LocalTime.MIDNIGHT).plusDays(1);
+        LocalDateTime end = date.toLocalDateTime(LocalTime.MIDNIGHT).plusDays(1).minusSeconds(1);
 
         return BackendClient.getInstance().getTimeTableEntryService().getEntriesBetweenDates(start, end);
     }
@@ -211,7 +211,7 @@ public class TimeTablePageFragment extends Fragment {
                 public void onClick(View v) {
                     User user = entry.getUser();
                     Intent i = IntentFactory.createNewEntryCreationIntent(getContext(), entry, true);
-                    getActivity().startActivityFromFragment(TimeTablePageFragment.this, i, 0);
+                    getParentFragment().startActivityForResult(i, TimeTablePagerFragment.REQUEST_CODE);
                 }
             });
 

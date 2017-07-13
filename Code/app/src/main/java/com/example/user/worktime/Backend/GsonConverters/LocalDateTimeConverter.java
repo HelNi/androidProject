@@ -32,21 +32,21 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 import java.lang.reflect.Type;
+import java.util.TimeZone;
 
 /**
  * GSON serialiser/deserialiser for converting Joda {@link LocalDateTime} objects.
  */
 public class LocalDateTimeConverter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime>
 {
-    /** Format specifier */
-    private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
-
     /**
      * Gson invokes this call-back method during serialization when it encounters a field of the
      * specified type. <p>
@@ -63,8 +63,11 @@ public class LocalDateTimeConverter implements JsonSerializer<LocalDateTime>, Js
     @Override
     public JsonElement serialize(LocalDateTime src, Type typeOfSrc, JsonSerializationContext context)
     {
-        final DateTimeFormatter fmt = ISODateTimeFormat.dateTimeNoMillis();
-        return new JsonPrimitive(fmt.print(src));
+        return new JsonPrimitive(getIsoFormatter().print(src));
+    }
+
+    private DateTimeFormatter getIsoFormatter() {
+        return ISODateTimeFormat.dateTimeNoMillis().withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone("europe/berlin")));
     }
 
     /**
@@ -91,7 +94,6 @@ public class LocalDateTimeConverter implements JsonSerializer<LocalDateTime>, Js
             return null;
         }
 
-        final DateTimeFormatter fmt = ISODateTimeFormat.dateTimeNoMillis();
-        return fmt.parseLocalDateTime(json.getAsString());
+        return getIsoFormatter().parseLocalDateTime(json.getAsString());
     }
 }
