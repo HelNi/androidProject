@@ -12,21 +12,24 @@
     <application
         android:name=".WorktimeApplication"
         android:allowBackup="true"
-        android:isGame="false"
         android:icon="@mipmap/ic_launcher"
+        android:isGame="false"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+
+        <!-- Login Activity -->
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -36,6 +39,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.user.worktime.LoginActivity" />
         </activity>
+
+        <!-- Settings Activity -->
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -44,10 +49,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.user.worktime.MainActivity" />
         </activity>
+
+        <!-- TimeTable Entry Activity -->
         <activity
             android:name=".TimeTableEntryCreationActivity"
             android:label="@string/title_activity_time_table_entry_creation"
-            android:launchMode = "singleInstance"></activity>
+            android:launchMode = "singleInstance"
+            android:theme="@style/AppTheme">
+        </activity>
+
     </application>
 
 </manifest>

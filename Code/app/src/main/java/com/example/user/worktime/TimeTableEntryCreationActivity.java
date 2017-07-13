@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.util.AttributeSet;
 import android.view.View;
@@ -30,7 +31,7 @@ import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
-public class TimeTableEntryCreationActivity extends Activity {
+public class TimeTableEntryCreationActivity extends AppCompatActivity {
     TimeTableEntry mEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
