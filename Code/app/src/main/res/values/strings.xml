@@ -142,5 +142,6 @@
     <string name="entry_form_button" translatable="false">Erstellen</string>
     <string name="weekNo">%1$s wk.</string>
     <string name="date_duration">%1$d%2$d h</string>
+    <string name="entry_edit_title">%1$s bearbeiten</string>
 
 </resources>

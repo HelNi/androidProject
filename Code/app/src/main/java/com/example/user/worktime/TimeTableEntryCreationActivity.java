@@ -53,8 +53,6 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
         addItemsOnSpinner();
 
-        
-
         //Set the focus to the parent-LinearLayout to not focus the EditText at startup.
         LinearLayout focusableParent = (LinearLayout) findViewById(R.id.entry_creation_form);
         focusableParent.requestFocus();
@@ -62,6 +60,12 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         //Add back button to the ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         updateTextViews();
+
+        if (mIsEdit) {
+            setTitle(String.format(getString(R.string.entry_edit_title),
+                    DateUtils.formatDateTime(this, mEntry.getStart(),
+                            DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY)));
+        }
     }
 
     /**
