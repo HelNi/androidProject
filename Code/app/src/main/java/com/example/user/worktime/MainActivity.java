@@ -62,10 +62,14 @@ public class MainActivity extends AppCompatActivity
         //close the drawer menu if back button is clicked
         FragmentManager fm = getSupportFragmentManager();
         int index = fm.getBackStackEntryCount() - 1;
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else if(fm.getBackStackEntryCount() != 0){
+        }
+        //Removes current fragment on back pressed. If the only fragment is the time table page then close the application.
+        //frag_time_table is not added to the backStack - only profile and about.
+        else if(fm.getBackStackEntryCount() != 0){
             fm.popBackStack();
         } else{
             super.onBackPressed();
@@ -94,11 +98,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_profile:
                 fragment = ProfileFragment.newInstance(mUser);
                 fragmentName = FRAGMENT_PROFILE;
+                //Add the fragment to the BackStack.
                 fm.beginTransaction().replace(R.id.main_layout, fragment, fragmentName).addToBackStack("profile").commit();
                 break;
             case R.id.nav_time_table:
                 fragment = new TimeTablePagerFragment();
                 fragmentName = FRAGMENT_TIME_TABLE;
+                //FRAGMENT_TIME_TABLE is not added to the BackStack so it won't get removed onBackPressed()-method.
                 fm.beginTransaction().replace(R.id.main_layout, fragment, fragmentName).commit();
                 displayFab = true;
                 break;
@@ -111,12 +117,14 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_about:
                 fragment = new AboutFragment();
                 fragmentName = FRAGMENT_ABOUT;
+                //Add the fragment to the BackStack.
                 fm.beginTransaction().replace(R.id.main_layout, fragment, fragmentName).addToBackStack("about").commit();
                 break;
             default:
                 return false;
         }
 
+        //If TIME_TABLE_FRAGMENT is clicked while being in another Activity: GOTO line 135! Otherwise the fab won't show up again.
         if (fm.findFragmentByTag(fragmentName) != null  && (fm.findFragmentByTag(fragmentName).equals(FRAGMENT_TIME_TABLE))) {
             // Fragment is already selected- we don't need to transition twice.
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
