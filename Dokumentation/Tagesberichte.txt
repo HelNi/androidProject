@@ -97,3 +97,12 @@ __________
 - Einfügen eines DatePickers zur Entry-Page
 - Implementierung der Erstellen-Fkt für die Entry-Page
 - Einlesen in die Funktionalität eines Date Pickers
+
+13.07.2017
+__________
+
+- Fragment-Verwaltung verbessert (schließen alter Fragmente bei bestimmten Ereignissen)
+- Implementierung der Hauptfunktion und Verwaltung des Eintrag-Objekts
+- Bearbeitung der Dokumentation
+- Design der App anpassen
+- Implementierung einer Editierungs- und Löschfunktion
