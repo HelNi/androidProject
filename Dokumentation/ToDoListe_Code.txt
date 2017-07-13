@@ -9,7 +9,6 @@
 _____________
 
 |X| Ändern des Anzeigenamens der MainActivity neben dem Navigations-Button
-| | Überarbeiten des Farbschemas
 
 
 
@@ -29,7 +28,7 @@ ________________________
 
 | | Button / Funktion zum Hinzufügen eines neuen Eintrags
 |X| Derselbe Button soll nur auf der MainActivity zu sehen sein
-| | Funktion zum Editieren eines Eintrags
+|X| Funktion zum Editieren eines Eintrags
 | | Funktion zum Löschen eines Eintrags
 |X| Ansicht aller Einträge eines Tages
 |X| Menü-Funktion
@@ -40,7 +39,7 @@ ________________________
 __________________
 
 |X| Name der Aktivität
-| | Icon der Aktivität
+|?| Icon der Aktivität
 |X| Startzeitpunkt (mit Datum?)
 |X| Endzeitpunkt (mit Datum?)
 |X| Beschreibung (max length?)
@@ -51,8 +50,8 @@ __________________
 _____________________
 
 |X| DatePicker implementieren
-| | Ausgewähltes Datum des DatePickers anzeigen
-| | Default-Datum ändern
+|X| Ausgewähltes Datum des DatePickers anzeigen
+|X| Default-Datum ändern
 |X| Action-Bar einblenden
 |X| Erstellen-Button überarbeiten
 
@@ -74,7 +73,7 @@ ______________________
 
 | | Einfügen des Namens und der Email aus der DB
 |X| Überarbeiten des Icons
-| | Überarbeiten des Hintergrundes
+|?| Überarbeiten des Hintergrundes
 
 
 
