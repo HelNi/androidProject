@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,10 +27,10 @@ public class MainActivity extends AppCompatActivity
     private static final String FRAGMENT_PROFILE = "frag_profile";
     private static final String FRAGMENT_TIME_TABLE = "frag_time_table";
     private static final String FRAGMENT_ABOUT = "frag_about";
+    boolean displayFab;
 
     // The Current user of the application, returned from the Login action.
     private User mUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +59,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        //close the drawer menu if back button is clicked
+        FragmentManager fm = getSupportFragmentManager();
+        int index = fm.getBackStackEntryCount() - 1;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else if(fm.getBackStackEntryCount() != 0){
+            fm.popBackStack();
+        } else{
             super.onBackPressed();
         }
     }
@@ -80,18 +86,20 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment;
         String fragmentName;
-        boolean displayFab = false;
+        displayFab = false;
+        FragmentManager fm = getSupportFragmentManager();
+        fm.popBackStack();
 
         switch (id) {
             case R.id.nav_profile:
-                // TODO: This is a temp user; Get the real user from the API later!
-
                 fragment = ProfileFragment.newInstance(mUser);
                 fragmentName = FRAGMENT_PROFILE;
+                fm.beginTransaction().replace(R.id.main_layout, fragment, fragmentName).addToBackStack("profile").commit();
                 break;
             case R.id.nav_time_table:
                 fragment = new TimeTablePagerFragment();
                 fragmentName = FRAGMENT_TIME_TABLE;
+                fm.beginTransaction().replace(R.id.main_layout, fragment, fragmentName).commit();
                 displayFab = true;
                 break;
             case R.id.nav_settings:
@@ -103,22 +111,25 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_about:
                 fragment = new AboutFragment();
                 fragmentName = FRAGMENT_ABOUT;
+                fm.beginTransaction().replace(R.id.main_layout, fragment, fragmentName).addToBackStack("about").commit();
                 break;
             default:
-                Log.e("Error", "onNavigationItemSelected: unknown ID " + id);
                 return false;
         }
 
-        if (getSupportFragmentManager().findFragmentByTag(fragmentName) != null) {
+        if (fm.findFragmentByTag(fragmentName) != null  && (fm.findFragmentByTag(fragmentName).equals(FRAGMENT_TIME_TABLE))) {
             // Fragment is already selected- we don't need to transition twice.
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
             return false;
         }
 
         fragment.setEnterTransition(new Fade());
         fragment.setExitTransition(new Fade());
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (displayFab) {
+
             if (!(fragment instanceof View.OnClickListener))
                 throw new AssertionError(String.format("Fragment %s must implement OnClickListener or not show The FAB", fragment.getClass().getName()));
 
@@ -129,24 +140,14 @@ public class MainActivity extends AppCompatActivity
                 }
             });
             fab.show();
+        } else {
+            fab.hide();
         }
-        else
-    {
-        fab.hide();
-    }
 
-    getSupportFragmentManager().
-
-    beginTransaction().
-
-    replace(R.id.main_layout, fragment, fragmentName).
-
-    commit();
-
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-}
+    }
 
     public void logout(MenuItem item) {
         // Clear saved API token
@@ -176,7 +177,6 @@ public class MainActivity extends AppCompatActivity
      * The default mail-program will be opened by using an intent.
      * The receiver of the mail is handed over to the mail program as a parameter of the intent.
      * @param view
-     * TODO check on an actual phone with a configured mail-client.
      */
     public void openMailProgram (View view) {
         Intent sendMail = new Intent(Intent.ACTION_VIEW);
