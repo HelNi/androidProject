@@ -102,9 +102,12 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
                 mEntry.setStart(start.withDate(year, month + 1, dayOfMonth));
                 mEntry.setEnd(end.withDate(year, month + 1, dayOfMonth));
+
+
             }
         }, 1992, 12,14); /*Dummy- Werte, mit Datum ersetzen*/
         datePickerDialog.show();
+
     }
 }
 
