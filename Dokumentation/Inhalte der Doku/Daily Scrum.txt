@@ -122,3 +122,22 @@ ______
 | | Gestaltung der Hauptfunktion und Implementierung dieser
 	| | Überarbeiten der Eintrag erstellen Funktion
 |X| Formatieren der Dokumentation mit LibreOffice
+
+
+
+13.07.2017
+__________
+
+|X| Allgemeine Projektplanung
+
+Phil:
+| | Gestaltung der Hauptfunktion und Implementierung dieser
+
+Niklas:
+|X| Backend API
+| | Diverse Arbeiten an der Hauptseite
+
+Helge:
+| | Gestaltung der Hauptfunktion und Implementierung dieser
+	| | Überarbeiten der Eintrag erstellen Funktion
+| | Weiterführen / Vorbereiten der Projektdokumentation
