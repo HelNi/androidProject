@@ -99,7 +99,7 @@ public class TimeTablePageFragment extends Fragment {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        ((TimeTablePagerFragment) getParentFragment()).changeSelectedDate(new LocalDate(year, month, dayOfMonth));
+                        ((TimeTablePagerFragment) getParentFragment()).changeSelectedDate(new LocalDate(year, month + 1, dayOfMonth));
                     }
                 }, date.getYear(), date.getMonthOfYear(), date.getDayOfMonth());
                 datePickerDialog.show();

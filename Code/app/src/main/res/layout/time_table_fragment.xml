@@ -22,11 +22,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Wochen-Platzhalter" />
-        <android.support.v7.widget.RecyclerView
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#999"></View>
+
+    <android.support.v7.widget.RecyclerView
             android:id="@+id/time_table_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-e
+
         </android.support.v7.widget.RecyclerView>
 <!--
         <android.support.v7.widget.CardView
