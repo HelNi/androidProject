@@ -6,153 +6,160 @@
     android:orientation="vertical"
     tools:context="com.example.user.worktime.TimeTableEntryCreationActivity">
 
-    <LinearLayout
-        android:id="@+id/entry_creation_form"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kategorie"
-            android:textStyle="bold"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
-            android:background="@android:color/darker_gray" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            style="@android:style/Widget.Holo.Light.Spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:text="Datum &amp; Uhrzeit"
-            android:textStyle="bold"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
-            android:background="@android:color/darker_gray" />
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/entry_creation_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="@dimen/fab_margin"
-                android:id="@+id/date_button"
-                android:onClick="startDateTimePicker"
-                android:text="Datum" />
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <TextView
-                android:id="@+id/date_textview"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="end"
-                android:layout_weight="1"
-                android:text="00.00.0000"
-                android:textSize="24sp" />
-        </LinearLayout>
+                android:text="Kategorie"
+                android:textStyle="bold"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/darker_gray" />
 
-            <Button
-                android:id="@+id/start_time"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="@dimen/fab_margin"
-                android:onClick="startTimePicker"
-                android:text="Startzeit" />
+            <Spinner
+                android:id="@+id/spinner"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/start_time_text_view"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:text="00:00 Uhr"
-                android:gravity="end"
-                android:textSize="24sp" />
-        </LinearLayout>
+                android:layout_marginTop="35dp"
+                android:text="Datum &amp; Uhrzeit"
+                android:textStyle="bold"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/darker_gray" />
 
-            <Button
-                android:id="@+id/end_time"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="0dp"
-                android:onClick="startTimePicker"
-                android:text="Endzeit" />
+                android:orientation="horizontal">
+
+                <Button
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/fab_margin"
+                    android:id="@+id/date_button"
+                    android:onClick="startDateTimePicker"
+                    android:text="Datum" />
+
+                <TextView
+                    android:id="@+id/date_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="end"
+                    android:layout_weight="1"
+                    android:text="00.00.0000"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/start_time"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/fab_margin"
+                    android:onClick="startTimePicker"
+                    android:text="Startzeit" />
+
+                <TextView
+                    android:id="@+id/start_time_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:text="00:00 Uhr"
+                    android:gravity="end"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/end_time"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:elevation="0dp"
+                    android:onClick="startTimePicker"
+                    android:text="Endzeit" />
+
+                <TextView
+                    android:id="@+id/end_time_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:text="00:00 Uhr"
+                    android:gravity="end"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/end_time_text_view"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:text="00:00 Uhr"
-                android:gravity="end"
-                android:textSize="24sp" />
+                android:layout_marginTop="35dp"
+                android:text="Beschreibung"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/entry_form_description_prompt"
+                android:maxLines="5" />
+
+            <Button
+                android:id="@+id/entry_form_create_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.13"
+                android:text="@string/entry_form_button" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:text="Beschreibung"
-            android:textStyle="bold"/>
+    </ScrollView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
-            android:background="@android:color/darker_gray" />
 
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/entry_form_description_prompt"
-            android:maxLines="5" />
-
-        <Button
-            android:id="@+id/entry_form_create_button"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="0.13"
-            android:text="@string/entry_form_button"
-            android:textStyle="bold" />
-    </LinearLayout>
 </LinearLayout>
