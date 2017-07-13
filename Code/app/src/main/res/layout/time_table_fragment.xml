@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eee"
     android:orientation="vertical">
 
     <TextView
@@ -12,16 +15,57 @@
         android:text="Zeitplan-Platzhalter"
 
         android:textSize="32sp" />
+
     <TextView
         android:id="@+id/week_number"
-        android:text="Wochen-Platzhalter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="Wochen-Platzhalter" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/time_table_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+e
+        </android.support.v7.widget.RecyclerView>
+<!--
+        <android.support.v7.widget.CardView
+            android:id="@+id/time_table_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="5dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </ScrollView>
+                <TextView
+                    android:id="@+id/entry_card_activity"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:text="PLACEHOLDER"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    tools:layout_editor_absoluteX="8dp" />
+
+                <TextView
+                    android:id="@+id/entry_card_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="placeholder2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintTop_toBottomOf="@+id/entry_card_activity"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <TextView
+                    android:id="@+id/entry_card_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="placeholder3"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintLeft_toRightOf="@+id/entry_card_start"
+                    app:layout_constraintTop_toBottomOf="@+id/entry_card_activity" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+-->
 </LinearLayout>
