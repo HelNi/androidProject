@@ -58,6 +58,16 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         mEntry = (TimeTableEntry) getIntent().getSerializableExtra("entry");
+        // TODO: REMOVE THIS! This is just a temporary hack to fix creating before activity selection is done.
+        if (mEntry.getActivity() == null) {
+            com.example.user.worktime.Classes.TimeTable.Activity activity = new com.example.user.worktime.Classes.TimeTable.Activity();
+            activity.setName("");
+            activity.setDeprecated(false);
+            activity.setCategoryName("test");
+            activity.setId(1);
+            mEntry.setActivity(activity);
+        }
+
         mIsEdit = getIntent().getBooleanExtra("isEdit", false);
 
         setContentView(R.layout.activity_time_table_entry_creation);
