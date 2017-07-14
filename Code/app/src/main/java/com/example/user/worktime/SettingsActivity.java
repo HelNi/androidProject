@@ -18,10 +18,15 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.widget.Toast;
 
+import java.lang.annotation.Target;
 import java.util.List;
+
+import static android.R.attr.value;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -49,7 +54,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 // the preference's 'entries' list.
                 ListPreference listPreference = (ListPreference) preference;
                 int index = listPreference.findIndexOfValue(stringValue);
-
                 // Set the summary to reflect the new value.
                 preference.setSummary(
                         index >= 0
@@ -83,9 +87,59 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
+
+            setTheme(preference.getSummary().toString(), preference.getContext());
+            setLanguage(preference.getSummary().toString(), preference.getContext());
+
             return true;
         }
     };
+
+    // Changing the app language programmatically can be buggy and you would have to set it
+    // whenever a new activity starts so for now it only displays an error message.
+    private static void setLanguage(String value, Context context) {
+        switch (value) {
+            case "English":
+                WorktimeApplication wt = new WorktimeApplication();
+                Toast.makeText(context, "Failed to set app language to english!", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
+
+    // This method only displays an error message. To change the theme we would have to set the theme
+    // each time we change the activity
+    private static void setTheme(String value, Context context) {
+        String errComp = null;
+        switch (value) {
+            case "Dark Theme":
+                errComp = "Dark Theme";
+                break;
+            case "Light Theme":
+                errComp = "Light Theme";
+                break;
+            case "Green Lantern":
+                errComp = "Green Lantern";
+                break;
+            case "Deep Ocean":
+                errComp = "Deep Ocean";
+                break;
+            case "Chaotic Mind":
+                errComp = "Chaotic Mind";
+                break;
+            case "Rainbow":
+                errComp = "Rainbow";
+                break;
+            default:
+                //standard theme
+                break;
+        }
+        if (errComp != null) {
+            String errMsg = "Failed to activate " + errComp + " !";
+            Toast.makeText(context, errMsg, Toast.LENGTH_SHORT).show();
+        }
+    }
 
     /**
      * Helper method to determine if the device has an extra-large screen. For
@@ -171,7 +225,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
                 || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
-                || NotificationPreferenceFragment.class.getName().equals(fragmentName);
+                || NotificationPreferenceFragment.class.getName().equals(fragmentName)
+                || ChooseThemePreferenceFragment.class.getName().equals(fragmentName)
+                || ChooseLanguagePreferenceFragment.class.getName().equals(fragmentName);
     }
 
     /**
@@ -252,6 +308,50 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class ChooseThemePreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstance) {
+            super.onCreate(savedInstance);
+            addPreferencesFromResource(R.xml.pref_theme);
+            setHasOptionsMenu(true);
+
+            bindPreferenceSummaryToValue(findPreference("new_theme"));
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class ChooseLanguagePreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstance) {
+            super.onCreate(savedInstance);
+            addPreferencesFromResource(R.xml.pref_language);
+            setHasOptionsMenu(true);
+
+            bindPreferenceSummaryToValue(findPreference("new_language"));
         }
 
         @Override

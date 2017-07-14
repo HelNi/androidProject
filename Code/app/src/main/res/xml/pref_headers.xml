@@ -17,4 +17,14 @@
         android:icon="@drawable/ic_sync_black_24dp"
         android:title="@string/pref_header_data_sync" />
 
+    <header
+        android:fragment="com.example.user.worktime.SettingsActivity$ChooseThemePreferenceFragment"
+        android:icon="@drawable/ic_color_lens_black_24dp"
+        android:title="@string/pref_header_choose_theme" />
+
+    <header
+        android:fragment="com.example.user.worktime.SettingsActivity$ChooseLanguagePreferenceFragment"
+        android:icon="@drawable/ic_public_black_24dp"
+        android:title="@string/pref_header_choose_language" />
+
 </preference-headers>
