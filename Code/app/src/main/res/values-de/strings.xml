@@ -1,21 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WorkTime</string>
-    <string name="action_sign_in">Anmelden</string>
-    <string name="action_sign_in_short">Login</string>
-    <string name="error_field_required">Dieses Feld muss angegeben werden</string>
-    <string name="error_incorrect_password">Das Passwort ist inkorrekt</string>
-    <string name="error_invalid_email">Die E-Mail ist ungültig</string>
-    <string name="error_invalid_password">Das Passwort ist zu kurz</string>
-    <string name="permission_rationale">Kontaktdaten werden benötigt, um eine Vervollständigung zu bieten.</string>
+
+    <!-- Strings für den Login -->
     <string name="prompt_email">E-Mail</string>
     <string name="prompt_password">Passwort</string>
+    <string name="prompt_username">Benutzername</string>
+    <string name="action_sign_in">Anmelden</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="error_invalid_email">Die E-Mail ist ungültig</string>
+    <string name="error_invalid_password">Das Passwort ist zu kurz</string>
+    <string name="error_incorrect_password">Das Passwort ist inkorrekt</string>
+    <string name="error_field_required">Dieses Feld muss angegeben werden</string>
+    <string name="permission_rationale">
+        "Kontaktdaten werden benötigt, um eine Vervollständigung zu bieten."
+    </string>
+    <string name="title_activity_main">WorkTime</string>
+
+
+    <!-- Strings für die Navigationsleiste -->
+    <string name="logout_name">Abmelden</string>
+    <string name="settings_name">Einstellungen</string>
+    <string name="profile_name">Profil</string>
+    <string name="view_name">Ansicht</string>
+    <string name="select_new_date">Neues Datum Wählen</string>
+    <string name="nav_username">Benutzername</string>
+    <string name="nav_email">app@worktime.com</string>
+    <string name="nav_about">Über die App</string>
+
+    <string name="navigation_drawer_open">Navigation Öffnen</string>
+    <string name="navigation_drawer_close">Navigation schließen</string>
+
+    <!-- Strings für die Einstellungen -->
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="pref_header_general">Allgemein</string>
+
+    <string name="pref_title_social_recommendations">Erlaube profilbezogene Empfehlungen</string>
+    <string name="pref_description_social_recommendations">Freundschaftsvorschläge</string>
+
+    <string name="pref_title_display_name">Anzeigename</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Freunde zu Gruppenchats hinzufügen</string>
+    <string-array name="pref_example_list_titles">
+        <item>Dauerhaft</item>
+        <item>Wenn möglich</item>
+        <item>Niemals</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Beispieleinstellungen für Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Synchronisationsinterval</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 Minuten</item>
+        <item>30 Minuten</item>
+        <item>1 Stunde</item>
+        <item>3 Stunden</item>
+        <item>6 Stunden</item>
+        <item>Niemals</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">Einstellungen zur Synchronisation</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Benachrichtigungen</string>
+
+    <string name="pref_title_new_message_notifications">Info bei neuen Nachrichten</string>
+
+    <string name="pref_title_ringtone">Klingelton</string>
+    <string name="pref_ringtone_silent">Lautlos</string>
+
+    <string name="pref_title_vibrate">Vibrieren</string>
     <string name="actions">Aktionen</string>
     <string name="personal">Persönliches</string>
+
+    <!-- Strings für Themes -->
+    <string name="pref_header_choose_theme">Theme</string>
+    <string name="pref_title_choose_theme">Theme auswählen</string>
+    <string-array name="pref_choose_theme_titles">
+        <item>Standard</item>
+        <item>Light Theme</item>
+        <item>Dark Theme</item>
+        <item>Green Lantern</item>
+        <item>Deep Ocean</item>
+        <item>Chaotic Mind</item>
+        <item>Rainbow</item>
+    </string-array>
+    <string-array name="pref_choose_theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <!-- Strings für die Spracheinstellungen -->
+    <string name="pref_header_choose_language">Language</string>
+    <string name="pref_title_choose_language">Choose Language</string>
+    <string-array name="pref_choose_language_titles">
+        <item>German</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="pref_choose_language_values">
+        <item>german</item>
+        <item>english</item>
+    </string-array>
+
+    <!-- Strings for the about_fragment -->
+    <string name="about_fragment_title">Über die App</string>
+    <string name="about_fragment_app_name">Name der App: WorkTime</string>
+    <string name="about_fragment_version">Version-Nr.: 1.0</string>
+    <string name="about_fragment_developed_by">Entwickelt von:\nPhil Hansen\nNiklas Schicker\nHelge Nieblich</string>
+    <string name="about_fragment_time_of_development">Entwicklungszeitraum:\n03.07.2017 – 21.07.2017</string>
+    <string name="about_fragment_git_link">Link zum GitHub Repository</string>
+    <string name="about_fragment_contact">Kontakt</string>
+    <string name="about_fragment_imprint">Impressum</string>
+    <string name="title_activity_time_table_entry_creation">Eintrag erstellen</string>
     <string name="unknown_username">Unbekannter Benutzer</string>
+
+    <!-- String related to creating a new entry -->
+    <string name="entry_form_activity_prompt">Neuer Eintrag</string>
+    <string name="entry_form_time_start_prompt" translatable="false">Anfangszeitpunkt</string>
+    <string name="entry_form_time_end_prompt">Endzeitpunkt</string>
+    <string name="entry_form_description_prompt">Details zur Beschäftigung.</string>
+    <string name="entry_form_button" translatable="false">Erstellen</string>
     <string name="weekNo">%1$s. KW</string>
-    <string name="navigation_drawer_close">Navigation schließen</string>
-    <string name="navigation_drawer_open">Navigation Öffnen</string>
-    <string name="nav_username">Benutzername</string>
     <string name="date_duration">%1$d Std.%2$d Min.</string>
+    <string name="entry_edit_title">%1$s bearbeiten</string>
+
 </resources>
