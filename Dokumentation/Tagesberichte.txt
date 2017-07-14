@@ -98,6 +98,7 @@ __________
 - Implementierung der Erstellen-Fkt für die Entry-Page
 - Einlesen in die Funktionalität eines Date Pickers
 
+
 13.07.2017
 __________
 
@@ -106,3 +107,9 @@ __________
 - Bearbeitung der Dokumentation
 - Design der App anpassen
 - Implementierung einer Editierungs- und Löschfunktion
+
+
+14.07.2017
+__________
+
+-
