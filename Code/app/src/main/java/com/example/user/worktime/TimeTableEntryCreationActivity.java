@@ -169,7 +169,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         });
 
         // change entry time (start and end)
-        EditText descriptionEditor = (EditText) findViewById(R.id.description);
+        final EditText descriptionEditor = (EditText) findViewById(R.id.description);
         descriptionEditor.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -183,7 +183,13 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.length() < 3) {
+                    descriptionEditor.setError("Bitte Mindestens 3 Buchstaben eingeben");
+                }else {
+                    descriptionEditor.setError(null);
+                }
                 mEntry.setDescription(s.toString());
+                enableSendButtonIfPossible();
             }
         });
 
