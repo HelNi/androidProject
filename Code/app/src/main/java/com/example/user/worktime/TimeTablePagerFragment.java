@@ -85,8 +85,9 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
                 return 50000; // TODO
             }
         };
-        mPager.setOffscreenPageLimit(1);
+        mPager.setOffscreenPageLimit(2);
         mPager.setAdapter(mPagerAdapter);
+
         changeSelectedDate(new LocalDate());
     }
 
@@ -107,13 +108,21 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // This is called when an entry edit or entry creation finishes.
         // When the entry activity finishes, we must update our results.
         if (requestCode != REQUEST_CODE) {
             return;
         }
 
-        TimeTablePageFragment currentFragment = getCurrentFragment();
-        currentFragment.fetchTimeTableListFromServer(); // Re-populate.
+        // Re-populate the currently drawn fragments from the database.
+        // not just the currently active one, As the others might have been affected.
+        for(int i = 0; i < mPagerFragments.size(); i++) {
+            TimeTablePageFragment timeTablePageFragment = mPagerFragments.valueAt(i);
+            timeTablePageFragment.fetchTimeTableListFromServer();
+        }
+
+        //TimeTablePageFragment currentFragment = getCurrentFragment();
+        //currentFragment.fetchTimeTableListFromServer(); // Re-populate.
     }
 
     public Call<List<Activity>> getActivitiesAsync() {

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.user.worktime.Backend.BackendClient;
@@ -137,6 +138,9 @@ public class TimeTablePageFragment extends Fragment {
     }
 
     public void fetchTimeTableListFromServer() {
+        final ProgressBar progress = (ProgressBar) getView().findViewById(R.id.time_table_progress);
+        progress.setVisibility(View.INVISIBLE);
+
         this.getEntriesAsync().enqueue(new Callback<List<TimeTableEntry>>() {
             @Override
             public void onResponse(Call<List<TimeTableEntry>> call, Response<List<TimeTableEntry>> response) {
@@ -144,12 +148,14 @@ public class TimeTablePageFragment extends Fragment {
 
                 mTimeTableEntries.clear();
                 mTimeTableEntries.addAll(body);
+                progress.setVisibility(View.GONE);
                 updateList();
             }
 
             @Override
             public void onFailure(Call<List<TimeTableEntry>> call, Throwable t) {
                 Snackbar.make(getView(), t.getLocalizedMessage(), Snackbar.LENGTH_INDEFINITE).show();
+                progress.setVisibility(View.GONE);
             }
         });
     }
