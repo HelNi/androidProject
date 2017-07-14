@@ -141,3 +141,28 @@ Helge:
 | | Gestaltung der Hauptfunktion und Implementierung dieser
 	| | Überarbeiten der Eintrag erstellen Funktion
 | | Weiterführen / Vorbereiten der Projektdokumentation
+
+
+
+14.07.2017
+__________
+
+| | Erweitern der TodoListe
+| | Gestaltung der Hauptfunktion und Implementierung dieser
+	|X| Überarbeiten der Eintrag erstellen Funktion
+
+Phil:
+_____
+|X| Wechsel zwischen Fragments und Activities, diverse Recherchen
+| | Settings-Page
+
+Niklas:
+_______
+| | Diverse Arbeiten an der Hauptseite und am Backend
+| | Re-organisation des Codes
+
+Helge:
+______
+| | Weiterführen / Vorbereiten der Projektdokumentation
+|X| Wechsel zwischen Fragments und Activities, diverse Recherchen
+| | Settings-Page
