@@ -139,7 +139,7 @@ public class TimeTablePageFragment extends Fragment {
 
     public void fetchTimeTableListFromServer() {
         final ProgressBar progress = (ProgressBar) getView().findViewById(R.id.time_table_progress);
-        progress.setVisibility(View.INVISIBLE);
+        progress.setVisibility(View.VISIBLE);
 
         this.getEntriesAsync().enqueue(new Callback<List<TimeTableEntry>>() {
             @Override
