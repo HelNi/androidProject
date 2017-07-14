@@ -1,23 +1,15 @@
 package com.example.user.worktime;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.DialogFragment;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.transition.Fade;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,10 +21,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -45,6 +34,10 @@ import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.DateTimeParser;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,10 +67,92 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_table_entry_creation);
 
         addItemsOnSpinner();
+        handleInputs();
 
         //Set the focus to the parent-LinearLayout to not focus the EditText at startup.
         LinearLayout focusableParent = (LinearLayout) findViewById(R.id.entry_creation_form);
         focusableParent.requestFocus();
+
+        //Add back button to the ActionBar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        updateTextViews();
+
+        if (mIsEdit) {
+            setTitle(String.format(getString(R.string.entry_edit_title),
+                    DateUtils.formatDateTime(this, mEntry.getStart(),
+                            DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY)));
+        }
+    }
+
+    private boolean enableSendButtonIfPossible() {
+        // Validate input fields, if any ix invalid or blank we can't send the entity.
+
+        final FloatingActionButton sendButton = (FloatingActionButton) findViewById(R.id.entry_form_create_button);
+        final EditText dateEditText = (EditText) findViewById(R.id.date_text_edit);
+        final EditText startTimeEdit = (EditText) findViewById(R.id.start_time_text_edit);
+        final EditText endTimeEdit = (EditText) findViewById(R.id.end_time_text_edit);
+        EditText descriptionEditor = (EditText) findViewById(R.id.description);
+
+        if ((descriptionEditor.length() == 0 || descriptionEditor.getError() != null)
+                || (dateEditText.length() == 0 || dateEditText.getError() != null)
+                || (startTimeEdit.length() == 0 || startTimeEdit.getError() != null)
+                || (endTimeEdit.length() == 0 || endTimeEdit.getError() != null)) {
+            sendButton.setEnabled(false);
+            sendButton.hide();
+            return false;
+        }
+
+        sendButton.setEnabled(true);
+        sendButton.show();
+        return true;
+    }
+
+    /**
+     * Handles user changes to input fields, parse their values and writes it to our entry.
+     */
+    private void handleInputs() {
+        final EditText startTimeEdit = (EditText) findViewById(R.id.start_time_text_edit);
+        final EditText endTimeEdit = (EditText) findViewById(R.id.end_time_text_edit);
+
+        startTimeEdit.addTextChangedListener(new TimeTextWatcher(startTimeEdit));
+        endTimeEdit.addTextChangedListener(new TimeTextWatcher(endTimeEdit));
+
+        final EditText dateEditText = (EditText) findViewById(R.id.date_text_edit);
+
+        dateEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder();
+                // specify some fallback formats, too.
+
+                DateTimeParser[] parsers = {
+                        DateTimeFormat.forPattern("dd.MM.yyyy").getParser(),
+                        DateTimeFormat.forPattern("yyyy-MM-dd").getParser()};
+
+                try {
+                    LocalDate parsedDate = LocalDate.parse(s.toString(), dateTimeFormatterBuilder.append(null, parsers).toFormatter());
+
+                    mEntry.setStart(mEntry.getStart().withDate(parsedDate.getYear(), parsedDate.getMonthOfYear(), parsedDate.getDayOfMonth()));
+                    mEntry.setEnd(mEntry.getEnd().withDate(parsedDate.getYear(), parsedDate.getMonthOfYear(), parsedDate.getDayOfMonth()));
+                    dateEditText.setError(null);
+                } catch (IllegalArgumentException e) {
+                    dateEditText.setError("Bitte ein Datum im Format Tag.Monat.Jahr eingeben. Alternativ linken Button klicken.");
+                }
+                finally {
+                    enableSendButtonIfPossible();
+                }
+            }
+        });
 
         EditText descriptionEditor = (EditText) findViewById(R.id.description);
         descriptionEditor.addTextChangedListener(new TextWatcher() {
@@ -96,16 +171,6 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
                 mEntry.setDescription(s.toString());
             }
         });
-
-        //Add back button to the ActionBar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        updateTextViews();
-
-        if (mIsEdit) {
-            setTitle(String.format(getString(R.string.entry_edit_title),
-                    DateUtils.formatDateTime(this, mEntry.getStart(),
-                            DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY)));
-        }
     }
 
     /**
@@ -117,7 +182,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         //dateTextView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_DATE));
 
         EditText dateEdit = (EditText) findViewById(R.id.date_text_edit);
-        dateEdit.setText(DateUtils.formatDateTime(this, mEntry.getStart(), DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_ALL));
+        dateEdit.setText(DateUtils.formatDateTime(this, mEntry.getStart(), DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_ABBREV_ALL));
 
         EditText startTimeEdit = (EditText) findViewById(R.id.start_time_text_edit);
         startTimeEdit.setText(DateUtils.formatDateTime(this, mEntry.getStart(), DateUtils.FORMAT_SHOW_TIME));
@@ -134,6 +199,8 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
         TextView descriptionView = (TextView) findViewById(R.id.description);
         descriptionView.setText(mEntry.getDescription());
+
+        enableSendButtonIfPossible();
     }
 
     //Needed to add the 'back'-button to the ActionBar
@@ -200,6 +267,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
     /**
      * Depending on whether the title is being edited or newly created, send it to the backend-API.
+     *
      * @param view
      */
     public void persistEntry(View view) {
@@ -209,8 +277,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         Call<Void> call;
         if (mIsEdit) {
             call = timeTableEntryService.updateEntry(mEntry.getId(), mEntry);
-        }
-        else {
+        } else {
             call = timeTableEntryService.createEntry(mEntry);
         }
 
@@ -236,6 +303,43 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
                 Snackbar.make(findViewById(R.id.activity_coordinator_layout), t.getLocalizedMessage(), Snackbar.LENGTH_INDEFINITE).show();
             }
         });
+    }
+
+    private class TimeTextWatcher implements TextWatcher {
+        private final EditText textEdit;
+
+        public TimeTextWatcher(EditText edit) {
+            this.textEdit = edit;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String inputString = s.toString();
+            try {
+                LocalTime parsedTime = LocalTime.parse(inputString, DateTimeFormat.forPattern("HH:mm"));
+                if (textEdit.getId() == R.id.start_time_text_edit) {
+                    mEntry.setStart(mEntry.getStart().withTime(parsedTime.getHourOfDay(), parsedTime.getMinuteOfHour(), 0, 0));
+                } else {
+                    mEntry.setEnd(mEntry.getEnd().withTime(parsedTime.getHourOfDay(), parsedTime.getMinuteOfHour(), 0, 0));
+                }
+                textEdit.setError(null);
+            } catch (IllegalArgumentException e) {
+                textEdit.setError("Bitte eine Uhrzeit im Format HH:mm Eingeben. Alternativ linken Button klicken.");
+            }
+            finally {
+                enableSendButtonIfPossible();
+            }
+        }
     }
 }
 
