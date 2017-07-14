@@ -226,6 +226,14 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
             }
         });
 
+        // Oh boy, I sure wonder what the "add 15 minutes button" does...
+        findViewById(R.id.entry_add_15_minutes_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEntry.setEnd(mEntry.getEnd().plusMinutes(15));
+                updateTextViews();
+            }
+        });
     }
 
     /**

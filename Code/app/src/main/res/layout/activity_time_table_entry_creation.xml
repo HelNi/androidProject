@@ -160,13 +160,15 @@
                         <TableRow>
 
                             <ImageButton
+                                android:id="@+id/entry_add_15_minutes_button"
                                 style="@android:style/Widget.Material.ImageButton"
                                 android:layout_column="1"
                                 android:layout_gravity="bottom"
                                 android:backgroundTint="@android:color/white"
                                 android:src="@drawable/ic_access_time_black_24dp_rotated"
                                 android:clickable="false"
-                                android:text="Dauer" />
+                                android:tint="@color/accent"
+                                android:text="@string/duration" />
 
                             <android.support.design.widget.TextInputLayout>
 
