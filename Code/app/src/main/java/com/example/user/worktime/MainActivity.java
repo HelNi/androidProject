@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
                 displayFab = true;
                 break;
             case R.id.nav_settings:
-                Intent intent = new Intent(this, SettingsActivity.class);
+                Intent intent = IntentFactory.createSettingsIntent(this);
                 startActivity(intent);
                 return false;
             case R.id.nav_logout:
