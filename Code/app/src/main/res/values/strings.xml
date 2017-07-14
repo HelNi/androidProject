@@ -144,5 +144,6 @@
     <string name="date_duration">%1$d%2$d h</string>
     <string name="entry_edit_title">%1$s bearbeiten</string>
     <string name="entry_error_end_before_start">Das Ende liegt vor dem Start.</string>
+    <string name="duration_format">%1$02d:%2$02d</string>
 
 </resources>

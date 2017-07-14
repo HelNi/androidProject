@@ -1,6 +1,5 @@
 package com.example.user.worktime;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 
 import android.app.TimePickerDialog;
@@ -13,7 +12,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -33,6 +31,7 @@ import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 
 import net.danlew.android.joda.DateUtils;
 
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -47,6 +46,8 @@ import retrofit2.Response;
 public class TimeTableEntryCreationActivity extends AppCompatActivity {
     TimeTableEntry mEntry; // The entry we edit or create.
     boolean mIsEdit; // Whether we edit or create a new entry
+
+    boolean endDurationFlag = true; // Helper to prevent an infinite loop
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,9 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         // Check if start date is after end date - if it is, that's invalid, too.
         if (mEntry.getStart().isAfter(mEntry.getEnd())) {
             endTimeEdit.setError(getString(R.string.entry_error_end_before_start));
+            sendButton.setEnabled(false);
+            sendButton.hide();
+            return false;
         }
         else {
             endTimeEdit.setError(null);
@@ -128,6 +132,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
         final EditText dateEditText = (EditText) findViewById(R.id.date_text_edit);
 
+        // Change entry date
         dateEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -163,6 +168,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
             }
         });
 
+        // change entry time (start and end)
         EditText descriptionEditor = (EditText) findViewById(R.id.description);
         descriptionEditor.addTextChangedListener(new TextWatcher() {
             @Override
@@ -180,6 +186,40 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
                 mEntry.setDescription(s.toString());
             }
         });
+
+        // change to duration (sets end to start + input duration
+
+        final EditText durationEdit = (EditText) findViewById(R.id.entry_duration_text_edit);
+        durationEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Parse duration as a time for now.
+
+                try {
+                    LocalTime parsedTime = LocalTime.parse(s.toString(), DateTimeFormat.forPattern("HH:mm"));
+                    // Need to check if it already is that value to prevent an infinite loop.
+                    String endTimeText = DateUtils.formatDateTime(TimeTableEntryCreationActivity.this, mEntry.getStart().plus(Duration.millis(parsedTime.getMillisOfDay())), DateUtils.FORMAT_SHOW_TIME);
+                    if (endDurationFlag && !endTimeEdit.getText().toString().equals(endTimeText)) {
+                        endDurationFlag = false;
+                        endTimeEdit.setText(endTimeText);
+                    }
+                    durationEdit.setError(null);
+                } catch (IllegalArgumentException e) {
+                    durationEdit.setError("Bitte eine Dauer im Format Stunden:Minuten eingeben");
+                }
+            }
+        });
+
     }
 
     /**
@@ -200,16 +240,23 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
         endTimeEdit.setText(DateUtils.formatDateTime(this, mEntry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
 
 
-        //TextView startView = (TextView) findViewById(R.id.start_time_text_view);
-        //TextView endView = (TextView) findViewById(R.id.end_time_text_view);
-
-        //startView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getStart(), DateUtils.FORMAT_SHOW_TIME));
-        //endView.setText(DateUtils.formatDateTime(getApplicationContext(), mEntry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
-
         TextView descriptionView = (TextView) findViewById(R.id.description);
         descriptionView.setText(mEntry.getDescription());
 
+
         enableSendButtonIfPossible();
+    }
+
+    private void updateDuration() {
+        EditText durationInput = (EditText) findViewById(R.id.entry_duration_text_edit);
+        Duration duration = mEntry.getDuration();
+
+        String durationText = String.format(getString(R.string.duration_format), duration.getStandardHours(), duration.getStandardMinutes() % 60);
+        if (endDurationFlag && !durationInput.getText().toString().equals(durationText)) {
+            endDurationFlag = false;
+            durationInput.setText(durationText);
+        }
+        endDurationFlag = true;
     }
 
     //Needed to add the 'back'-button to the ActionBar
@@ -343,6 +390,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
                     mEntry.setEnd(mEntry.getEnd().withTime(parsedTime.getHourOfDay(), parsedTime.getMinuteOfHour(), 0, 0));
                 }
                 textEdit.setError(null);
+                updateDuration();
             } catch (IllegalArgumentException e) {
                 textEdit.setError("Bitte eine Uhrzeit im Format HH:mm Eingeben. Alternativ linken Button klicken.");
             }
