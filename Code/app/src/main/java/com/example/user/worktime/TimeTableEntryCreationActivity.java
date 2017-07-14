@@ -1,5 +1,6 @@
 package com.example.user.worktime;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 
 import android.app.TimePickerDialog;
@@ -100,6 +101,14 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
             sendButton.setEnabled(false);
             sendButton.hide();
             return false;
+        }
+
+        // Check if start date is after end date - if it is, that's invalid, too.
+        if (mEntry.getStart().isAfter(mEntry.getEnd())) {
+            endTimeEdit.setError(getString(R.string.entry_error_end_before_start));
+        }
+        else {
+            endTimeEdit.setError(null);
         }
 
         sendButton.setEnabled(true);
@@ -213,6 +222,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
     public void startTimePicker(View view) {
         final boolean isStart = view.getId() == R.id.start_time;
 
+
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -226,7 +236,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
             }
         },
                 isStart ? mEntry.getStart().getHourOfDay() : mEntry.getEnd().getHourOfDay(),
-                isStart ? mEntry.getStart().getMinuteOfHour() : mEntry.getEnd().getMinuteOfHour(), true);// TODO: Aus entry
+                isStart ? mEntry.getStart().getMinuteOfHour() : mEntry.getEnd().getMinuteOfHour(), false);
 
         timePickerDialog.show();
     }

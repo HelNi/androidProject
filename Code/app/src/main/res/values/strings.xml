@@ -143,5 +143,6 @@
     <string name="weekNo">%1$s wk.</string>
     <string name="date_duration">%1$d%2$d h</string>
     <string name="entry_edit_title">%1$s bearbeiten</string>
+    <string name="entry_error_end_before_start">Das Ende liegt vor dem Start.</string>
 
 </resources>
