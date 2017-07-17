@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * Created by nsh on 12.07.2017.
+ *
  */
 
 public class Activity implements Serializable {
@@ -48,5 +49,10 @@ public class Activity implements Serializable {
 
     public void setDeprecated(Boolean deprecated) {
         this.deprecated = deprecated;
+    }
+
+    @Override
+    public String toString() {
+        return categoryName + " / " + name;
     }
 }

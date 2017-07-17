@@ -129,9 +129,4 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
         //TimeTablePageFragment currentFragment = getCurrentFragment();
         //currentFragment.fetchTimeTableListFromServer(); // Re-populate.
     }
-
-    public Call<List<Activity>> getActivitiesAsync() {
-        // Asynchronously fetch activities. Sub-Views can register callbacks.
-        return BackendClient.getInstance().getActivityService().getActivities();
-    }
 }
