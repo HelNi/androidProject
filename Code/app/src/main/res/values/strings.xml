@@ -93,8 +93,8 @@
     <string name="pref_title_choose_theme">Choose Theme</string>
     <string-array name="pref_choose_theme_titles">
         <item>Standard</item>
-        <item>Light Theme</item>
-        <item>Dark Theme</item>
+        <item>Light Mode</item>
+        <item>Dark Mode</item>
         <item>Green Lantern</item>
         <item>Deep Ocean</item>
         <item>Chaotic Mind</item>

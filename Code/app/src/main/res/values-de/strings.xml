@@ -93,8 +93,8 @@
     <string name="pref_title_choose_theme">Theme auswählen</string>
     <string-array name="pref_choose_theme_titles">
         <item>Standard</item>
-        <item>Light Theme</item>
-        <item>Dark Theme</item>
+        <item>Light Mode</item>
+        <item>Dark Mode</item>
         <item>Green Lantern</item>
         <item>Deep Ocean</item>
         <item>Chaotic Mind</item>
@@ -111,15 +111,15 @@
     </string-array>
 
     <!-- Strings für die Spracheinstellungen -->
-    <string name="pref_header_choose_language">Language</string>
-    <string name="pref_title_choose_language">Choose Language</string>
+    <string name="pref_header_choose_language">Spracheinstellungen</string>
+    <string name="pref_title_choose_language">Sprache wählen</string>
     <string-array name="pref_choose_language_titles">
-        <item>German</item>
-        <item>English</item>
+        <item>Deutsch</item>
+        <item>Englisch</item>
     </string-array>
     <string-array name="pref_choose_language_values">
-        <item>german</item>
-        <item>english</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <!-- Strings for the about_fragment -->
