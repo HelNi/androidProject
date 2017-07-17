@@ -5,19 +5,22 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <!--This is only shown when there is a time gap to the previous entry; It can be clicked to create a new entry to fill that gap.-->
     <LinearLayout
         android:id="@+id/entry_duration_before_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
         android:orientation="vertical">
 
         <View
             android:layout_width="1dp"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:background="#000" />
 
         <TextView
@@ -31,10 +34,9 @@
 
         <View
             android:layout_width="1dp"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="11dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="#000" />
 
     </LinearLayout>
@@ -44,7 +46,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
         android:elevation="5dp"
         card_view:cardCornerRadius="3dp"
         card_view:cardUseCompatPadding="true">

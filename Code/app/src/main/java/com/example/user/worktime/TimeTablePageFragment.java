@@ -47,8 +47,15 @@ import retrofit2.Response;
 
 /**
  * Created by User on 05.07.2017.
+ *
+ * This fragment displays the time table entries for one day.
+ *
+ * It will display all of them in a recycle view.
+ * It also shows time gaps between those entries.
+ * It allows editing and deleting those entries.
+ *
+ * This fragment also handles the date picker that allows moving the parent pager to a specified date.
  */
-
 public class TimeTablePageFragment extends Fragment {
     private static final String TAG = "TimeTablePagerFragment";
     int position;
@@ -111,6 +118,7 @@ public class TimeTablePageFragment extends Fragment {
         TextView weekNumberView = (TextView) view.findViewById(R.id.week_number);
         weekNumberView.setText(String.format(getString(R.string.weekNo), String.valueOf(date.getWeekOfWeekyear())));
 
+        // Date select dialog. Will move the parent view pager.
         dateShow.setClickable(true);
         dateShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +128,7 @@ public class TimeTablePageFragment extends Fragment {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         ((TimeTablePagerFragment) getParentFragment()).changeSelectedDate(new LocalDate(year, month + 1, dayOfMonth));
                     }
-                }, date.getYear(), date.getMonthOfYear(), date.getDayOfMonth());
+                }, date.getYear(), date.getMonthOfYear() - 1, date.getDayOfMonth());
                 datePickerDialog.setCancelable(true);
                 datePickerDialog.show();
             }
@@ -204,17 +212,32 @@ public class TimeTablePageFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(EntryViewHolder holder, int position) {
-            Duration gapToPrevious = mGapDurations.get(position);
+            final Duration gapToPrevious = mGapDurations.get(position);
+            final TimeTableEntry entry = mEntries.get(position);
+
+
             // Render either the gap to the previous entry or the entry itself.
             if (gapToPrevious != null) {
                 holder.durationBefore.setText(String.format(getString(R.string.date_duration),
                         gapToPrevious.getStandardHours(), gapToPrevious.getStandardMinutes() % 60));
+                holder.entry_duration_before_layout.setVisibility(View.VISIBLE);
+
+                // When a gap is clicked, create an editor for an entry that will fill that gap.
+                holder.entry_duration_before_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        User user = entry.getUser();
+                        TimeTableEntry newEntry = new TimeTableEntry(entry.getStart().minus(gapToPrevious), entry.getStart(), "", null, user);
+
+                        Intent i = IntentFactory.createNewEntryCreationIntent(getContext(), newEntry , false);
+                        getParentFragment().startActivityForResult(i, TimeTablePagerFragment.REQUEST_CODE, null);
+                    }
+                });
+
             }
             else {
                 holder.entry_duration_before_layout.setVisibility(View.GONE);
             }
-            // Otherwise, render the entry.
-            final TimeTableEntry entry = mEntries.get(position);
 
             holder.description.setText(entry.getDescription());
             holder.interval.setText(DateUtils.formatDateRange(getContext(), entry.getStart(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
@@ -233,8 +256,6 @@ public class TimeTablePageFragment extends Fragment {
                 holder.activity_category.setText(a.getCategoryName());
                 holder.activity_name.setText(a.getName());
             }
-
-            // BUTTONS TODO (setOnClickListener)
 
             holder.editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
