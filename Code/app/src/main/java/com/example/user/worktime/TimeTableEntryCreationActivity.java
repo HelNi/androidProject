@@ -27,13 +27,15 @@ import android.widget.TimePicker;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 
 import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Backend.Services.TimeTableEntryService;
 import com.example.user.worktime.Classes.TimeTable.Activity;
-import com.example.user.worktime.Classes.TimeTable.Category;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.Helpers.ActivityFetcher;
 
@@ -313,7 +315,18 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
                     // TODO: error message
                     return;
                 }
-                activities.addAll(response.body());
+                List<Activity> body = response.body();
+                Collections.sort(body, new Comparator<Activity>() {
+                    @Override
+                    public int compare(Activity o1, Activity o2) {
+                        if (o1.getCategoryName() == o2.getCategoryName()) {
+                            return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
+                        }
+
+                        return String.CASE_INSENSITIVE_ORDER.compare(o1.getCategoryName(), o2.getCategoryName());
+                    }
+                });
+                activities.addAll(body);
                 activityAdapter.notifyDataSetChanged();
 
                 spinner.setSelection(activityAdapter.getPosition(mEntry.getActivity()));
