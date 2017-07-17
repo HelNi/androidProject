@@ -12,9 +12,9 @@ ____________________________
 |X| Einrichten eines Repositorys für die Organisation des Codes auf github.com
 |X| Allgemeine, grundlegende Strukturierung des Projektes
 |X| Verfassen einer Zielsetzung
-| | Verfassen einer Projektbeschreibung
+|X| Verfassen einer Projektbeschreibung
 | | Erstellen von Arbeitspaketen und Zuständigkeiten (parallel zur Arbeit)
-| | Festlegen von Meilensteinen (siehe Meilensteine.txt)
+|X| Festlegen von Meilensteinen (siehe Meilensteine.txt)
 | | UML-Klassendiagramme (nach Fertigstellung des Projektes)
 | | Anfertigung der Reflexion
 
