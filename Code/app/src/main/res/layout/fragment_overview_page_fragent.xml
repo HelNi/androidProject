@@ -28,16 +28,61 @@
         android:layout_height="1dp"
         android:background="#999" />
 
-    <TableLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#eee">
-        <TableRow>
-            <TextView android:text="Stunden Gesamt: " />
-            <TextView android:id="@+id/overview_total_hours" />
-        </TableRow>
-        <TableRow>
-        </TableRow>
-    </TableLayout>
+        android:background="#eee"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Geleistete Stunden: "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:id="@+id/overview_worked_hours"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Von Stunden:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                <TextView
+                    android:padding="8dp"
+
+                    android:id="@+id/overview_total_hours"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </TableRow>
+
+<!--
+            <android.support.v7.widget.RecyclerView android:id="@+id/overview_activity_recycler">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/overview_category_name"
+                        android:padding="8dp"
+                        android:text="Von Stunden:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    <TextView
+                        android:padding="8dp"
+                        android:id="@+id/overview_category_hours"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                </TableRow>
+            </android.support.v7.widget.RecyclerView>
+-->
+
+        </TableLayout>
+
+    </ScrollView>
 
 </LinearLayout>

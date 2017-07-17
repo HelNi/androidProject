@@ -1,5 +1,6 @@
 package com.example.user.worktime;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         TextView tv = (TextView) findViewById(R.id.textView1);
-        tv.setText("Willkommen "+getUser().getFirstName() + " "+ getUser().getLastName());
+        tv.setText("Willkommen " + getUser().getFirstName() + " " + getUser().getLastName());
         return true;
     }
 
@@ -84,12 +85,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment;
         String fragmentName;
+        CharSequence fragmentTitle = item.getTitle();
         boolean displayFab = false;
 
         switch (id) {
             case R.id.nav_profile:
-                // TODO: This is a temp user; Get the real user from the API later!
-
                 fragment = ProfileFragment.newInstance(mUser);
                 fragmentName = FRAGMENT_PROFILE;
                 break;
@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
 
+        setTitle(fragmentTitle);
+
         fragment.setEnterTransition(new Fade());
         fragment.setExitTransition(new Fade());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -132,24 +134,16 @@ public class MainActivity extends AppCompatActivity
             }
             fab.setOnClickListener((View.OnClickListener) fragment);
             fab.show();
+        } else {
+            fab.hide();
         }
-        else
-    {
-        fab.hide();
-    }
 
-    getSupportFragmentManager().
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, fragment, fragmentName).commit();
 
-    beginTransaction().
-
-    replace(R.id.main_layout, fragment, fragmentName).
-
-    commit();
-
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-}
+    }
 
     public void logout(MenuItem item) {
         // Clear saved API token
@@ -160,6 +154,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * See IntentFactory.java for further information!
+     *
      * @param view the view handed over by the button.
      */
     public void openImprint(View view) {
@@ -168,6 +163,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * See IntentFactory.java for further information!
+     *
      * @param view the view handed over by the button.
      */
     public void openGitHub(View view) {
@@ -178,10 +174,10 @@ public class MainActivity extends AppCompatActivity
      * This method is used when the contact-button in the about-fragment is being clicked.
      * The default mail-program will be opened by using an intent.
      * The receiver of the mail is handed over to the mail program as a parameter of the intent.
-     * @param view
-     * TODO check on an actual phone with a configured mail-client.
+     *
+     * @param view TODO check on an actual phone with a configured mail-client.
      */
-    public void openMailProgram (View view) {
+    public void openMailProgram(View view) {
         Intent sendMail = new Intent(Intent.ACTION_VIEW);
         Uri data = Uri.parse("mailto:workTime@example.com?subject=Anfrage%20zur%20WorkTime%20App");
         sendMail.setData(data);

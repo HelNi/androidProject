@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.worktime.Backend.BackendClient;
+import com.example.user.worktime.Classes.TimeTable.Activity;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.Classes.User.User;
 import com.example.user.worktime.Helpers.DateHelpers;
@@ -21,9 +24,13 @@ import com.example.user.worktime.Helpers.TimeTableEntryCollectionHelper;
 import net.danlew.android.joda.DateUtils;
 
 import org.joda.time.DateTimeConstants;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import okhttp3.HttpUrl;
@@ -52,6 +59,15 @@ public class OverviewPageFragent extends Fragment {
 
     public static OverviewPageFragent newInstance(User user, int weekNo) {
         return newInstance(user, weekNo, null);
+    }
+
+    private static Duration calculateTotalRequiredDuration(User user) {
+        Duration duration = Duration.ZERO;
+        for (int i = DateTimeConstants.MONDAY; i <= DateTimeConstants.SUNDAY; ++i) {
+            duration = duration.plus(user.getWorkingTimeForWeekDay(i));
+        }
+
+        return duration;
     }
 
     /**
@@ -88,7 +104,8 @@ public class OverviewPageFragent extends Fragment {
     public void renderTable(List<TimeTableEntry> entries) {
         View view = getView();
 
-        ((TextView) view.findViewById(R.id.overview_total_hours)).setText(DateUtils.formatDuration(getContext(), TimeTableEntryCollectionHelper.sumDuration(entries)));
+        ((TextView) view.findViewById(R.id.overview_worked_hours)).setText(DateUtils.formatDuration(getContext(), TimeTableEntryCollectionHelper.sumDuration(entries)));
+        ((TextView) view.findViewById(R.id.overview_total_hours)).setText(DateUtils.formatDuration(getContext(), calculateTotalRequiredDuration(mUser)));
     }
 
     @Override
