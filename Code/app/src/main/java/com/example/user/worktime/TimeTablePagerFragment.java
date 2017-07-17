@@ -102,7 +102,12 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
         LocalDate currentDate = new LocalDate(DateHelpers.dayNumToDate(currentDay));
 
         User user = ((MainActivity) getActivity()).getUser();
-        TimeTableEntry entry = new TimeTableEntry(currentDate.toLocalDateTime(LocalTime.MIDNIGHT), currentDate.toLocalDateTime(LocalTime.MIDNIGHT), "", null, user);
+        TimeTablePageFragment currentFragment = getCurrentFragment();
+
+        LocalTime suggestedStartTime = currentFragment.mSuggestedStartTime;
+        LocalTime suggestedEndTime = suggestedStartTime.plusMinutes(15);
+
+        TimeTableEntry entry = new TimeTableEntry(currentDate.toLocalDateTime(suggestedStartTime), currentDate.toLocalDateTime(suggestedEndTime), "", null, user);
         startActivityForResult(IntentFactory.createNewEntryCreationIntent(getContext(), entry, false), REQUEST_CODE);
     }
 

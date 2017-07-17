@@ -58,9 +58,13 @@ public class TimeTablePageFragment extends Fragment {
     List<TimeTableEntry> mTimeTableEntries = new ArrayList<>();
     TimeTableEntryAdapter mAdapter;
 
+    // Start time that is pre-filled for new entries.
+    LocalTime mSuggestedStartTime;
+
     public TimeTablePageFragment() {
         this.position = 0;
         date = DateHelpers.dayNumToDate(0);
+        recalculateSuggestedStartTime();
     }
 
     // TODO: Is this how you use arguments?
@@ -73,6 +77,7 @@ public class TimeTablePageFragment extends Fragment {
 
     public void updateList() {
         mAdapter.notifyDataSetChanged();
+        recalculateSuggestedStartTime();
     }
 
     public static TimeTablePageFragment newInstance(int position) {
@@ -150,6 +155,7 @@ public class TimeTablePageFragment extends Fragment {
                 mTimeTableEntries.clear();
                 mTimeTableEntries.addAll(body);
                 progress.setVisibility(View.GONE);
+
                 updateList();
             }
 
@@ -159,6 +165,10 @@ public class TimeTablePageFragment extends Fragment {
                 progress.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void recalculateSuggestedStartTime() {
+        mSuggestedStartTime = TimeTableEntryCollectionHelper.suggestNextStartTime(mTimeTableEntries);
     }
 
     // When activities arrive from the nework,
