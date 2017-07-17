@@ -112,7 +112,7 @@
 
     <!-- Strings für die Spracheinstellungen -->
     <string name="pref_header_choose_language">Spracheinstellungen</string>
-    <string name="pref_title_choose_language">Sprache wählen</string>
+    <string name="pref_title_choose_language">Sprache auswählen</string>
     <string-array name="pref_choose_language_titles">
         <item>Deutsch</item>
         <item>Englisch</item>
