@@ -6,23 +6,53 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/page_number"
+    <RelativeLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:gravity="center_horizontal"
-        android:text="Zeitplan-Platzhalter"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/page_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:text="Zeitplan-Platzhalter"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@id/page_number"
+            android:layout_alignBaseline="@id/page_number"
+            android:id="@+id/week_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="Wochen-Platzhalter"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </RelativeLayout>
+
 
     <TextView
-        android:id="@+id/week_number"
+        android:id="@+id/entry_daily_progress_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Wochen-Platzhalter"
+        android:text="4.5 Std. / 6 Stunden"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <ProgressBar
+        android:id="@+id/entry_daily_progress"
+        style="@android:style/Widget.Material.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:progress="25"
+        android:text="@string/error_invalid_password" />
 
     <View
         android:layout_width="match_parent"
@@ -32,7 +62,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/time_table_recycler"
@@ -44,9 +73,7 @@
             android:paddingBottom="64dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:paddingTop="0dp">
-
-        </android.support.v7.widget.RecyclerView>
+            android:paddingTop="0dp" />
 
         <ProgressBar
             android:id="@+id/time_table_progress"

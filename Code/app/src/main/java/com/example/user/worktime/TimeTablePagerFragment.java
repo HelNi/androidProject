@@ -67,7 +67,8 @@ public class TimeTablePagerFragment extends Fragment implements View.OnClickList
 
             @Override
             public Fragment getItem(int position) {
-                return TimeTablePageFragment.newInstance(position);
+                return TimeTablePageFragment.newInstance(position, ((MainActivity) getActivity()).getUser());
+
             }
 
             @Override

@@ -71,6 +71,7 @@ public class TimeTablePageFragment extends Fragment {
 
     // Start time that is pre-filled for new entries.
     LocalTime mSuggestedStartTime;
+    User mUser;
 
     public TimeTablePageFragment() {
         this.position = 0;
@@ -83,6 +84,7 @@ public class TimeTablePageFragment extends Fragment {
     public void setArguments(Bundle args) {
         position = args.getInt("num", 0);
         date = DateHelpers.dayNumToDate(position);
+        mUser = (User) args.getSerializable("user");
         super.setArguments(args);
     }
 
@@ -94,13 +96,38 @@ public class TimeTablePageFragment extends Fragment {
         // This causes the adapter to re-determine count and to re-bind everything.
         mAdapter.notifyDataSetChanged();
         recalculateSuggestedStartTime();
+        updateProgress();
     }
 
-    public static TimeTablePageFragment newInstance(int position) {
+    private void updateProgress() {
+        int progress;
+
+        Duration requiredDurationForDay = mUser.getWorkingTimeForWeekDay(date.getDayOfWeek());
+        Duration doneDuration = TimeTableEntryCollectionHelper.sumDuration(mTimeTableEntries);
+        if (requiredDurationForDay.isEqual(null)) {
+            progress = 100;
+        }
+        else {
+
+            if (doneDuration.isEqual(null)) {
+                progress = 0;
+            }
+            else {
+                progress = (int) (((double)doneDuration.getMillis() / (double) requiredDurationForDay.getMillis()) * 100.0);
+            }
+        }
+
+        ((TextView) getView().findViewById(R.id.entry_daily_progress_text)).setText(String.format(getString(R.string.date_duration), doneDuration.getStandardHours(), doneDuration.getStandardMinutes() % 60) + " / " + DateUtils.formatDuration(getContext(), requiredDurationForDay));
+        //progress = Math.min(100, progress);
+        ((ProgressBar) getView().findViewById(R.id.entry_daily_progress)).setProgress(progress);
+    }
+
+    public static TimeTablePageFragment newInstance(int position, User user) {
         TimeTablePageFragment fragment = new TimeTablePageFragment();
 
         Bundle bundle = new Bundle();
         bundle.putInt("num", position);
+        bundle.putSerializable("user", user);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -226,8 +253,7 @@ public class TimeTablePageFragment extends Fragment {
                 holder.entry_duration_before_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        User user = entry.getUser();
-                        TimeTableEntry newEntry = new TimeTableEntry(entry.getStart().minus(gapToPrevious), entry.getStart(), "", null, user);
+                        TimeTableEntry newEntry = new TimeTableEntry(entry.getStart().minus(gapToPrevious), entry.getStart(), "", null, mUser);
 
                         Intent i = IntentFactory.createNewEntryCreationIntent(getContext(), newEntry , false);
                         getParentFragment().startActivityForResult(i, TimeTablePagerFragment.REQUEST_CODE, null);
