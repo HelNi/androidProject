@@ -141,7 +141,7 @@
     <string name="entry_form_description_prompt">Details zur Beschäftigung.</string>
     <string name="entry_form_button" translatable="false">Erstellen</string>
     <string name="weekNo">%1$s. KW</string>
-    <string name="date_duration">%1$d Std.%2$d Min.</string>
+    <string name="date_duration">%1$d Std. %2$d Min.</string>
     <string name="entry_edit_title">%1$s bearbeiten</string>
 
 </resources>

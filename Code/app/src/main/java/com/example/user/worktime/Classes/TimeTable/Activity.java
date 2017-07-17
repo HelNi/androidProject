@@ -49,4 +49,9 @@ public class Activity implements Serializable {
     public void setDeprecated(Boolean deprecated) {
         this.deprecated = deprecated;
     }
+
+    @Override
+    public String toString() {
+        return categoryName + " / " + name;
+    }
 }

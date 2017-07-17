@@ -53,9 +53,13 @@ public class TimeTablePageFragment extends Fragment {
     private static final String TAG = "TimeTablePagerFragment";
     int position;
     LocalDate date;
-
-    List<Activity> mActivities = new ArrayList<>();
+    /**
+     * List of all time table entries. Might be empty before it is first loaded.
+     */
     List<TimeTableEntry> mTimeTableEntries = new ArrayList<>();
+    /**
+     * Adapter for the recycleview.
+     */
     TimeTableEntryAdapter mAdapter;
 
     // Start time that is pre-filled for new entries.
@@ -75,7 +79,12 @@ public class TimeTablePageFragment extends Fragment {
         super.setArguments(args);
     }
 
+    /**
+     * Call this when either the list of activities or the list of entries changes
+     * To re-draw the data.
+     */
     public void updateList() {
+        // This causes the adapter to re-determine count and to re-bind everything.
         mAdapter.notifyDataSetChanged();
         recalculateSuggestedStartTime();
     }
@@ -93,7 +102,6 @@ public class TimeTablePageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //new Throwable("A").printStackTrace();
         View view = inflater.inflate(R.layout.time_table_fragment, container, false);
         TextView dateShow = (TextView) view.findViewById(R.id.page_number);
         dateShow.setText(DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_ABBREV_WEEKDAY | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_WEEKDAY));
@@ -127,12 +135,10 @@ public class TimeTablePageFragment extends Fragment {
         recycler.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new TimeTableEntryAdapter(mTimeTableEntries);
         recycler.setAdapter(mAdapter);
-
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        registerActivitiesCallback();
         fetchTimeTableListFromServer();
     }
 
@@ -170,26 +176,9 @@ public class TimeTablePageFragment extends Fragment {
     private void recalculateSuggestedStartTime() {
         mSuggestedStartTime = TimeTableEntryCollectionHelper.suggestNextStartTime(mTimeTableEntries);
     }
-
-    // When activities arrive from the nework,
-    private void registerActivitiesCallback() {
-        TimeTablePagerFragment parentFragment = (TimeTablePagerFragment) this.getParentFragment();
-
-        parentFragment.getActivitiesAsync().enqueue(new Callback<List<Activity>>() {
-            @Override
-            public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
-                List<Activity> body = response.body();
-                // TODO: Do something with that list.
-            }
-
-            @Override
-            public void onFailure(Call<List<Activity>> call, Throwable t) {
-                Snackbar.make(getView(), t.getLocalizedMessage(), Snackbar.LENGTH_LONG);
-            }
-        });
-    }
-
-    // View adapter for the list view.
+    ///////////////////////////////////////////////////////////////////////////
+    //  Time Table Entry Adpter
+    ///////////////////////////////////////////////////////////////////////////
     protected class TimeTableEntryAdapter extends RecyclerView.Adapter<TimeTableEntryAdapter.EntryViewHolder> {
         List<TimeTableEntry> mEntries;
         SparseArray<Duration> mGapDurations;
@@ -226,13 +215,23 @@ public class TimeTablePageFragment extends Fragment {
             }
             // Otherwise, render the entry.
             final TimeTableEntry entry = mEntries.get(position);
+
             holder.description.setText(entry.getDescription());
             holder.interval.setText(DateUtils.formatDateRange(getContext(), entry.getStart(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
             Minutes minutes = Minutes.minutesBetween(entry.getStart(), entry.getEnd());
             holder.duration.setText(String.format(getString(R.string.date_duration),
                     Hours.hoursBetween(entry.getStart(),
                             entry.getEnd()).getHours(), minutes.getMinutes() % 60));
-            // ACTIVITY TODO
+
+            Activity a = entry.getActivity();
+            // When would that happen? But let's handle it anyway.
+            if (a == null) {
+                holder.activity.setText("Unbekannt");
+            }
+            else {
+                holder.activity.setText(a.getCategoryName() + " / " + a.getName());
+            }
+
             // BUTTONS TODO (setOnClickListener)
 
             holder.editButton.setOnClickListener(new View.OnClickListener() {
@@ -301,6 +300,9 @@ public class TimeTablePageFragment extends Fragment {
             return mEntries.size();
         }
 
+        ///////////////////////////////////////////////////////////////////////////
+        // View Holder
+        ///////////////////////////////////////////////////////////////////////////
         protected class EntryViewHolder extends RecyclerView.ViewHolder {
             CardView cv;
             TextView interval;

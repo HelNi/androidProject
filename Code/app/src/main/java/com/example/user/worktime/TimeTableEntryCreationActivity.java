@@ -3,14 +3,20 @@ package com.example.user.worktime;
 import android.app.DatePickerDialog;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,8 +32,10 @@ import java.util.List;
 
 import com.example.user.worktime.Backend.BackendClient;
 import com.example.user.worktime.Backend.Services.TimeTableEntryService;
+import com.example.user.worktime.Classes.TimeTable.Activity;
 import com.example.user.worktime.Classes.TimeTable.Category;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
+import com.example.user.worktime.Helpers.ActivityFetcher;
 
 import net.danlew.android.joda.DateUtils;
 
@@ -54,15 +62,6 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         mEntry = (TimeTableEntry) getIntent().getSerializableExtra("entry");
-        // TODO: REMOVE THIS! This is just a temporary hack to fix creating before activity selection is done.
-        if (mEntry.getActivity() == null) {
-            com.example.user.worktime.Classes.TimeTable.Activity activity = new com.example.user.worktime.Classes.TimeTable.Activity();
-            activity.setName("");
-            activity.setDeprecated(false);
-            activity.setCategoryName("test");
-            activity.setId(1);
-            mEntry.setActivity(activity);
-        }
 
         mIsEdit = getIntent().getBooleanExtra("isEdit", false);
 
@@ -110,8 +109,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
             sendButton.setEnabled(false);
             sendButton.hide();
             return false;
-        }
-        else {
+        } else {
             endTimeEdit.setError(null);
         }
 
@@ -161,8 +159,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
                     dateEditText.setError(null);
                 } catch (IllegalArgumentException e) {
                     dateEditText.setError("Bitte ein Datum im Format Tag.Monat.Jahr eingeben. Alternativ linken Button klicken.");
-                }
-                finally {
+                } finally {
                     enableSendButtonIfPossible();
                 }
             }
@@ -185,7 +182,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (s.length() < 3) {
                     descriptionEditor.setError("Bitte Mindestens 3 Buchstaben eingeben");
-                }else {
+                } else {
                     descriptionEditor.setError(null);
                 }
                 mEntry.setDescription(s.toString());
@@ -304,18 +301,44 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
 
     // Add all values of the Activity enum into the spinner
     private void addItemsOnSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        List<String> list = new ArrayList<String>();
-        EnumSet<Category> categories = EnumSet.allOf(Category.class);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        final List<Activity> activities = new ArrayList<>();
 
-        for (Category category : categories) {
-            list.add(category.toString());
-        }
+        final ArrayAdapter<Activity> activityAdapter = new ArrayAdapter<Activity>(this, android.R.layout.simple_spinner_item, activities);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+        ActivityFetcher.getActivitiesAsync().enqueue(new Callback<List<Activity>>() {
+            @Override
+            public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
+                if (!response.isSuccessful()) {
+                    // TODO: error message
+                    return;
+                }
+                activities.addAll(response.body());
+                activityAdapter.notifyDataSetChanged();
+
+                spinner.setSelection(activityAdapter.getPosition(mEntry.getActivity()));
+            }
+
+            @Override
+            public void onFailure(Call<List<Activity>> call, Throwable t) {
+                // TODO: Error message
+            }
+        });
+
+        activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(activityAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mEntry.setActivity((Activity) parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mEntry.setActivity(null);
+            }
+        });
     }
 
     public void startDateTimePicker(View view) {
@@ -407,8 +430,7 @@ public class TimeTableEntryCreationActivity extends AppCompatActivity {
                 updateDuration();
             } catch (IllegalArgumentException e) {
                 textEdit.setError("Bitte eine Uhrzeit im Format HH:mm Eingeben. Alternativ linken Button klicken.");
-            }
-            finally {
+            } finally {
                 enableSendButtonIfPossible();
             }
         }
