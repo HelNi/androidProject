@@ -12,7 +12,7 @@ _____________
 
 
 
-| | LOGINBERECH
+|X| LOGINBERECH
 _______________
 
 |X| Anbindung an die Backend-API
@@ -26,10 +26,10 @@ _______________
 | | HAUPTSEITE / ANSICHT
 ________________________
 
-| | Button / Funktion zum Hinzufügen eines neuen Eintrags
+|X| Button / Funktion zum Hinzufügen eines neuen Eintrags
 |X| Derselbe Button soll nur auf der MainActivity zu sehen sein
 |X| Funktion zum Editieren eines Eintrags
-| | Funktion zum Löschen eines Eintrags
+|X| Funktion zum Löschen eines Eintrags
 |X| Ansicht aller Einträge eines Tages
 |X| Menü-Funktion
 
@@ -39,10 +39,10 @@ ________________________
 __________________
 
 |X| Name der Aktivität
-|?| Icon der Aktivität
 |X| Startzeitpunkt (mit Datum?)
 |X| Endzeitpunkt (mit Datum?)
 |X| Beschreibung (max length?)
+| | Margins setzen (siehe auch: Eintrag erstellen!)
 
 
 
@@ -54,6 +54,7 @@ _____________________
 |X| Default-Datum ändern
 |X| Action-Bar einblenden
 |X| Erstellen-Button überarbeiten
+| | Margins setzen
 
 
 
@@ -64,7 +65,7 @@ ________
 | | Tagesansicht (optional: Ansicht ändern)
 |X| Über die App
 |X| Abmelden
-| | Einstellungen
+|X| Einstellungen
 
 
 
@@ -73,7 +74,7 @@ ______________________
 
 | | Einfügen des Namens und der Email aus der DB
 |X| Überarbeiten des Icons
-|?| Überarbeiten des Hintergrundes
+|X| Überarbeiten des Hintergrundes
 
 
 
@@ -86,7 +87,7 @@ _________________
 
 
 
-| | ÜBER DIE APP
+|X| ÜBER DIE APP
 ________________
 
 |X| Link zum Impressum
@@ -95,7 +96,7 @@ ________________
 |X| Entwickler
 |X| App-Name
 |X| Kontakt
-| | Testen der Kontakt-Funktion mit konfiguriertem Mail-Client
+|X| Testen der Kontakt-Funktion mit konfiguriertem Mail-Client
 
 
 
