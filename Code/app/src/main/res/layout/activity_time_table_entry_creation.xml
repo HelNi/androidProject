@@ -225,7 +225,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/fab_margin"
         android:onClick="persistEntry"
-        android:src="@drawable/ic_create_black_24dp"
+        android:src="@drawable/ic_save_black_24dp"
         android:text="@string/entry_form_button"
         android:tint="#fff" />
 
