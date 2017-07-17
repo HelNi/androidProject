@@ -12,19 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.user.worktime.Backend.BackendClient;
-import com.example.user.worktime.Classes.DateHelpers;
-import com.example.user.worktime.Classes.TimeTable.Activity;
+import com.example.user.worktime.Helpers.DateHelpers;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.Classes.User.User;
 import com.example.user.worktime.Factory.IntentFactory;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-
-import java.util.List;
-
-import retrofit2.Call;
 
 /**
  * Created by User on 05.07.2017.

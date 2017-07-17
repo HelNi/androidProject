@@ -14,15 +14,15 @@
         android:clickable="true"
         android:gravity="center_horizontal"
         android:text="Zeitplan-Platzhalter"
-
-        android:textSize="32sp" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <TextView
         android:id="@+id/week_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Wochen-Platzhalter" />
+        android:text="Wochen-Platzhalter"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <View
         android:layout_width="match_parent"

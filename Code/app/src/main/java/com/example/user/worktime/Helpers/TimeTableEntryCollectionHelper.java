@@ -64,4 +64,13 @@ public class TimeTableEntryCollectionHelper {
 
         return entries.get(entries.size() - 1).getEnd().toLocalTime();
     }
+
+    public static Duration sumDuration(List<TimeTableEntry> entries) {
+        Duration sum = Duration.ZERO;
+
+        for (TimeTableEntry entry : entries) {
+            sum.plus(entry.getDuration());
+        }
+        return sum;
+    }
 }

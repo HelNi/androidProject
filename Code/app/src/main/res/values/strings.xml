@@ -148,5 +148,9 @@
     <string name="duration">Dauer</string>
     <string name="entry_deletion_confirmation">Eintrag von %1$s bis %2$s wirklich löschen?</string>
     <string name="loading">Lädt</string>
+    <string name="evaluation">Auswertung</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
