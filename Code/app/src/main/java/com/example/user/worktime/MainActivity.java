@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity
     private static final String FRAGMENT_PROFILE = "frag_profile";
     private static final String FRAGMENT_TIME_TABLE = "frag_time_table";
     private static final String FRAGMENT_ABOUT = "frag_about";
+    private static final String FRAGMENT_OVERVIEW = "frag_overview";
 
     // The Current user of the application, returned from the Login action.
     private User mUser;
-
 
     public User getUser() {
         return mUser;
@@ -107,6 +107,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_about:
                 fragment = new AboutFragment();
                 fragmentName = FRAGMENT_ABOUT;
+                break;
+            case R.id.nav_overview:
+                fragment = OverviewFragment.newInstance(mUser);
+                fragmentName = FRAGMENT_OVERVIEW;
                 break;
             default:
                 Log.e("Error", "onNavigationItemSelected: unknown ID " + id);

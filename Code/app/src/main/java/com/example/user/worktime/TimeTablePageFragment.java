@@ -22,7 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.user.worktime.Backend.BackendClient;
-import com.example.user.worktime.Classes.DateHelpers;
+import com.example.user.worktime.Helpers.DateHelpers;
 import com.example.user.worktime.Classes.TimeTable.Activity;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.Classes.User.User;
