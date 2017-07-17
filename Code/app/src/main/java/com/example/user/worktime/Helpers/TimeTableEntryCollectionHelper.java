@@ -15,12 +15,14 @@ import java.util.List;
  */
 
 public class TimeTableEntryCollectionHelper {
+    private TimeTableEntryCollectionHelper() {
 
+    }
     /**
      * @return Hashmap, the keys are the position (0 is right after the first element), the second the
      * duration of the gap.
      */
-    public SparseArray<Duration> gapLengths(List<TimeTableEntry> entries) {
+    public static SparseArray<Duration> gapLengths(List<TimeTableEntry> entries) {
         LocalDateTime lastEnd = null;
         int i = 0;
         SparseArray<Duration> returnValue = new SparseArray<>();

@@ -27,6 +27,7 @@ import com.example.user.worktime.Classes.TimeTable.Activity;
 import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.Classes.User.User;
 import com.example.user.worktime.Factory.IntentFactory;
+import com.example.user.worktime.Helpers.TimeTableEntryCollectionHelper;
 
 import net.danlew.android.joda.DateUtils;
 
@@ -221,13 +222,14 @@ public class TimeTablePageFragment extends Fragment {
                 }
             });
 
+            // ask for confirmation if the user really wants the entry to be deleted.
             holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("Eintrag löschen")
                             .setCancelable(true)
-                            .setNegativeButton("Nicht löschen", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("behalten", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
@@ -236,8 +238,24 @@ public class TimeTablePageFragment extends Fragment {
                             .setPositiveButton("Löschen", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    BackendClient.getInstance().getTimeTableEntryService().deleteEntry(entry.getId());
-                                    fetchTimeTableListFromServer();
+                                    Call<Void> deleteAction = BackendClient.getInstance().getTimeTableEntryService().deleteEntry(entry.getId());
+                                    final ProgressBar progress = (ProgressBar) getView().findViewById(R.id.time_table_progress);
+                                    progress.setVisibility(View.VISIBLE);
+
+                                    deleteAction.enqueue(new Callback<Void>() {
+                                        @Override
+                                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                            fetchTimeTableListFromServer();
+                                            progress.setVisibility(View.GONE);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Void> call, Throwable t) {
+                                            // Snackbar
+
+                                            progress.setVisibility(View.GONE);
+                                        }
+                                    });
                                 }
                             })
                             .setIcon(R.drawable.ic_delete_forever_black_24dp)
@@ -254,7 +272,7 @@ public class TimeTablePageFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return entries.size();
+            return entries.size() + TimeTableEntryCollectionHelper.gapLengths(entries).size();
         }
 
         protected class EntryViewHolder extends RecyclerView.ViewHolder {
