@@ -166,3 +166,26 @@ ______
 | | Weiterführen / Vorbereiten der Projektdokumentation
 |X| Wechsel zwischen Fragments und Activities, diverse Recherchen
 | | Settings-Page
+
+
+
+17.07.2017
+__________
+
+|X| Erweitern der TodoListe
+| | Gestaltung der Hauptfunktion und Implementierung dieser
+| | Dokumentation
+
+Phil:
+_____
+| | Settings-Page
+
+Niklas:
+_______
+| | Diverse Arbeiten an der Hauptseite und am Backend
+| | Re-organisation des Codes
+
+Helge:
+______
+| | Weiterführen / Vorbereiten der Projektdokumentation
+| | Settings-Page
