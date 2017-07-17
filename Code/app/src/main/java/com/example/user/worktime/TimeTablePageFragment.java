@@ -226,10 +226,12 @@ public class TimeTablePageFragment extends Fragment {
             Activity a = entry.getActivity();
             // When would that happen? But let's handle it anyway.
             if (a == null) {
-                holder.activity.setText("Unbekannt");
+                holder.activity_category.setText("Unbek.");
+                holder.activity_name.setText("Unbek.");
             }
             else {
-                holder.activity.setText(a.getCategoryName() + " / " + a.getName());
+                holder.activity_category.setText(a.getCategoryName());
+                holder.activity_name.setText(a.getName());
             }
 
             // BUTTONS TODO (setOnClickListener)
@@ -308,7 +310,8 @@ public class TimeTablePageFragment extends Fragment {
             TextView interval;
             TextView duration;
             TextView description;
-            TextView activity;
+            TextView activity_category;
+            TextView activity_name;
 
             TextView durationBefore;
             View entry_duration_before_layout;
@@ -321,7 +324,8 @@ public class TimeTablePageFragment extends Fragment {
                 cv = (CardView) itemView.findViewById(R.id.cv);
                 interval = (TextView) itemView.findViewById(R.id.entry_interval);
                 duration = (TextView) itemView.findViewById(R.id.entry_duration);
-                activity = (TextView) itemView.findViewById(R.id.project_name);
+                activity_category = (TextView) itemView.findViewById(R.id.project_activity_category);
+                activity_name = (TextView) itemView.findViewById(R.id.project_activity_name);
                 description = (TextView) itemView.findViewById(R.id.entry_description);
                 durationBefore = (TextView) itemView.findViewById(R.id.entry_duration_before);
                 entry_duration_before_layout = itemView.findViewById(R.id.entry_duration_before_layout);
