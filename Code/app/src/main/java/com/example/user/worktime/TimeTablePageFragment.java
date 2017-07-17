@@ -284,7 +284,7 @@ public class TimeTablePageFragment extends Fragment {
                             .setIcon(R.drawable.ic_delete_forever_black_24dp)
                             .setMessage(String.format(getString(R.string.entry_deletion_confirmation),
                                     DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME),
-                                    DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME)));
+                                    DateUtils.formatDateTime(getContext(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME)));
 
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
