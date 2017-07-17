@@ -12,7 +12,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +31,7 @@ import com.example.user.worktime.Helpers.TimeTableEntryCollectionHelper;
 
 import net.danlew.android.joda.DateUtils;
 
-import org.joda.time.DateTimeUtils;
+import org.joda.time.Duration;
 import org.joda.time.Hours;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -179,19 +179,22 @@ public class TimeTablePageFragment extends Fragment {
         });
     }
 
+    // View adapter for the list view.
     protected class TimeTableEntryAdapter extends RecyclerView.Adapter<TimeTableEntryAdapter.EntryViewHolder> {
-        List<TimeTableEntry> entries;
+        List<TimeTableEntry> mEntries;
+        SparseArray<Duration> mGapDurations;
 
-        public List<TimeTableEntry> getEntries() {
-             return entries;
+        public List<TimeTableEntry> getmEntries() {
+             return mEntries;
         }
 
-        public void setEntries(List<TimeTableEntry> entries) {
-            this.entries = entries;
+        public void setmEntries(List<TimeTableEntry> mEntries) {
+            this.mEntries = mEntries;
+            mGapDurations = TimeTableEntryCollectionHelper.gapLengths(mEntries);
         }
 
-        public TimeTableEntryAdapter(List<TimeTableEntry> entries) {
-            this.entries = entries;
+        public TimeTableEntryAdapter(List<TimeTableEntry> mEntries) {
+            setmEntries(mEntries);
         }
 
         @Override
@@ -202,10 +205,19 @@ public class TimeTablePageFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(EntryViewHolder holder, int position) {
-            final TimeTableEntry entry = entries.get(position);
+            Duration gapToPrevious = mGapDurations.get(position);
+            // Render either the gap to the previous entry or the entry itself.
+            if (gapToPrevious != null) {
+                holder.durationBefore.setText(String.format(getString(R.string.date_duration),
+                        gapToPrevious.getStandardHours(), gapToPrevious.getStandardMinutes() % 60));
+            }
+            else {
+                holder.entry_duration_before_layout.setVisibility(View.GONE);
+            }
+            // Otherwise, render the entry.
+            final TimeTableEntry entry = mEntries.get(position);
             holder.description.setText(entry.getDescription());
             holder.interval.setText(DateUtils.formatDateRange(getContext(), entry.getStart(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
-            //holder.duration.setText(DateUtils.formatDuration(getContext(), entry.getDuration()));
             Minutes minutes = Minutes.minutesBetween(entry.getStart(), entry.getEnd());
             holder.duration.setText(String.format(getString(R.string.date_duration),
                     Hours.hoursBetween(entry.getStart(),
@@ -245,21 +257,21 @@ public class TimeTablePageFragment extends Fragment {
                                     deleteAction.enqueue(new Callback<Void>() {
                                         @Override
                                         public void onResponse(Call<Void> call, Response<Void> response) {
+                                            // TODO: Snackbar on failure
                                             fetchTimeTableListFromServer();
                                             progress.setVisibility(View.GONE);
                                         }
 
                                         @Override
                                         public void onFailure(Call<Void> call, Throwable t) {
-                                            // Snackbar
-
+                                            // TODO: Snackbar
                                             progress.setVisibility(View.GONE);
                                         }
                                     });
                                 }
                             })
                             .setIcon(R.drawable.ic_delete_forever_black_24dp)
-                            .setMessage(String.format("Eintrag von %1$s bis %2$s wirklich löschen?",
+                            .setMessage(String.format(getString(R.string.entry_deletion_confirmation),
                                     DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME),
                                     DateUtils.formatDateTime(getContext(), entry.getStart(), DateUtils.FORMAT_SHOW_TIME)));
 
@@ -270,9 +282,13 @@ public class TimeTablePageFragment extends Fragment {
             });
         }
 
+
+
         @Override
         public int getItemCount() {
-            return entries.size() + TimeTableEntryCollectionHelper.gapLengths(entries).size();
+            // Recompute mGapDurations here. The array may have changed.
+            mGapDurations = TimeTableEntryCollectionHelper.gapLengths(mEntries);
+            return mEntries.size();
         }
 
         protected class EntryViewHolder extends RecyclerView.ViewHolder {
@@ -281,6 +297,9 @@ public class TimeTablePageFragment extends Fragment {
             TextView duration;
             TextView description;
             TextView activity;
+
+            TextView durationBefore;
+            View entry_duration_before_layout;
 
             Button editButton;
             Button deleteButton;
@@ -292,6 +311,8 @@ public class TimeTablePageFragment extends Fragment {
                 duration = (TextView) itemView.findViewById(R.id.entry_duration);
                 activity = (TextView) itemView.findViewById(R.id.project_name);
                 description = (TextView) itemView.findViewById(R.id.entry_description);
+                durationBefore = (TextView) itemView.findViewById(R.id.entry_duration_before);
+                entry_duration_before_layout = itemView.findViewById(R.id.entry_duration_before_layout);
 
                 editButton = (Button) itemView.findViewById(R.id.entry_edit_button);
                 deleteButton = (Button) itemView.findViewById(R.id.entry_delete_button);

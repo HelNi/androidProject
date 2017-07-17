@@ -34,9 +34,10 @@ public class TimeTableEntryCollectionHelper {
                 continue; // Skip the first entry of the day.
             }
 
+            Duration duration = new Duration(lastEnd.toDateTime(), entry.getStart().toDateTime());
 
-            Duration duration = new Duration(entry.getStart().toDateTime(), lastEnd.toDateTime());
-            if (duration.getStandardMinutes() > 0) {
+            long minuteDifference = duration.getStandardMinutes();
+            if (minuteDifference > 0) {
                 returnValue.append(i, duration);
             }
             ++i;
