@@ -8,6 +8,7 @@ import com.example.user.worktime.Classes.TimeTable.TimeTableEntry;
 import com.example.user.worktime.LoginActivity;
 import com.example.user.worktime.MainActivity;
 import com.example.user.worktime.R;
+import com.example.user.worktime.SettingsActivity;
 import com.example.user.worktime.TimeTableEntryCreationActivity;
 
 /**
@@ -53,6 +54,11 @@ public class IntentFactory {
     public static Intent createLogoutIntent(MainActivity mainActivity) {
         Intent intent = new Intent(mainActivity, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        return intent;
+    }
+
+    public static Intent createSettingsIntent(MainActivity mainActivity) {
+        Intent intent = new Intent(mainActivity, SettingsActivity.class);
         return intent;
     }
 }
