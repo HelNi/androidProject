@@ -87,7 +87,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
-
+            // TODO Refactoring.
+            // These methods only return a toast saying the configuration failed.
+            // The construct is still buggy. No matter which menu has been clicked both of these methods
+            // will be accessed and a wrong toast might be returned.
             setTheme(preference.getSummary().toString(), preference.getContext());
             setLanguage(preference.getSummary().toString(), preference.getContext());
 
@@ -98,13 +101,18 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     // Changing the app language programmatically can be buggy and you would have to set it
     // whenever a new activity starts so for now it only displays an error message.
     private static void setLanguage(String value, Context context) {
+        String errMsg = null;
         switch (value) {
             case "English":
-                WorktimeApplication wt = new WorktimeApplication();
-                Toast.makeText(context, "Failed to set app language to english!", Toast.LENGTH_SHORT).show();
+                errMsg = "Failed to set app language to english!";
                 break;
+            case "Englisch":
+                errMsg = "Das Ändern der Sprache in \""+value+"\" ist fehlgeschlagen.";
             default:
                 break;
+        }
+        if (errMsg != null) {
+            Toast.makeText(context, errMsg, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -113,11 +121,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static void setTheme(String value, Context context) {
         String errComp = null;
         switch (value) {
-            case "Dark Theme":
-                errComp = "Dark Theme";
+            case "Light Mode":
+                errComp = "Light Mode";
                 break;
-            case "Light Theme":
-                errComp = "Light Theme";
+            case "Dark Mode":
+                errComp = "Dark Mode";
                 break;
             case "Green Lantern":
                 errComp = "Green Lantern";
@@ -136,7 +144,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 break;
         }
         if (errComp != null) {
-            String errMsg = "Failed to activate " + errComp + " !";
+            String errMsg = "Fehler beim Aktivieren des \"" + errComp + "\" Theme!";
             Toast.makeText(context, errMsg, Toast.LENGTH_SHORT).show();
         }
     }
