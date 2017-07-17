@@ -2,6 +2,8 @@ package com.example.user.worktime.Classes.User;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.joda.time.DateTimeConstants;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 
 import java.io.Serializable;
@@ -97,5 +99,25 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    /**
+     *
+     * @param weekDay For which day to check
+     * @return The duration the employee needs to work for the specified day.
+     *         Currently hardcoded, but could be fetched from the Backend.
+     */
+    public Duration getWorkingTimeForWeekDay(int weekDay) {
+        if (weekDay < DateTimeConstants.MONDAY || weekDay > DateTimeConstants.SUNDAY) {
+            throw new IllegalArgumentException("Weeday must be in range 1 - 7 , is " + weekDay);
+        }
+
+        switch (weekDay) {
+            case DateTimeConstants.SATURDAY:
+            case DateTimeConstants.SUNDAY:
+                return Duration.ZERO;
+            default:
+                return new Duration(8 * DateTimeConstants.MILLIS_PER_HOUR); // 8 hours.
+        }
     }
 }

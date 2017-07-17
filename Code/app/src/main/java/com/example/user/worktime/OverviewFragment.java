@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.worktime.Classes.User.User;
+import com.example.user.worktime.Helpers.DateHelpers;
 
+import org.joda.time.LocalDate;
 import org.joda.time.Weeks;
 
 
@@ -75,7 +77,14 @@ public class OverviewFragment extends Fragment {
             }
         });
 
+        overviewPager.setCurrentItem(DateHelpers.getWeekPage(LocalDate.now()));
+
         return view;
     }
 
+    public void selectWeek(int weekOfWeekyear) {
+        ViewPager overviewPager = (ViewPager) getView().findViewById(R.id.overview_pager);
+        overviewPager.setCurrentItem(weekOfWeekyear);
+
+    }
 }

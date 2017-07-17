@@ -42,7 +42,7 @@ public class DateHelpers {
      * @return Number of the day of the specified date after 1.1.1970
      */
     public static int getWeekPage(@NonNull LocalDate date) {
-        return Weeks.weeksBetween(new LocalDate(0L), date).getWeeks();
+        return Weeks.weeksBetween(new LocalDate(1970, 1, 5), date).getWeeks();
     }
 
     /**
@@ -50,8 +50,8 @@ public class DateHelpers {
      * @param week Day number after 1.1.1970
      * @return The Date of the Specified day.
      */
-    public @NonNull static LocalDate wekkNumToDate(int week) {
-        LocalDate localDate = new LocalDate(0L);
+    public @NonNull static LocalDate weekToDate(int week) {
+        LocalDate localDate = new LocalDate(1970, 1, 5); // 5.1.1970 - Because 1.1. is a monday.
         return localDate.plusWeeks(week);
     }
 }

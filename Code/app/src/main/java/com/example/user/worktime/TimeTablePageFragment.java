@@ -47,8 +47,15 @@ import retrofit2.Response;
 
 /**
  * Created by User on 05.07.2017.
+ *
+ * This fragment displays the time table entries for one day.
+ *
+ * It will display all of them in a recycle view.
+ * It also shows time gaps between those entries.
+ * It allows editing and deleting those entries.
+ *
+ * This fragment also handles the date picker that allows moving the parent pager to a specified date.
  */
-
 public class TimeTablePageFragment extends Fragment {
     private static final String TAG = "TimeTablePagerFragment";
     int position;
@@ -64,6 +71,7 @@ public class TimeTablePageFragment extends Fragment {
 
     // Start time that is pre-filled for new entries.
     LocalTime mSuggestedStartTime;
+    User mUser;
 
     public TimeTablePageFragment() {
         this.position = 0;
@@ -76,6 +84,7 @@ public class TimeTablePageFragment extends Fragment {
     public void setArguments(Bundle args) {
         position = args.getInt("num", 0);
         date = DateHelpers.dayNumToDate(position);
+        mUser = (User) args.getSerializable("user");
         super.setArguments(args);
     }
 
@@ -87,13 +96,38 @@ public class TimeTablePageFragment extends Fragment {
         // This causes the adapter to re-determine count and to re-bind everything.
         mAdapter.notifyDataSetChanged();
         recalculateSuggestedStartTime();
+        updateProgress();
     }
 
-    public static TimeTablePageFragment newInstance(int position) {
+    private void updateProgress() {
+        int progress;
+
+        Duration requiredDurationForDay = mUser.getWorkingTimeForWeekDay(date.getDayOfWeek());
+        Duration doneDuration = TimeTableEntryCollectionHelper.sumDuration(mTimeTableEntries);
+        if (requiredDurationForDay.isEqual(null)) {
+            progress = 100;
+        }
+        else {
+
+            if (doneDuration.isEqual(null)) {
+                progress = 0;
+            }
+            else {
+                progress = (int) (((double)doneDuration.getMillis() / (double) requiredDurationForDay.getMillis()) * 100.0);
+            }
+        }
+
+        ((TextView) getView().findViewById(R.id.entry_daily_progress_text)).setText(String.format(getString(R.string.date_duration), doneDuration.getStandardHours(), doneDuration.getStandardMinutes() % 60) + " / " + DateUtils.formatDuration(getContext(), requiredDurationForDay));
+        //progress = Math.min(100, progress);
+        ((ProgressBar) getView().findViewById(R.id.entry_daily_progress)).setProgress(progress);
+    }
+
+    public static TimeTablePageFragment newInstance(int position, User user) {
         TimeTablePageFragment fragment = new TimeTablePageFragment();
 
         Bundle bundle = new Bundle();
         bundle.putInt("num", position);
+        bundle.putSerializable("user", user);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -111,6 +145,7 @@ public class TimeTablePageFragment extends Fragment {
         TextView weekNumberView = (TextView) view.findViewById(R.id.week_number);
         weekNumberView.setText(String.format(getString(R.string.weekNo), String.valueOf(date.getWeekOfWeekyear())));
 
+        // Date select dialog. Will move the parent view pager.
         dateShow.setClickable(true);
         dateShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +155,7 @@ public class TimeTablePageFragment extends Fragment {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         ((TimeTablePagerFragment) getParentFragment()).changeSelectedDate(new LocalDate(year, month + 1, dayOfMonth));
                     }
-                }, date.getYear(), date.getMonthOfYear(), date.getDayOfMonth());
+                }, date.getYear(), date.getMonthOfYear() - 1, date.getDayOfMonth());
                 datePickerDialog.setCancelable(true);
                 datePickerDialog.show();
             }
@@ -204,17 +239,31 @@ public class TimeTablePageFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(EntryViewHolder holder, int position) {
-            Duration gapToPrevious = mGapDurations.get(position);
+            final Duration gapToPrevious = mGapDurations.get(position);
+            final TimeTableEntry entry = mEntries.get(position);
+
+
             // Render either the gap to the previous entry or the entry itself.
             if (gapToPrevious != null) {
                 holder.durationBefore.setText(String.format(getString(R.string.date_duration),
                         gapToPrevious.getStandardHours(), gapToPrevious.getStandardMinutes() % 60));
+                holder.entry_duration_before_layout.setVisibility(View.VISIBLE);
+
+                // When a gap is clicked, create an editor for an entry that will fill that gap.
+                holder.entry_duration_before_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TimeTableEntry newEntry = new TimeTableEntry(entry.getStart().minus(gapToPrevious), entry.getStart(), "", null, mUser);
+
+                        Intent i = IntentFactory.createNewEntryCreationIntent(getContext(), newEntry , false);
+                        getParentFragment().startActivityForResult(i, TimeTablePagerFragment.REQUEST_CODE, null);
+                    }
+                });
+
             }
             else {
                 holder.entry_duration_before_layout.setVisibility(View.GONE);
             }
-            // Otherwise, render the entry.
-            final TimeTableEntry entry = mEntries.get(position);
 
             holder.description.setText(entry.getDescription());
             holder.interval.setText(DateUtils.formatDateRange(getContext(), entry.getStart(), entry.getEnd(), DateUtils.FORMAT_SHOW_TIME));
@@ -233,8 +282,6 @@ public class TimeTablePageFragment extends Fragment {
                 holder.activity_category.setText(a.getCategoryName());
                 holder.activity_name.setText(a.getName());
             }
-
-            // BUTTONS TODO (setOnClickListener)
 
             holder.editButton.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -25,7 +25,7 @@
 
     <TableRow>
         <ImageView
-            android:src="@drawable/ic_person_black_24dp"
+            android:src="@drawable/ic_person_outline_black_24dp"
             android:tint="@color/colorPrimary"
             android:layout_width="32dp"
             android:layout_height="32dp"

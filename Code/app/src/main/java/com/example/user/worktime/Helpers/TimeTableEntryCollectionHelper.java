@@ -69,7 +69,7 @@ public class TimeTableEntryCollectionHelper {
         Duration sum = Duration.ZERO;
 
         for (TimeTableEntry entry : entries) {
-            sum.plus(entry.getDuration());
+            sum = sum.plus(entry.getDuration());
         }
         return sum;
     }
