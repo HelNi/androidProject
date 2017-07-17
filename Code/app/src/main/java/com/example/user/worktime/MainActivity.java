@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.user.worktime.Backend.BackendApiTokenManager;
 import com.example.user.worktime.Classes.User.User;
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        TextView tv = (TextView) findViewById(R.id.textView1);
+        tv.setText("Willkommen "+getUser().getFirstName() + " "+ getUser().getLastName());
         return true;
     }
 
