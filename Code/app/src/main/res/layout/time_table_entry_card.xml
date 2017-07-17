@@ -74,6 +74,7 @@
                 android:layout_toRightOf="@id/project_activity_category"
                 android:padding="6dp"
                 android:text="Subcategory"
+                android:layout_marginBottom="8dp"
                 android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
             <TextView
