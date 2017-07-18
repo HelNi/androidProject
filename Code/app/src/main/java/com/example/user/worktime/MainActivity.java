@@ -23,6 +23,10 @@ import com.example.user.worktime.Backend.BackendApiTokenManager;
 import com.example.user.worktime.Classes.User.User;
 import com.example.user.worktime.Factory.IntentFactory;
 
+/**
+ * Main activity that coordinates the many sub-views (which are fragments).
+ * The layout is an app-bar with a drawer that has a menu to select the fragments.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String FRAGMENT_PROFILE = "frag_profile";
@@ -78,6 +82,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Display the correct fragment
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

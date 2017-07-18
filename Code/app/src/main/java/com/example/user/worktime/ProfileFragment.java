@@ -15,6 +15,8 @@ import java.text.Format;
 
 /**
  * Created by User on 05.07.2017.
+ *
+ * This fragment shows information about the currently logged in user.
  */
 
 public class ProfileFragment extends Fragment {

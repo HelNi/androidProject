@@ -53,6 +53,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class allows editing and creating new Time Table Entries.
+ */
 public class TimeTableEntryCreationActivity extends AppCompatActivity {
     TimeTableEntry mEntry; // The entry we edit or create.
     boolean mIsEdit; // Whether we edit or create a new entry

@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 /**
  * Created by User on 06.07.2017.
+ *
+ * This fragment shows some information about the authors of the app.
  */
 
 public class AboutFragment extends Fragment {

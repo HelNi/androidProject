@@ -9,8 +9,10 @@ import retrofit2.Call;
 
 /**
  * Created by User on 17.07.2017.
+ *
+ * This could as well be done manually in an Activity.
  */
-
+@Deprecated
 public class ActivityFetcher {
     public static Call<List<Activity>> getActivitiesAsync() {
         // Asynchronously fetch activities. Sub-Views can register callbacks.

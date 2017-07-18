@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 
 /**
  * Created by nsh on 11.07.2017.
+ *
+ * This class stores and retrieves the Backend-API token persistently.
+ * It is necessary to use this class because shared preferences for some reason don't update other shared preferences in the same app when an entry changes, gets added or deleted.
  */
 
 public class BackendApiTokenManager {

@@ -14,6 +14,8 @@ import java.util.Date;
 
 /**
  * Created by User on 06.07.2017.
+ *
+ * This class provides helper method for the view pagers to calculate the right page to display or the dates to display for a page.
  */
 
 public class DateHelpers {

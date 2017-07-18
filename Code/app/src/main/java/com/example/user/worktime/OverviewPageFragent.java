@@ -43,6 +43,9 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  * Use the {@link OverviewPageFragent#newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * This fragment shows an overview of a single week. It is Work in Progress and only shows
+ * Start and end time.
  */
 public class OverviewPageFragent extends Fragment {
     private static final String ARG_USER = "user";
@@ -101,7 +104,7 @@ public class OverviewPageFragent extends Fragment {
         }
     }
 
-    public void renderTable(List<TimeTableEntry> entries) {
+    private void renderTable(List<TimeTableEntry> entries) {
         View view = getView();
 
         ((TextView) view.findViewById(R.id.overview_worked_hours)).setText(DateUtils.formatDuration(getContext(), TimeTableEntryCollectionHelper.sumDuration(entries)));
@@ -143,8 +146,6 @@ public class OverviewPageFragent extends Fragment {
                 if (!response.isSuccessful()) {
                     Toast.makeText(getContext(), "FUGG", Toast.LENGTH_SHORT).show();
                 }
-
-                HttpUrl url = call.request().url();
 
                 renderTable(response.body());
             }
