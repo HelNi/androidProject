@@ -13,10 +13,10 @@ ____________________________
 |X| Allgemeine, grundlegende Strukturierung des Projektes
 |X| Verfassen einer Zielsetzung
 |X| Verfassen einer Projektbeschreibung
-| | Erstellen von Arbeitspaketen und Zuständigkeiten (parallel zur Arbeit)
+|X| Erstellen von Arbeitspaketen und Zuständigkeiten (parallel zur Arbeit)
 |X| Festlegen von Meilensteinen (siehe Meilensteine.txt)
-| | UML-Klassendiagramme (nach Fertigstellung des Projektes)
-| | Anfertigung der Reflexion
+|X| UML-Klassendiagramme (nach Fertigstellung des Projektes)
+|X| Anfertigung der Reflexion
 
 
 
