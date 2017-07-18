@@ -3,6 +3,7 @@ package com.example.user.worktime;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -220,6 +221,7 @@ public class TimeTablePageFragment extends Fragment {
     protected class TimeTableEntryAdapter extends RecyclerView.Adapter<TimeTableEntryAdapter.EntryViewHolder> {
         List<TimeTableEntry> mEntries;
         SparseArray<Duration> mGapDurations;
+        SparseArray<Duration> mOverlapDurations;
 
         public List<TimeTableEntry> getmEntries() {
              return mEntries;
@@ -228,6 +230,7 @@ public class TimeTablePageFragment extends Fragment {
         public void setmEntries(List<TimeTableEntry> mEntries) {
             this.mEntries = mEntries;
             mGapDurations = TimeTableEntryCollectionHelper.gapLengths(mEntries);
+            mOverlapDurations = TimeTableEntryCollectionHelper.overlapLengths(mEntries);
         }
 
         public TimeTableEntryAdapter(List<TimeTableEntry> mEntries) {
@@ -266,6 +269,14 @@ public class TimeTablePageFragment extends Fragment {
             }
             else {
                 holder.entry_duration_before_layout.setVisibility(View.GONE);
+            }
+
+            final Duration overlapWithPrevious = mOverlapDurations.get(position);
+            if (overlapWithPrevious != null) {
+                holder.interval.setTextColor(Color.RED);
+            }
+            else {
+                holder.interval.setTextColor(Color.DKGRAY);
             }
 
             holder.description.setText(entry.getDescription());
@@ -349,6 +360,7 @@ public class TimeTablePageFragment extends Fragment {
         public int getItemCount() {
             // Recompute mGapDurations here. The array may have changed.
             mGapDurations = TimeTableEntryCollectionHelper.gapLengths(mEntries);
+            mOverlapDurations = TimeTableEntryCollectionHelper.overlapLengths(mEntries);
             return mEntries.size();
         }
 

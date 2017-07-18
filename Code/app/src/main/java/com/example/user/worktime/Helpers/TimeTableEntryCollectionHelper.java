@@ -51,6 +51,30 @@ public class TimeTableEntryCollectionHelper {
         return returnValue;
     }
 
+    public static SparseArray<Duration> overlapLengths(List<TimeTableEntry> entries) {
+        LocalDateTime lastEnd = null;
+        int i = 0;
+        SparseArray<Duration> returnValue = new SparseArray<>();
+
+        for (TimeTableEntry entry : entries) {
+            if (lastEnd == null) {
+                lastEnd = entry.getEnd();
+                ++i;
+                continue; // Skip the first entry of the day.
+            }
+
+            Duration duration = new Duration(entry.getStart().toDateTime(), lastEnd.toDateTime());
+
+            long minuteDifference = duration.getStandardMinutes();
+            if (minuteDifference > 0) {
+                returnValue.append(i, duration);
+            }
+            ++i;
+            lastEnd = entry.getEnd();
+        }
+        return returnValue;
+    }
+
     /**
      * @param entries A sorted (by start time) list of entries.
      * @return basically the end of the last datetime in the list Or null if the list is empty.
