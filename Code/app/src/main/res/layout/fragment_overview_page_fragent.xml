@@ -26,6 +26,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="15dp"
         android:background="#999" />
 
     <ScrollView
@@ -46,8 +47,8 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                 <TextView
-                    android:padding="8dp"
                     android:id="@+id/overview_worked_hours"
+                    android:padding="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </TableRow>
             <TableRow>
@@ -58,9 +59,9 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                 <TextView
-                    android:padding="8dp"
-
                     android:id="@+id/overview_total_hours"
+
+                    android:padding="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </TableRow>
 
