@@ -1,6 +1,0 @@
-entry:
-    end:
-        beforeStart: "Die Endzeit darf nicht vor der Starzeit liegen"
-
-time_span:
-    start_after_end: 'Die Starzeit muss vor der Endzeit liegen'
