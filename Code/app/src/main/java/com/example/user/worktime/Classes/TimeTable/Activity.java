@@ -7,6 +7,8 @@ import java.io.Serializable;
 /**
  * Created by nsh on 12.07.2017.
  *
+ * This class represents the activities / categories that a Time Table Entry can belong to.
+ * You can obtain these via the Backend-API
  */
 
 public class Activity implements Serializable {

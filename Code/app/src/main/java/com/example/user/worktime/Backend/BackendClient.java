@@ -26,6 +26,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by nsh on 11.07.2017.
+ *
+ * Creates Retrofit service singletons which can be used to retrieve data.
  */
 
 public class BackendClient {

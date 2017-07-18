@@ -43,7 +43,7 @@ import java.lang.reflect.Type;
 import java.util.TimeZone;
 
 /**
- * GSON serialiser/deserialiser for converting Joda {@link LocalDateTime} objects.
+ * GSON serialiser/deserialiser for converting Joda {@link LocalDateTime} objects. Uses ISO-8601.
  */
 public class LocalDateTimeConverter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime>
 {

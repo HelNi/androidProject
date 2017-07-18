@@ -45,6 +45,8 @@ import retrofit2.Response;
  * A login screen that offers login via email/password.
  *
  * First, the API is fetched from the user's given inputs, then the corresponding user is fetched.
+ *
+ * The API Token is saved to allow an immediate login in subsequent visits.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     /**

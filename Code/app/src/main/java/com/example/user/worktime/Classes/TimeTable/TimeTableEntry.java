@@ -10,6 +10,9 @@ import java.io.Serializable;
 
 /**
  * Created by User on 06.07.2017.
+ *
+ * This class represents a time entry for a user for a specified interval.
+ * You can obtain and update these via the Backend-API
  */
 
 public class TimeTableEntry implements Serializable {

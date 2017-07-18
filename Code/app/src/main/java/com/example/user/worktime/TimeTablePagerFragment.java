@@ -24,6 +24,10 @@ import org.joda.time.LocalTime;
  * Created by User on 05.07.2017.
  */
 
+/**
+ * This Fragment maintains a list of TimeTablePageFragments in a ViewPager.
+ * These fragments can be switched between by swiping.
+ */
 public class TimeTablePagerFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQUEST_CODE = 5;
