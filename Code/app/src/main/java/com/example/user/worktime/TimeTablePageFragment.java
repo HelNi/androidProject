@@ -80,6 +80,17 @@ public class TimeTablePageFragment extends Fragment {
         recalculateSuggestedStartTime();
     }
 
+    public static TimeTablePageFragment newInstance(int position, User user) {
+        TimeTablePageFragment fragment = new TimeTablePageFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("num", position);
+        bundle.putSerializable("user", user);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
     // TODO: Is this how you use arguments?
     @Override
     public void setArguments(Bundle args) {
@@ -124,17 +135,6 @@ public class TimeTablePageFragment extends Fragment {
 
         ((TextView) getView().findViewById(R.id.entry_daily_progress_text)).setText(String.format(getString(R.string.date_duration), doneDuration.getStandardHours(), doneDuration.getStandardMinutes() % 60) + " / " + DateUtils.formatDuration(getContext(), requiredDurationForDay));
         ((ProgressBar) getView().findViewById(R.id.entry_daily_progress)).setProgress(progress);
-    }
-
-    public static TimeTablePageFragment newInstance(int position, User user) {
-        TimeTablePageFragment fragment = new TimeTablePageFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("num", position);
-        bundle.putSerializable("user", user);
-        fragment.setArguments(bundle);
-
-        return fragment;
     }
 
     @Nullable
@@ -223,6 +223,10 @@ public class TimeTablePageFragment extends Fragment {
         SparseArray<Duration> mGapDurations;
         SparseArray<Duration> mOverlapDurations;
 
+        public TimeTableEntryAdapter(List<TimeTableEntry> mEntries) {
+            setmEntries(mEntries);
+        }
+
         public List<TimeTableEntry> getmEntries() {
              return mEntries;
         }
@@ -231,10 +235,6 @@ public class TimeTablePageFragment extends Fragment {
             this.mEntries = mEntries;
             mGapDurations = TimeTableEntryCollectionHelper.gapLengths(mEntries);
             mOverlapDurations = TimeTableEntryCollectionHelper.overlapLengths(mEntries);
-        }
-
-        public TimeTableEntryAdapter(List<TimeTableEntry> mEntries) {
-            setmEntries(mEntries);
         }
 
         @Override
