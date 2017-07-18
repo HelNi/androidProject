@@ -36,8 +36,7 @@ Die anderen Funktionen sind CRUD für Benutzer, Aktivitäten und Zeiterfassungse
 ## Verwendung in der App
 Die Backend-API wird in der App mithilfe der Rest-Bibliothek "Retrofit" (https://github.com/square/retrofit) verwendet. Die Serialisierung und Deserialisierung erfolg durch GSON (https://github.com/google/gson)
 
-
-
-
-
-
+## Offene Punkte
+- Die API-Keys haben derzeit kein Ablaufdatum. Außerdem gibt es nur einen gleichzeitig pro Benutzer. 
+- Die Admin-Only Methoden (Verwalten und Einsehen von Einträgen anderer Benutzer) wird derzeit nicht von der Anwendung benutzt
+- Das Web-Anwendungs Frontend ist Rudimentär, außerdem fehlt das vollständige Editieren von Benutzern.
