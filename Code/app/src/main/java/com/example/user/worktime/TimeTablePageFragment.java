@@ -100,6 +100,10 @@ public class TimeTablePageFragment extends Fragment {
     }
 
     private void updateProgress() {
+        if (getView() == null) {
+            return;
+        }
+
         int progress;
 
         Duration requiredDurationForDay = mUser.getWorkingTimeForWeekDay(date.getDayOfWeek());
@@ -118,7 +122,6 @@ public class TimeTablePageFragment extends Fragment {
         }
 
         ((TextView) getView().findViewById(R.id.entry_daily_progress_text)).setText(String.format(getString(R.string.date_duration), doneDuration.getStandardHours(), doneDuration.getStandardMinutes() % 60) + " / " + DateUtils.formatDuration(getContext(), requiredDurationForDay));
-        //progress = Math.min(100, progress);
         ((ProgressBar) getView().findViewById(R.id.entry_daily_progress)).setProgress(progress);
     }
 
